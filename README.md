@@ -1,24 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## First Pull Instructions
 
-## Getting Started
+When you first pull this repository, follow these steps to set up your development environment:
 
-First, run the development server:
+1. **Install dependencies**:
+    ```bash
+    npm install
+    ```
 
+2. **Set up the database**:
+    - Ensure you have a PostgreSQL database running.
+    - Create a `.env` file in the root of your project and add your database URL:
+        ```env
+        DATABASE_URL="your-database-url"
+        ```
+    - Run Prisma migrations to set up your database schema:
+        ```bash
+        npx prisma migrate dev
+        ```
+
+3. **Run the development server**:
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You can start editing the page by modifying `src/app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Tech Stack
+
+- **TypeScript**: A strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.
+- **Sass**: A preprocessor scripting language that is interpreted or compiled into CSS. It allows you to use variables, nested rules, mixins, functions, and more, all with a fully CSS-compatible syntax.
+- **Bootstrap**: A powerful, feature-packed frontend toolkit. Build anything—from prototype to production—in minutes.
+- **Prisma**: An open-source database toolkit that makes it easy to work with databases in TypeScript and JavaScript applications. It provides type-safe database access and migrations.
+
 
 ## Learn More
 
