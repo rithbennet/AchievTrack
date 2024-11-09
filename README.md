@@ -35,6 +35,7 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 - **Sass**: A preprocessor scripting language that is interpreted or compiled into CSS. It allows you to use variables, nested rules, mixins, functions, and more, all with a fully CSS-compatible syntax.
 - **Bootstrap**: A powerful, feature-packed frontend toolkit. Build anything—from prototype to production—in minutes.
 - **Prisma**: An open-source database toolkit that makes it easy to work with databases in TypeScript and JavaScript applications. It provides type-safe database access and migrations.
+- **Supabase**: Supabase is an open-source backend-as-a-service (BaaS) that provides a suite of tools to help developers build and scale their applications.
 
 
 ## Learn More
