@@ -2,7 +2,7 @@ import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const users = await prisma.Users.findMany();
+  const users = await prisma.users.findMany();
 
   // Serialize BigInt values to strings
   const serializedUsers = users.map((user: { id: BigInt, created_at: Date }) => ({

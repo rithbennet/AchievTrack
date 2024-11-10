@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
+    "achievtrack": "file:",
     "bootstrap": "^5.3.3",
     "font-awesome": "^4.7.0",
     "next": "15.0.3",
