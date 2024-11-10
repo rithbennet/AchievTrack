@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
+    "achievtrack": "file:",
     "bootstrap": "^5.3.3",
     "next": "15.0.3",
     "prisma": "^5.22.0",
