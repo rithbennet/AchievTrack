@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import UserForm from './components/UserForm';
-import UserList from './components/UserList';
 import AdminGuard from './components/AdminGuard';
 import Header from '../components/header'; // Import the Header component
 import styles from './styles/manageUser.module.scss';
@@ -43,25 +42,29 @@ const ManageUserPage: React.FC = () => {
     setIsAdmin(true);
   }, []);
 
+  // Handle the form submission to add or update a user
   const handleAddOrUpdateUser = (user: User) => {
     setUsers((prev) => {
       const updatedUsers = prev.filter((u) => u.id !== user.id);
-      const newUser = { ...user, id: user.id ?? Date.now() };
+      const newUser = { ...user, id: user.id ?? Date.now() }; // Ensure there's an ID for new users
       return [...updatedUsers, newUser];
     });
-    setSelectedUser(null);
-    setIsModalOpen(false);
+    setSelectedUser(null); // Reset selected user after saving
+    setIsModalOpen(false); // Close modal after saving
   };
 
+  // Handle the deletion of a user
   const handleDeleteUser = (id: number) => {
     setUsers((prev) => prev.filter((u) => u.id !== id));
   };
 
-  const openModal = () => {
-    setSelectedUser(null);
-    setIsModalOpen(true);
+  // Open the modal for adding or editing a user
+  const openModal = (user: User | null) => {
+    setSelectedUser(user); // Set the selected user for editing
+    setIsModalOpen(true); // Open the modal
   };
 
+  // Close the modal without saving
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -88,12 +91,13 @@ const ManageUserPage: React.FC = () => {
               onChange={(e) => setSearch(e.target.value)}
               className={styles.searchInput}
             />
-            <button className={styles.addButton} onClick={openModal}>
+            <button className={styles.addButton} onClick={() => openModal(null)}>
               Add User
             </button>
           </div>
         </div>
 
+        {/* Modal for Adding/Editing User */}
         {isModalOpen && (
           <div className={styles.modalOverlay}>
             <div className={styles.modalContent}>
@@ -105,6 +109,7 @@ const ManageUserPage: React.FC = () => {
           </div>
         )}
 
+        {/* User Table List */}
         <div className={styles.userListSection}>
           <table className={styles.userTable}>
             <thead>
@@ -126,7 +131,7 @@ const ManageUserPage: React.FC = () => {
                     <td>{user.password}</td>
                     <td>{user.role}</td>
                     <td>
-                      <button onClick={() => setSelectedUser(user)} className={styles.editButton}>Edit</button>
+                      <button onClick={() => openModal(user)} className={styles.editButton}>Edit</button>
                       <button onClick={() => user.id !== undefined && handleDeleteUser(user.id)} className={styles.deleteButton}>
                         Delete
                       </button>
@@ -136,6 +141,7 @@ const ManageUserPage: React.FC = () => {
             </tbody>
           </table>
 
+          {/* Pagination */}
           <div className={styles.pagination}>
             <span>Items per page:</span>
             <select
