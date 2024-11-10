@@ -1,4 +1,5 @@
-import styles from './page.module.scss';
+import styles from './admin.module.scss';
+import React from 'react';
 
 export default function HomePage() {
   return (
