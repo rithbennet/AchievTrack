@@ -1,25 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { User } from '../types';  // Import User type from types.ts
 import styles from '../styles/manageUser.module.scss';
 
 interface UserFormProps {
   onSubmit: (user: User) => void;
-  initialData?: User; // Optional initial data for editing
+  initialData?: User;
   isSubmitting?: boolean;
 }
 
 const UserForm: React.FC<UserFormProps> = ({ onSubmit, initialData, isSubmitting }) => {
-  // Initialize the state with initial data if provided, otherwise with default empty values
-  const [user, setUser] = useState<User>(
-    initialData || { name: '', email: '', role: 'user', password: '' }
-  );
-
-  // Whenever the initialData changes, update the user state (for editing)
-  useEffect(() => {
-    if (initialData) {
-      setUser(initialData);
-    }
-  }, [initialData]);
+  const [user, setUser] = useState<User>(initialData || { name: '', email: '', role: 'user', password: '' });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -60,7 +50,7 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit, initialData, isSubmitting
         className={styles.inputField}
       />
       <button type="submit" className={styles.submitButton} disabled={isSubmitting}>
-        {isSubmitting ? 'Saving...' : initialData ? 'Save Changes' : 'Add User'}
+        {isSubmitting ? 'Saving...' : 'Add User'}
       </button>
     </form>
   );
