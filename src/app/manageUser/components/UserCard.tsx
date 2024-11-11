@@ -4,7 +4,7 @@ import styles from '../styles/manageUser.module.scss';
 import { User } from '../types';
 
 
-interface User {
+interface LocalUser {
   id: number;
   name: string;
   email: string;
@@ -12,8 +12,8 @@ interface User {
 }
 
 interface UserCardProps {
-  user: User;
-  onEdit: (user: User) => void;
+  user: LocalUser;
+  onEdit: (user: LocalUser) => void;
   onDelete: (id: number) => void;
 }
 

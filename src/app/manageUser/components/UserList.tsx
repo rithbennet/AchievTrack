@@ -5,7 +5,7 @@ import styles from '../styles/manageUser.module.scss';
 import { User } from '../types';
 
 
-interface User {
+interface LocalUser {
   id: number;
   name: string;
   email: string;
@@ -13,8 +13,8 @@ interface User {
 }
 
 interface UserListProps {
-  users: User[];
-  onEdit: (user: User) => void;
+  users: LocalUser[];
+  onEdit: (user: LocalUser) => void;
   onDelete: (id: number) => void;
 }
 
