@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import UserForm from './components/UserForm';
 import AdminGuard from './components/AdminGuard';
-import Header from '../components/header'; // Import the Header component
+import Header from '@/components/header/header'; // Import the Header component
 import styles from './styles/manageUser.module.scss';
 import { User } from './types'; // Import User type from types.ts
 import Link from 'next/link';

@@ -1,0 +1,55 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .logoSection {
+    display: flex;
+    align-items: center;
+  
+    h1 {
+      margin-left: 10px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+    }
+  }
+  
+  .userSection {
+    display: flex;
+    align-items: center;
+  }
+  
+  .notificationButton {
+    margin-right: 20px;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    color: #0070f3;
+    cursor: pointer;
+  
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  
+  .userInfo {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+  
+    .userName {
+      font-weight: bold;
+      color: #333;
+    }
+  
+    .userRole {
+      font-size: 0.9rem;
+      color: #666;
+    }
+  }
+  

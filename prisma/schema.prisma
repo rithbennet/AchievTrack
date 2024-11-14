@@ -12,8 +12,8 @@ datasource db {
 model Users {
   id         BigInt   @id @unique @default(autoincrement())
   created_at DateTime @default(now()) @db.Timestamptz(6)
-  Username   String   @db.VarChar
   Name       String
   Password   String   @db.VarChar
   Role       String
+  Email      String   @unique
 }
