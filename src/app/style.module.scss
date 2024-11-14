@@ -1,0 +1,89 @@
+.page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+  }
+  
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    max-width: 1200px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .left {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #007bff;
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px 0 0 8px;
+  }
+  
+  .logo {
+    width: 80px;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  .title {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .right {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 0 8px 8px 0;
+  }
+  
+  .formCard {
+    max-width: 400px;
+    width: 100%;
+    margin: auto;
+  }
+  
+  .form-label {
+    font-size: 14px;
+  }
+  
+  button {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .link {
+      color: #007bff;
+      font-weight: 500;
+    }
+    
+    .link:hover {
+      text-decoration: underline;
+    }
+  
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      width: 90%;
+    }
+  
+    .left {
+      border-radius: 8px;
+    }
+  
+    .right {
+      border-radius: 8px;
+    }
+  }
+  
