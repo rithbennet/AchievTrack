@@ -1,7 +1,7 @@
 // src/app/page.tsx
 "use client";
 import { useState } from "react";
-import styles from "./login.module.scss"; // Import the SCSS file
+import styles from "./styles/login.module.scss"; // Import the SCSS file
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
