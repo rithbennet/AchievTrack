@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { User } from '../types';  // Import User type from types.ts
+import { User } from '../types'; // Import User type from types.ts
 import styles from '../styles/manageUser.module.scss';
 
 interface UserFormProps {
   onSubmit: (user: User) => void;
   initialData?: User; // Optional initial data for editing
   isSubmitting?: boolean;
+  onClose: () => void; // Callback function to close the modal
 }
 
-const UserForm: React.FC<UserFormProps> = ({ onSubmit, initialData, isSubmitting }) => {
-  // Initialize the state with initial data if provided, otherwise with default empty values
+const UserForm: React.FC<UserFormProps> = ({ onSubmit, initialData, isSubmitting, onClose }) => {
   const [user, setUser] = useState<User>(
     initialData || { name: '', email: '', role: 'user', password: '' }
   );
 
-  // Whenever the initialData changes, update the user state (for editing)
   useEffect(() => {
     if (initialData) {
       setUser(initialData);
@@ -25,9 +24,15 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit, initialData, isSubmitting
     const { name, value } = e.target;
     setUser((prevUser) => ({ ...prevUser, [name]: value }));
   };
-
+  // Removed close button as per request
   return (
     <form onSubmit={(e) => { e.preventDefault(); onSubmit(user); }} className={styles.userForm}>
+      <div className={styles.modalHeader}>
+        <h2>{initialData ? 'Edit User' : 'Add User'}</h2>
+        <button type="button" className={styles.closeButton} onClick={onClose} aria-label="Close modal">
+          &times;
+        </button>
+      </div>
       <input
         type="text"
         name="name"

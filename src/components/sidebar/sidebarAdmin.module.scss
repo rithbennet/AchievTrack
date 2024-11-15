@@ -1,0 +1,78 @@
+.sidebar {
+    width: 250px;
+    background-color: #b27df4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    transition: width 0.3s;
+    height: 100vh;
+  }
+  
+  .collapsed {
+    width: 80px;
+  }
+  
+  .header {
+    background-color: #4A1942;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .userName {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+    flex-grow: 1;
+  }
+  
+  .navItem {
+    display: flex;
+    align-items: left;
+    gap: 1rem;
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+    width: 100%;
+    justify-content: left;
+  }
+  
+  .navItem:hover {
+    background-color: #9c6de2;
+  }
+  
+  .icon {
+    font-size: 1.5rem;
+  }
+  
+  .logout {
+    margin-top: auto;
+    width: 100%;
+  }
+  
+  .logout .navItem {
+    background-color: #d9534f;
+  }
+  
+  .logout .navItem:hover {
+    background-color: #c9302c;
+  }
+  
