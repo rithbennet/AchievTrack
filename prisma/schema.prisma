@@ -7,13 +7,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
-/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
-model Users {
-  id         BigInt   @id @unique @default(autoincrement())
-  created_at DateTime @default(now()) @db.Timestamptz(6)
-  Name       String
-  Password   String   @db.VarChar
-  Role       String
-  Email      String   @unique
+model User {
+  id         Int       @id @unique @default(autoincrement())
+  name       String
+  password   String
+  email      String    @unique
+  role       String
+  created_at DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at DateTime? @default(now()) @db.Timestamptz(6)
 }

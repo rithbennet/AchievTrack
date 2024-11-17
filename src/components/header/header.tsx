@@ -1,4 +1,5 @@
 // /app/components/header.tsx
+"use client";
 import React from 'react';
 import Image from 'next/image';
 import styles from './header.module.scss';
@@ -6,10 +7,9 @@ import styles from './header.module.scss';
 interface HeaderProps {
   userName: string;
   userRole: string;
-  onNotificationClick: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ userName, userRole, onNotificationClick }) => {
+const Header: React.FC<HeaderProps> = ({ userName, userRole }) => {
   return (
     <header className={styles.header}>
       <div className={styles.logoSection}>
@@ -17,7 +17,7 @@ const Header: React.FC<HeaderProps> = ({ userName, userRole, onNotificationClick
         <h1>Sek. Keb Saujana Utama</h1>
       </div>
       <div className={styles.userSection}>
-        <button className={styles.notificationButton} onClick={onNotificationClick}>
+        <button className={styles.notificationButton}>
           <Image src="/notification.png" alt="Notifications" width={24} height={24} />
         </button>
         <div className={styles.userInfo}>

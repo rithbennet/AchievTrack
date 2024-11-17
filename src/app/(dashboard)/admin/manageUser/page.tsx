@@ -7,6 +7,7 @@ import Header from "@/components/header/header";
 import SidebarAdmin from "@/components/sidebar/sidebarAdmin";
 import styles from "./styles/manageUser.module.scss";
 import { User } from "./types";
+import UserList from "./components/UserList";
 
 const ManageUserPage: React.FC = () => {
   const [users, setUsers] = useState<User[]>([
@@ -20,6 +21,31 @@ const ManageUserPage: React.FC = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch('/api/user');
+        if (!response.ok) {
+          throw new Error('Failed to fetch users');
+        }
+        const data = await response.json();
+        setUsers(data.data);
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError('An unknown error occurred');
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUsers();
+  }, []);
 
   const filteredUsers = useMemo(() => {
     return users.filter((user) => user.name.toLowerCase().includes(search.toLowerCase()) || user.email.toLowerCase().includes(search.toLowerCase()));
@@ -53,9 +79,7 @@ const ManageUserPage: React.FC = () => {
 
   return (
     <AdminGuard isAdmin={isAdmin}>
-      <Header userName="John Doe" userRole="Admin" onNotificationClick={() => alert("Notification clicked")} />
       <div className={styles.pageContainer}>
-        <SidebarAdmin userName="John Doe" onLogout={() => alert("Logged out")} />
         <div className={styles.contentContainer}>
           <div className={styles.manageUserPage}>
             <h2 style={{fontWeight: "bold" }}>USER MANAGEMENT</h2>
@@ -100,7 +124,6 @@ const ManageUserPage: React.FC = () => {
                   <tr>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Password</th>
                     <th>Role</th>
                     <th>Actions</th>
                   </tr>
@@ -110,7 +133,6 @@ const ManageUserPage: React.FC = () => {
                     <tr key={user.id}>
                       <td>{user.name}</td>
                       <td>{user.email}</td>
-                      <td>{user.password}</td>
                       <td>{user.role}</td>
                       <td>
                         <button onClick={() => openModal(user)} className={styles.editButton} aria-label={`Edit user ${user.name}`}>

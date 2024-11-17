@@ -52,7 +52,7 @@ const UserForm: React.FC<UserFormProps> = ({ onSubmit, initialData, isSubmitting
         className={styles.inputField}
       />
       <select name="role" value={user.role} onChange={handleChange} className={styles.inputField}>
-        <option value="user">User</option>
+        <option value="teacher">Teacher</option>
         <option value="admin">Admin</option>
       </select>
       <input

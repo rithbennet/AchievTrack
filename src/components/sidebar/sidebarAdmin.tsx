@@ -22,7 +22,7 @@ const SidebarAdmin: React.FC<SidebarProps> = ({ userName }) => {
         <span className={styles.userName}>{isCollapsed ? '' : userName}</span>
       </div>
       <nav className={styles.nav}>
-        <Link href="/dashboard" className={styles.navItem}>
+        <Link href="/admin" className={styles.navItem}>
           <FaHome className={styles.icon} />
           {!isCollapsed && <span>Dashboard</span>}
         </Link>

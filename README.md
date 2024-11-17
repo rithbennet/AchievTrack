@@ -36,6 +36,9 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 - **Bootstrap**: A powerful, feature-packed frontend toolkit. Build anything—from prototype to production—in minutes.
 - **Prisma**: An open-source database toolkit that makes it easy to work with databases in TypeScript and JavaScript applications. It provides type-safe database access and migrations.
 - **Supabase**: Supabase is an open-source backend-as-a-service (BaaS) that provides a suite of tools to help developers build and scale their applications.
+- **zod**: Zod is a TypeScript-first schema declaration and validation library. It allows you to define schemas for your data and provides a simple and powerful API for validating that data. Zod is particularly useful for ensuring that the data your application receives and processes conforms to expected formats and types, reducing the risk of runtime errors and improving overall code reliability.
+- **bcrypt**: bcrypt is a library for hashing passwords. It is designed to be computationally intensive to make brute-force attacks more difficult. bcrypt provides functions to hash passwords and to compare hashed passwords with plain text passwords. This makes it an essential tool for securely storing and verifying user passwords in applications, ensuring that even if the password database is compromised, the actual passwords remain protected.
+
 
 
 ## Learn More
