@@ -36,7 +36,7 @@ export default function UserForm({ closeModal, initialData }: UserFormProps) {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (initialData && typeof initialData.id === 'number') {
-      await updateUser(initialData.id.toString(), new FormData(event.target as HTMLFormElement));
+      await updateUser(initialData.id, new FormData(event.target as HTMLFormElement));
     } else {
       await createUser(new FormData(event.target as HTMLFormElement));
     }
@@ -61,6 +61,7 @@ export default function UserForm({ closeModal, initialData }: UserFormProps) {
           onChange={handleChange}
           className={styles.inputField}
           required
+          maxLength={100}
         />
         
         <label htmlFor="email">Email</label>
@@ -96,6 +97,7 @@ export default function UserForm({ closeModal, initialData }: UserFormProps) {
           onChange={handleChange}
           className={styles.inputField}
           required
+          minLength={8}
         />
         
         <button type="submit" className={styles.submitButton}>{initialData ? 'Save Changes' : 'Add User'}</button>
