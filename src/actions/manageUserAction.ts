@@ -10,7 +10,7 @@ const userSchema = z.object({
     email: z.string().email("Invalid email address").nonempty("Email is required"),
     role: z.string().nonempty("Role is required"),
     password: z.string().nonempty("Password is required").min(8, "Password must be at least 8 characters"),
-    id: z.number().optional(),
+    
   });
 
 // Create a new user
@@ -41,10 +41,9 @@ export async function createUser(formData: FormData){
 
 }
 
-export async function updateUser(id: string, formData: FormData){
+export async function updateUser(userId: number, formData: FormData){
   // Extract and validate form data using Zod
   const userData = {
-    id: Number(formData.get('id') as unknown),
     name: formData.get('name') as string,
     email: formData.get('email') as string,
     password: formData.get('password') as string,
@@ -60,7 +59,7 @@ export async function updateUser(id: string, formData: FormData){
   // Update the user in the database
   const user = await prisma.user.update({
     where: {
-      id: validatedUserData.id,
+      id: userId,
     },
     data: {
       name: validatedUserData.name,
