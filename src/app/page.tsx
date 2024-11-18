@@ -1,10 +1,11 @@
-import Image from "next/image";
-import styles from "./page.module.scss";
+// src/app/page.tsx
+import LoginForm from "@/components/form/LoginForm";
+import styles from "./styles/login.module.scss"; // Import the SCSS file
 
-export default function Home() {
+export default function LoginPage() {
   return (
-    <main>
-      <h1 className="text-danger">Hello Bootstrap</h1>
+    <main className={styles.page}>
+      <LoginForm />
     </main>
-  )
+  );
 }
