@@ -303,6 +303,12 @@
 .addButton {
   padding: 0.5rem 1rem; /* Add some padding for better button appearance */
 }
+.actionButtons {
+  display: flex; /* Align children horizontally */
+  gap: 10px; /* Add space between buttons */
+  justify-content: flex-start; /* Align buttons to the left (optional) */
+  align-items: center; /* Center buttons vertically (optional) */
+}
 
 
 

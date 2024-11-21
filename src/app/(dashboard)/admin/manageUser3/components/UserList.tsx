@@ -57,8 +57,14 @@ export default async function UserList({ query, currentPage }: UserListProps) {
               <td>{user.email}</td>
               <td>{user.role}</td>
               <td>
+                <div className={styles.actionButtons}>
+                <div className={styles.editButton}>
                 <EditButton userId={user.id.toString()} initialData={user} />
+                </div>
+                <div className={styles.deleteButton}>
                 <DeleteButton userId={user.id} />
+                </div>
+                </div>
               </td>
             </tr>
           ))}
