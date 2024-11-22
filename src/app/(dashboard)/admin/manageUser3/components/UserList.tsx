@@ -2,19 +2,18 @@ import prisma from "@/lib/db";
 import styles from "../styles/manageUser.module.scss";
 import EditButton from './editButton';
 import DeleteButton from './deleteButton';
+import PaginationComponent from './Pagination';
 
 interface UserListProps {
   query: string;
   currentPage: number;
 }
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 2;
 
 export default async function UserList({ query, currentPage }: UserListProps) {
-  // Calculate offset for pagination
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
-  // Fetch filtered and paginated users
   const users = await prisma.user.findMany({
     where: {
       name: {
@@ -26,7 +25,6 @@ export default async function UserList({ query, currentPage }: UserListProps) {
     take: ITEMS_PER_PAGE,
   });
 
-  // Fetch total number of users matching the query
   const totalUsers = await prisma.user.count({
     where: {
       name: {
@@ -36,7 +34,6 @@ export default async function UserList({ query, currentPage }: UserListProps) {
     },
   });
 
-  // Calculate total pages
   const totalPages = Math.ceil(totalUsers / ITEMS_PER_PAGE);
 
   return (
@@ -58,19 +55,19 @@ export default async function UserList({ query, currentPage }: UserListProps) {
               <td>{user.role}</td>
               <td>
                 <div className={styles.actionButtons}>
-                <div className={styles.editButton}>
-                <EditButton userId={user.id.toString()} initialData={user} />
-                </div>
-                <div className={styles.deleteButton}>
-                <DeleteButton userId={user.id} />
-                </div>
+                  <div className={styles.editButton}>
+                    <EditButton userId={user.id.toString()} initialData={user} />
+                  </div>
+                  <div className={styles.deleteButton}>
+                    <DeleteButton userId={user.id} />
+                  </div>
                 </div>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <div className={styles.pagination}>
+      {/* <div className={styles.pagination}>
         {Array.from({ length: totalPages }, (_, index) => (
           <a
             key={index}
@@ -82,7 +79,8 @@ export default async function UserList({ query, currentPage }: UserListProps) {
             {index + 1}
           </a>
         ))}
-      </div>
+      </div> */}
+      <PaginationComponent pageCount={totalPages} />
     </div>
   );
 }
