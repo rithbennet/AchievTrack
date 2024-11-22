@@ -4,16 +4,14 @@ import UserList from "./components/UserList";
 import AddButton from "./components/addButton";
 import Search from "./components/SearchBar";
 
-export default async function ManageUserPage(props: {
-  searchParams?: Promise<{
-    query?: string;
-    page?: string;
-  }>;
+export default async function ManageUserPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ query?: string; page?: string }>;
 }) {
-  const searchParams = await props.searchParams;
-  const query = searchParams?.query || '';
-  const currentPage = Number(searchParams?.page) || 1;
-  
+  const resolvedSearchParams = (await searchParams) ?? {}; // Await searchParams
+  const query = resolvedSearchParams.query || "";
+  const currentPage = Number(resolvedSearchParams.page) || 1;
 
   return (
     <AdminGuard isAdmin={true}>
@@ -22,14 +20,10 @@ export default async function ManageUserPage(props: {
           <div className={styles.manageUserPage}>
             <h1 style={{ fontWeight: "bold" }}>User Management</h1>
             <div className={styles.searchAndAddContainer}>
-            <Search placeholder="Search..." />
-            <AddButton />
-        </div>
-
-            {/* <Search placeholder="Search..." />
-            <AddButton /> */}
+              <Search placeholder="Search..." />
+              <AddButton />
+            </div>
             <UserList query={query} currentPage={currentPage} />
-            
           </div>
         </div>
       </div>
