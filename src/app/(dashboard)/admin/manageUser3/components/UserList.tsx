@@ -9,7 +9,7 @@ interface UserListProps {
   currentPage: number;
 }
 
-const ITEMS_PER_PAGE = 2;
+const ITEMS_PER_PAGE = 4;
 
 export default async function UserList({ query, currentPage }: UserListProps) {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -67,19 +67,6 @@ export default async function UserList({ query, currentPage }: UserListProps) {
           ))}
         </tbody>
       </table>
-      {/* <div className={styles.pagination}>
-        {Array.from({ length: totalPages }, (_, index) => (
-          <a
-            key={index}
-            href={`?query=${query}&page=${index + 1}`}
-            className={`${styles.pageLink} ${
-              currentPage === index + 1 ? styles.active : ''
-            }`}
-          >
-            {index + 1}
-          </a>
-        ))}
-      </div> */}
       <PaginationComponent pageCount={totalPages} />
     </div>
   );

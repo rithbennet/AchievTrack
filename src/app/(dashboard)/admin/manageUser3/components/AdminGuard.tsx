@@ -22,3 +22,4 @@ const AdminGuard: React.FC<AdminGuardProps> = ({ children, isAdmin }) => {
 };
 
 export default AdminGuard;
+
