@@ -9,7 +9,7 @@ interface AdminGuardProps {
   isAdmin: boolean;
 }
 
-const AdminGuard: React.FC<AdminGuardProps> = ({ children, isAdmin }) => {
+export default function AdminGuard({ children, isAdmin }: AdminGuardProps) {
   const router = useRouter();
 
   useEffect(() => {
@@ -21,4 +21,3 @@ const AdminGuard: React.FC<AdminGuardProps> = ({ children, isAdmin }) => {
   return isAdmin ? <>{children}</> : null;
 };
 
-export default AdminGuard;
