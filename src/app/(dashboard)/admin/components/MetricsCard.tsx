@@ -6,7 +6,7 @@ interface MetricsCardProps {
   value: number;
 }
 
-const MetricsCard: React.FC<MetricsCardProps> = ({ title, value }) => {
+export default function MetricsCard({ title, value }: MetricsCardProps) {
   return (
     <div className="col-md-3">
       <div className="card text-center">
@@ -17,6 +17,4 @@ const MetricsCard: React.FC<MetricsCardProps> = ({ title, value }) => {
       </div>
     </div>
   );
-};
-
-export default MetricsCard;
+}
