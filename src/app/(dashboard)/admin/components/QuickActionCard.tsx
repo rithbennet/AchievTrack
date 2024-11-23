@@ -6,7 +6,7 @@ interface QuickActionCardProps {
   onClick: () => void;
 }
 
-const QuickActionCard: React.FC<QuickActionCardProps> = ({ title, onClick }) => {
+export default function QuickActionCard({ title, onClick }: QuickActionCardProps) {
   return (
     <div className="col-md-4">
       <div className="card text-center">
@@ -19,6 +19,4 @@ const QuickActionCard: React.FC<QuickActionCardProps> = ({ title, onClick }) => 
       </div>
     </div>
   );
-};
-
-export default QuickActionCard;
+}
