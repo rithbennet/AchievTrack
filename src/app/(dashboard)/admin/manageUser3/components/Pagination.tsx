@@ -1,13 +1,13 @@
 "use client";
 
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 interface PaginationProps {
   pageCount: number;
 }
 
-const PaginationComponent: FC<PaginationProps> = ({ pageCount }) => {
+export default function PaginationComponent({ pageCount }: PaginationProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -18,11 +18,14 @@ const PaginationComponent: FC<PaginationProps> = ({ pageCount }) => {
   // Watch for query parameter change (page)
   useEffect(() => {
     const page = Number(searchParams.get("page")) || 1;
+    console.log("URL page parameter changed:", page);
     setCurrentPage(page);
   }, [searchParams]);
 
   const handlePageChange = (targetPage: number) => {
     if (targetPage < 1 || targetPage > pageCount) return;
+
+    console.log("Changing to page:", targetPage);
 
     // Update the URL with the new page query parameter
     const nextSearchParams = new URLSearchParams(window.location.search);
@@ -57,6 +60,4 @@ const PaginationComponent: FC<PaginationProps> = ({ pageCount }) => {
       </button>
     </div>
   );
-};
-
-export default PaginationComponent;
+}

@@ -3,15 +3,15 @@ import styles from "./styles/manageUser.module.scss";
 import UserList from "./components/UserList";
 import AddButton from "./components/addButton";
 import Search from "./components/SearchBar";
+import PaginationComponent from "./components/Pagination";
 
-export default async function ManageUserPage({
-  searchParams,
-}: {
-  searchParams?: Promise<{ query?: string; page?: string }>;
+export default async function ManageUserPage(props: {
+ searchParams?: Promise< { query?: string; page?: string }>;
 }) {
-  const resolvedSearchParams = (await searchParams) ?? {}; // Await searchParams
-  const query = resolvedSearchParams.query || "";
-  const currentPage = Number(resolvedSearchParams.page) || 1;
+  const searchParams = await props.searchParams; // Await searchParams
+  const query = searchParams?.query || '';
+  const currentPage = Number(searchParams?.page) || 1;
+
 
   return (
     <AdminGuard isAdmin={true}>
