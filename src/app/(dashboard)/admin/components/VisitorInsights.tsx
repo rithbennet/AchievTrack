@@ -1,7 +1,7 @@
 // components/VisitorInsights.tsx
-import React from 'react';
 
-const VisitorInsights: React.FC = () => {
+
+export default function VisitorInsights() {
   return (
     <div className="card">
       <div className="card-body">
@@ -12,4 +12,3 @@ const VisitorInsights: React.FC = () => {
   );
 };
 
-export default VisitorInsights;

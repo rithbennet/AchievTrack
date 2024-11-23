@@ -12,7 +12,7 @@ interface Metrics {
   achievements: number;
 }
 
-const DashboardAdmin: React.FC = () => {
+export default function DashboardAdmin(){
   const [metrics, setMetrics] = useState<Metrics>({
     totalUsers: 0,
     activeUsers: 0,
@@ -24,7 +24,6 @@ const DashboardAdmin: React.FC = () => {
     fetch('/api/dashboard-metrics')
       .then((res) => res.json())
       .then((data) => setMetrics(data))
-      .catch((err) => console.error('Error fetching metrics:', err));
   }, []);
 
   return (
@@ -53,5 +52,3 @@ const DashboardAdmin: React.FC = () => {
     </main>
   );
 }
-
-export default DashboardAdmin;
