@@ -1,11 +1,41 @@
-import React from 'react';
+"use client";
+
+import { useEffect, useState } from "react";
 import styles from './homepage.module.scss';
-import Link from 'next/link';
+import Link from "next/link";
+import supabase from "./supabaseClient";
 
 const HomePage = () => {
+  const [fetchError, setFetchError] = useState<string | null>(null);
+  const [dataRecords, setDataRecords] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchDataRecord = async () => {
+      try {
+        const { data, error } = await supabase.from("DataRecord").select();
+
+        if (error) {
+          setFetchError("Error fetching data from Supabase");
+          console.error("Supabase Error:", error);
+        } else if (data && data.length > 0) {
+          console.log("Supabase Data:", data); // Log data for debugging
+          setDataRecords(data); // Update the state with fetched data
+          setFetchError(null); // Clear any previous errors
+        } else {
+          setFetchError("No data found in the DataRecord table.");
+        }
+      } catch (error) {
+        setFetchError("Error fetching data from Supabase");
+        console.error("Fetch Error:", error);
+      }
+    };
+
+    fetchDataRecord();
+  }, []);
+
   return (
     <div className={styles.container}>
-      {/* Side Menu */}
+      {/* Main Layout */}
       <aside className={styles.sidebar}>
         <button className={styles.userName}>Saleha</button>
         <div className={styles.menu}>
@@ -16,9 +46,7 @@ const HomePage = () => {
         <button className={styles.logoutButton}>ⓘLogout</button>
       </aside>
 
-      {/* Main Content */}
       <div className={styles.mainContent}>
-        {/* Top Bar */}
         <div className={styles.topBar}>
           <div className={styles.schoolInfo}>
             <img src="/images/SKSU.jpg" alt="School Logo" className={styles.logo} />
@@ -29,50 +57,36 @@ const HomePage = () => {
           </div>
         </div>
 
-        {/* Search Bar and Action Buttons */}
-        <div className={styles.header}>
-          <input type="text" placeholder="Search" className={styles.searchBar} />
-          <button className={styles.importButton}>Import Excel</button>
-          <Link href="/formAdd">
-        <button className={styles.addButton}>Add</button>
-      </Link>
-        </div>
-
-        {/* Achievement Table */}
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Category</th>
-              <th>Level</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Sports Carnival</td>
-              <td>Sport</td>
-              <td>District</td>
-              <td className={styles.actions}>
-                <Link href="/formView">
-                <button className={styles.iconButton}>👁️</button>
-                </Link>
-                <Link href="/formEdit"><button className={styles.iconButton}>✏️</button></Link>
-                <button className={styles.iconButton}>🗑️</button>
-              </td>
-            </tr>
-            {/* Add more rows as needed */}
-          </tbody>
-        </table>
-
-        {/* Pagination */}
-        <div className={styles.pagination}>
-          <button>«</button>
-          <button>‹</button>
-          <span>Page 1</span>
-          <button>›</button>
-          <button>»</button>
-        </div>
+        {/* Data Table */}
+        {fetchError && <p className={styles.error}>{fetchError}</p>}
+        {!fetchError && (
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Level</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dataRecords.length > 0 ? (
+                dataRecords.map((record) => (
+                  <tr key={record.id}>
+                    <td>{record.title}</td>
+                    <td>{record.category}</td>
+                    <td>{record.level}</td>
+                    <td>{record.description}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={4}>No records found</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import SidebarAdmin from '@/components/sidebar/sidebarAdmin'; // Ensure the correct path to your SidebarAdmin component
-import Header from '@/components/header/header'; 
+import SidebarAdmin from '@/app/components2/sidebar/sidebarAdmin'; // Ensure the correct path to your SidebarAdmin component
+import Header from '@/app/components2/header/header'; 
 
 
 export const metadata: Metadata = {

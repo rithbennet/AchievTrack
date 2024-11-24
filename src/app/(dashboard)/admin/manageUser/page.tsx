@@ -3,8 +3,8 @@
 import { useState, useEffect, useMemo } from "react";
 import UserForm from "./components/UserForm";
 import AdminGuard from "./components/AdminGuard";
-import Header from "@/components/header/header";
-import SidebarAdmin from "@/components/sidebar/sidebarAdmin";
+import Header from "@/app/components2/header/header";
+import SidebarAdmin from "@/app/components2/sidebar/sidebarAdmin";
 import styles from "./styles/manageUser.module.scss";
 import { User } from "./types";
 import UserList from "./components/UserList";
