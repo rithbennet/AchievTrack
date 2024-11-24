@@ -8,11 +8,89 @@ datasource db {
 }
 
 model User {
-  id         Int       @id @unique @default(autoincrement())
-  name       String
-  password   String
-  email      String    @unique
-  role       String
-  created_at DateTime? @default(now()) @db.Timestamptz(6)
-  updated_at DateTime? @default(now()) @db.Timestamptz(6)
+  id              Int               @id @default(autoincrement())
+  name            String
+  password        String
+  email           String            @unique
+  role            String
+  created_at      DateTime?         @default(now()) @db.Timestamptz(6)
+  updated_at      DateTime?         @default(now()) @db.Timestamptz(6)
+  is_active       Boolean?          @default(true)
+  Admin           Admin?
+  Notification    Notification[]
+  Teacher         Teacher?
+  achievementdata achievementdata[]
+}
+
+model Admin {
+  id   Int  @id(map: "admin_pkey")
+  User User @relation(fields: [id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "admin_id_fkey")
+}
+
+model Notification {
+  id              BigInt          @id(map: "notification_pkey") @default(autoincrement())
+  message         String
+  date            DateTime        @default(now()) @db.Timestamp(6)
+  recipientid     Int
+  achievementid   Int
+  acknowledged    Boolean?        @default(false)
+  achievementdata achievementdata @relation(fields: [achievementid], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "notification_achievementid_fkey")
+  User            User            @relation(fields: [recipientid], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "notification_recipientid_fkey")
+
+  @@index([achievementid])
+  @@index([recipientid])
+}
+
+model Student {
+  id                  Int                   @id(map: "student_pkey") @default(autoincrement())
+  name                String
+  class               String
+  mykad               String                @unique(map: "student_mykad_key")
+  created_at          DateTime?             @default(now()) @db.Timestamptz(6)
+  updated_at          DateTime?             @default(now()) @db.Timestamptz(6)
+  is_active           Boolean?              @default(true)
+  achievementstudents achievementstudents[]
+}
+
+model Teacher {
+  id                  Int                   @id(map: "teacher_pkey")
+  specialization      String?
+  User                User                  @relation(fields: [id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "teacher_id_fkey")
+  achievementteachers achievementteachers[]
+}
+
+model achievementdata {
+  id                  Int                   @id @default(autoincrement())
+  title               String
+  category            String
+  level               String
+  certificate         String[]
+  date                DateTime              @db.Timestamp(6)
+  description         String?
+  createdby           Int?
+  verified            Boolean?              @default(false)
+  created_at          DateTime?             @default(now()) @db.Timestamptz(6)
+  updated_at          DateTime?             @default(now()) @db.Timestamptz(6)
+  Notification        Notification[]
+  User                User?                 @relation(fields: [createdby], references: [id], onUpdate: NoAction)
+  achievementstudents achievementstudents[]
+  achievementteachers achievementteachers[]
+}
+
+model achievementstudents {
+  achievementid   Int
+  studentid       Int
+  achievementdata achievementdata @relation(fields: [achievementid], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  Student         Student         @relation(fields: [studentid], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([achievementid, studentid])
+}
+
+model achievementteachers {
+  achievementid   Int
+  teacherid       Int
+  achievementdata achievementdata @relation(fields: [achievementid], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  Teacher         Teacher         @relation(fields: [teacherid], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([achievementid, teacherid])
 }

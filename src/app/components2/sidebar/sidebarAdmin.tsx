@@ -26,15 +26,15 @@ const SidebarAdmin: React.FC<SidebarProps> = ({ userName }) => {
           <FaHome className={styles.icon} />
           {!isCollapsed && <span>Dashboard</span>}
         </Link>
-        <Link href="/manageUser" className={styles.navItem}>
+        <Link href="/admin/manageUser" className={styles.navItem}>
           <FaUserCog className={styles.icon} />
           {!isCollapsed && <span>Manage Users</span>}
         </Link>
-        <Link href="/manageStudent" className={styles.navItem}>
+        <Link href="/admin/manageStudent" className={styles.navItem}>
           <FaUserGraduate className={styles.icon} />
           {!isCollapsed && <span>Manage Students</span>}
         </Link>
-        <Link href="/achievementRecords" className={styles.navItem}>
+        <Link href="/admin/achievementRecords" className={styles.navItem}>
           <FaMedal className={styles.icon} />
           {!isCollapsed && <span>Achievement Records</span>}
         </Link>

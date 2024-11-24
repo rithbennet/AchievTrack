@@ -86,3 +86,4 @@ export async function deleteUser(userId: number) {
 
   return response;
 }
+

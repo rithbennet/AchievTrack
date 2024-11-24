@@ -173,15 +173,16 @@
 
 /* Modal Overlay */
 .modalOverlay {
-  position: fixed;
+  position: fixed; /* Ensure the modal is fixed and covers the entire screen */
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000; /* Ensure the modal is on top of other elements */
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
@@ -193,12 +194,12 @@
 }
 
 .modalContent {
-  background-color: #fff;
-  padding: 2rem;
-  border-radius: 10px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   max-width: 500px;
   width: 100%;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   animation: fadeIn 0.3s ease-in-out;
 }
 
@@ -235,11 +236,12 @@
 }
 
 .inputField {
+  display: block;
   width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
+  padding: 8px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 4px;
   font-size: 1rem;
   outline: none;
 }
@@ -249,18 +251,67 @@
 }
 
 .submitButton {
-  padding: 10px 20px;
-  background-color: #623988;
+  background: #007bff;
   color: white;
+  padding: 10px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #45a049;
-  }
 }
+
+.submitButton:hover {
+  background-color: #45a049;
+}
+
+.successModal {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.searchAndAddContainer {
+  display: flex;
+  align-items: center; /* Align items vertically in the center */
+  justify-content: space-between; /* Adds space between the two elements */
+  margin-bottom: 1rem; /* Adjust spacing below the row */
+}
+
+.searchInput {
+  flex: 1; /* Make the search input take up as much space as available */
+  max-width: 300px; /* Optional: Limit the maximum width */
+  margin-right: 1rem; /* Add spacing between the search bar and button */
+}
+
+.addButton {
+  padding: 0.5rem 1rem; /* Add some padding for better button appearance */
+}
+.actionButtons {
+  display: flex; /* Align children horizontally */
+  gap: 10px; /* Add space between buttons */
+  justify-content: flex-start; /* Align buttons to the left (optional) */
+  align-items: center; /* Center buttons vertically (optional) */
+}
+
+
+
+
 
 
