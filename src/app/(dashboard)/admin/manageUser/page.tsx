@@ -1,9 +1,4 @@
 import AdminGuard from "./components/AdminGuard";
-<<<<<<< HEAD
-import Header from "@/app/components2/header/header";
-import SidebarAdmin from "@/app/components2/sidebar/sidebarAdmin";
-=======
->>>>>>> origin/main
 import styles from "./styles/manageUser.module.scss";
 import UserList from "./components/UserList";
 import AddButton from "./components/addButton";

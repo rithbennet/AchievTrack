@@ -12,7 +12,8 @@ const HomePage = () => {
   useEffect(() => {
     const fetchDataRecord = async () => {
       try {
-        const { data, error } = await supabase.from("DataRecord").select();
+        // Fetch only the id, name, and age columns
+        const { data, error } = await supabase.from("items").select("id, name, age");
 
         if (error) {
           setFetchError("Error fetching data from Supabase");
@@ -63,25 +64,23 @@ const HomePage = () => {
           <table className={styles.table}>
             <thead>
               <tr>
-                <th>Title</th>
-                <th>Category</th>
-                <th>Level</th>
-                <th>Description</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
               </tr>
             </thead>
             <tbody>
               {dataRecords.length > 0 ? (
                 dataRecords.map((record) => (
                   <tr key={record.id}>
-                    <td>{record.title}</td>
-                    <td>{record.category}</td>
-                    <td>{record.level}</td>
-                    <td>{record.description}</td>
+                    <td>{record.id}</td>
+                    <td>{record.name}</td>
+                    <td>{record.age}</td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan={4}>No records found</td>
+                  <td colSpan={3}>No records found</td>
                 </tr>
               )}
             </tbody>
