@@ -1,6 +1,6 @@
 // components/EditButton.tsx
 "use client";
-import { deleteUser } from '@/actions/manageUserAction';
+import { deactivateUser } from '@/actions/manageUserAction';
 import styles from '../styles/manageUser.module.scss';
 
 interface DeleteButtonProps {
@@ -10,7 +10,7 @@ interface DeleteButtonProps {
 export default function DeleteButton({ userId }: DeleteButtonProps) {
   const handleDelete = async () => {
     try {
-      await deleteUser(userId);
+      await deactivateUser(userId);
       console.log(`User with ID ${userId} deleted successfully.`);
       // Optionally, you can add code here to update the UI after deletion
     } catch (error) {
@@ -20,7 +20,7 @@ export default function DeleteButton({ userId }: DeleteButtonProps) {
 
   return (
     <button onClick={handleDelete} className={styles.deleteButton} aria-label={`Delete user ${userId}`}>
-      Delete
+      Deactivate
     </button>
   );
 }

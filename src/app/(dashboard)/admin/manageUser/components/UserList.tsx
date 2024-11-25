@@ -1,7 +1,7 @@
 import prisma from "@/lib/db";
 import styles from "../styles/manageUser.module.scss";
 import EditButton from './editButton';
-import DeleteButton from './deleteButton';
+import DeactivateButton from './deactivateUser';
 import PaginationComponent from './Pagination';
 
 interface UserListProps {
@@ -9,7 +9,7 @@ interface UserListProps {
   currentPage: number;
 }
 
-const ITEMS_PER_PAGE = 4;
+const ITEMS_PER_PAGE = 8;
 
 export default async function UserList({ query, currentPage }: UserListProps) {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -25,14 +25,7 @@ export default async function UserList({ query, currentPage }: UserListProps) {
     take: ITEMS_PER_PAGE,
   });
 
-  const totalUsers = await prisma.user.count({
-    where: {
-      name: {
-        contains: query,
-        mode: 'insensitive',
-      },
-    },
-  });
+  const totalUsers = await prisma.user.count();
 
   const totalPages = Math.ceil(totalUsers / ITEMS_PER_PAGE);
 
@@ -59,7 +52,7 @@ export default async function UserList({ query, currentPage }: UserListProps) {
                     <EditButton userId={user.id.toString()} initialData={user} />
                   </div>
                   <div className={styles.deleteButton}>
-                    <DeleteButton userId={user.id} />
+                    <DeactivateButton userId={user.id} />
                   </div>
                 </div>
               </td>

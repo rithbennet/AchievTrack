@@ -84,8 +84,8 @@ export default function UserForm({ closeModal, initialData }: UserFormProps) {
           className={styles.inputField}
           required
         >
-          <option value="teacher">Teacher</option>
-          <option value="admin">Admin</option>
+          <option value="Teacher">Teacher</option>
+          <option value="Admin">Admin</option>
         </select>
         
         <label htmlFor="password">Password</label>

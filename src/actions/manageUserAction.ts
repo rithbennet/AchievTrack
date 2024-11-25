@@ -71,7 +71,7 @@ export async function updateUser(userId: number, formData: FormData){
 
 }
 
-export async function deleteUser(userId: number) {
+export async function deactivateUser(userId: number) {
   const user = await prisma.user.findUnique({
     where: { id: userId },
   });
@@ -80,10 +80,10 @@ export async function deleteUser(userId: number) {
     throw new Error(`User with ID ${userId} does not exist.`);
   }
 
-  const response = await prisma.user.delete({
+  const response = await prisma.user.update({
     where: { id: userId },
+    data: { is_active: false },
   });
 
   return response;
 }
-
