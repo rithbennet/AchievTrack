@@ -3,7 +3,6 @@ import styles from "./styles/manageUser.module.scss";
 import UserList from "./components/UserList";
 import AddButton from "./components/addButton";
 import Search from "./components/SearchBar";
-import PaginationComponent from "./components/Pagination";
 
 export default async function ManageUserPage(props: {
  searchParams?: Promise< { query?: string; page?: string }>;

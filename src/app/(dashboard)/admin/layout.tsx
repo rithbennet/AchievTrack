@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "SK Saujana Utama achievement tracking system",
 };
 
-export default function DashboardLayout({
+export default function AdminDashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
