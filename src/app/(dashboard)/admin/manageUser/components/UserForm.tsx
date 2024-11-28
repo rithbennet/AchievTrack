@@ -2,6 +2,7 @@
 import { createUser, updateUser } from '@/actions/manageUserAction';
 import styles from '../styles/manageUser.module.scss';
 import { FormEvent, useState, useEffect } from 'react';
+import { useRouter } from "next/navigation";
 
 interface UserFormProps {
   closeModal: () => void;
@@ -22,6 +23,8 @@ export default function UserForm({ closeModal, initialData }: UserFormProps) {
     password: ''
   });
 
+  const router = useRouter();
+
   useEffect(() => {
     if (initialData) {
       setUser(initialData);
@@ -41,6 +44,7 @@ export default function UserForm({ closeModal, initialData }: UserFormProps) {
       await createUser(new FormData(event.target as HTMLFormElement));
     }
     closeModal();
+    router.refresh();
   }
 
   return (
