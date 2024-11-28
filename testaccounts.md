@@ -5,7 +5,7 @@ This document contains information about the test accounts available in the syst
 ## Admin Accounts
 | Email                | Password       | Role  |
 |----------------------|----------------|-------|
-| john@gmail.com.      | 123456789      | Admin |
+| john@gmail.com       | 123456789      | Admin |
 | test1@gmail.com      | test123456789  | Admin |
 |
 
