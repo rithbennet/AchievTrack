@@ -4,10 +4,9 @@ import { useForm } from "react-hook-form";
 import styles from "@/app/styles/login.module.scss"; // Import the SCSS file
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { getSession, signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 
 const FormSchema = z.object({
   email: z.string().min(1, 'Email is required').email("Invalid email"),
@@ -20,12 +19,20 @@ const FormSchema = z.object({
 type FormSchemaType = z.infer<typeof FormSchema>;
 
 export default function LoginForm() {
+  const router = useRouter();
+  const { data: session } = useSession();
   const { register, handleSubmit, formState: { errors } } = useForm<FormSchemaType>({
     resolver: zodResolver(FormSchema),
   });
-
-  const router = useRouter();
   const [loginError, setLoginError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (session?.user?.role === "Admin") {
+      router.push("/admin"); // Navigate to the admin page
+    } else if (session?.user?.role === "Teacher") {
+      router.push("/teacher"); // Navigate to the teacher page
+    }
+  }, [session, router]);
 
   const onSubmit = async (data: FormSchemaType) => {
     // Handle sign-in logic here
@@ -34,7 +41,7 @@ export default function LoginForm() {
       email: data.email,
       password: data.password,
     });
-    
+
     if (result?.error) {
       if (result.error === "CredentialsSignin") {
         setLoginError("Invalid email or password.");
@@ -43,14 +50,13 @@ export default function LoginForm() {
       }
     } else {
       console.log("Logged in successfully");
-
-      // Fetch the session to get the user role
-      const session = await getSession();
       if (session?.user?.role === "Admin") {
         router.push("/admin"); // Navigate to the admin page
-      } else (session?.user?.role === "Teacher") 
+      } else if (session?.user?.role === "Teacher") {
         router.push("/teacher"); // Navigate to the teacher page
-        
+      } else {
+        router.push("/"); // Default fallback
+      }
     }
   };
 

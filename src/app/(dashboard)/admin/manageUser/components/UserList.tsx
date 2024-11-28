@@ -1,7 +1,7 @@
 import prisma from "@/lib/db";
 import styles from "../styles/manageUser.module.scss";
 import EditButton from './editButton';
-import DeactivateButton from './deleteButton';
+import DeactivateButton from './deactivateButton';
 import PaginationComponent from './Pagination';
 
 interface UserListProps {
