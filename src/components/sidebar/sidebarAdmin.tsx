@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from './sidebarAdmin.module.scss';
 import { FaHome, FaUserCog, FaUserGraduate, FaMedal, FaSignOutAlt } from 'react-icons/fa';
+import { signOut } from 'next-auth/react';
 
 interface SidebarProps {
   userName: string;
@@ -15,6 +16,11 @@ const SidebarAdmin: React.FC<SidebarProps> = ({ userName }) => {
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
   };
+
+  useEffect(() => {
+    // Ensure the sidebar state is consistent between server and client
+    setIsCollapsed(false);
+  }, []);
 
   return (
     <div className={`${styles.sidebar} ${isCollapsed ? styles.collapsed : ''}`}>
@@ -40,10 +46,10 @@ const SidebarAdmin: React.FC<SidebarProps> = ({ userName }) => {
         </Link>
       </nav>
       <div className={styles.logout}>
-        <Link href="/logout" className={styles.navItem}>
+        <button onClick={() => signOut({ callbackUrl: '/signIn' })} className={styles.navItem}>
           <FaSignOutAlt className={styles.icon} />
           {!isCollapsed && <span>Logout</span>}
-        </Link>
+        </button>
       </div>
     </div>
   );

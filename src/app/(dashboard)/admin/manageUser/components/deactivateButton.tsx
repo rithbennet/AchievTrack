@@ -7,8 +7,8 @@ interface DeleteButtonProps {
   userId: number; // Ensure userId is a number
 }
 
-export default function DeleteButton({ userId }: DeleteButtonProps) {
-  const handleDelete = async () => {
+export default function deactivateButton({ userId }: DeleteButtonProps) {
+  const handleDeactivate = async () => {
     try {
       await deactivateUser(userId);
       console.log(`User with ID ${userId} deleted successfully.`);
@@ -19,7 +19,7 @@ export default function DeleteButton({ userId }: DeleteButtonProps) {
   };
 
   return (
-    <button onClick={handleDelete} className={styles.deleteButton} aria-label={`Delete user ${userId}`}>
+    <button onClick={handleDeactivate} className={styles.deleteButton} aria-label={`Delete user ${userId}`}>
       Deactivate
     </button>
   );

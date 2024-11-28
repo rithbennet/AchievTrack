@@ -9,15 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/prisma-adapter": "^2.7.4",
+    "@hookform/resolvers": "^3.9.1",
     "@prisma/client": "^5.22.0",
     "achievtrack": "file:",
     "bcrypt": "^5.1.1",
     "bootstrap": "^5.3.3",
     "font-awesome": "^4.7.0",
     "next": "15.0.3",
+    "next-auth": "^5.0.0-beta.25",
     "prisma": "^5.22.0",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
+    "react-hook-form": "^7.53.2",
     "react-icons": "^5.3.0",
     "zod": "^3.23.8"
   },

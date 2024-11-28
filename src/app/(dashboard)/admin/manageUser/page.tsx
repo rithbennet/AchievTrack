@@ -1,9 +1,8 @@
-import AdminGuard from "./components/AdminGuard";
+import AdminGuard from "../components/AdminGuard";
 import styles from "./styles/manageUser.module.scss";
 import UserList from "./components/UserList";
 import AddButton from "./components/addButton";
 import Search from "./components/SearchBar";
-import PaginationComponent from "./components/Pagination";
 
 export default async function ManageUserPage(props: {
  searchParams?: Promise< { query?: string; page?: string }>;
@@ -14,7 +13,6 @@ export default async function ManageUserPage(props: {
 
 
   return (
-    <AdminGuard isAdmin={true}>
       <div className={styles.pageContainer}>
         <div className={styles.contentContainer}>
           <div className={styles.manageUserPage}>
@@ -27,6 +25,5 @@ export default async function ManageUserPage(props: {
           </div>
         </div>
       </div>
-    </AdminGuard>
   );
 }
