@@ -11,7 +11,6 @@ interface UserFormProps {
     name: string;
     email: string;
     role: string;
-    password: string;
   };
 }
 
@@ -19,10 +18,11 @@ export default function UserForm({ closeModal, initialData }: UserFormProps) {
   const [user, setUser] = useState({
     name: '',
     email: '',
-    role: 'teacher',
-    password: ''
+    role: 'teacher'
   });
 
+  const [isEditingPassword, setIsEditingPassword] = useState(false);
+  const [password, setPassword] = useState('');
   const router = useRouter();
 
   useEffect(() => {
@@ -34,6 +34,14 @@ export default function UserForm({ closeModal, initialData }: UserFormProps) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
     setUser((prevUser) => ({ ...prevUser, [name]: value }));
+  };
+
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
+  };
+
+  const handleEditPassword = () => {
+    setIsEditingPassword(true);
   };
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -91,19 +99,43 @@ export default function UserForm({ closeModal, initialData }: UserFormProps) {
           <option value="Teacher">Teacher</option>
           <option value="Admin">Admin</option>
         </select>
-        
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={user.password}
-          onChange={handleChange}
-          className={styles.inputField}
-          required
-          minLength={8}
-        />
-        
+        {!initialData ? (
+          <div className={styles.formGroup}>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              onChange={handlePasswordChange}
+              className={styles.inputField}
+              required
+              minLength={8}
+            />
+          </div>
+        ) : (
+          <>
+            {isEditingPassword ? (
+              <div className={styles.formGroup}>
+                <label htmlFor="password">New Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={password}
+                  onChange={handlePasswordChange}
+                  className={styles.inputField}
+                  required
+                  minLength={8}
+                />
+              </div>
+            ) : (
+              <button type="button" onClick={handleEditPassword} className={"btn btn-primary"}>
+                Edit Password
+              </button>
+            )}
+          </>
+        )}
         <button type="submit" className={styles.submitButton}>{initialData ? 'Save Changes' : 'Add User'}</button>
       </form>
     </div>

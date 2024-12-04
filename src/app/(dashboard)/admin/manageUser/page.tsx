@@ -1,4 +1,3 @@
-import AdminGuard from "../components/AdminGuard";
 import styles from "./styles/manageUser.module.scss";
 import UserList from "./components/UserList";
 import AddButton from "./components/addButton";
