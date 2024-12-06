@@ -1,20 +1,9 @@
-// components/EditButton.tsx
 "use client"
 import { useState } from 'react';
-import UserForm from "./UserForm";
+import UserForm from "../UserForm";
 import styles from '../styles/manageUser.module.scss';
 
-interface EditButtonProps {
-  userId: string;
-  initialData: {
-    name: string;
-    email: string;
-    role: string;
-    password: string;
-  };
-}
-
-export default function EditButton({ userId, initialData }: EditButtonProps) {
+export default function AddButton() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -29,13 +18,11 @@ export default function EditButton({ userId, initialData }: EditButtonProps) {
 
   return (
     <div>
-      <button onClick={openModal} className={styles.editButton} aria-label={`Edit user ${userId}`}>
-        Edit
-      </button>
+      <button onClick={openModal} className={styles.addButton}>Add User</button>
       {isModalOpen && (
         <div className={`${styles.modalOverlay} ${isModalOpen ? styles.open : ''}`}>
           <div className={styles.modalContent}>
-            <UserForm closeModal={closeModal} initialData={initialData} />
+            <UserForm closeModal={closeModal} />
           </div>
         </div>
       )}

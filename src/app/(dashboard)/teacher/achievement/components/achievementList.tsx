@@ -1,7 +1,5 @@
 import prisma from "@/lib/db";
-import styles from "../styles/manageUser.module.scss";
-import EditButton from './buttons/editButton';
-import DeactivateButton from './buttons/deactivateButton';
+import styles from '../styles/achievement.module.scss';
 import PaginationComponent from './Pagination';
 
 interface UserListProps {
@@ -9,14 +7,14 @@ interface UserListProps {
   currentPage: number;
 }
 
-const ITEMS_PER_PAGE = 8;
+const ITEMS_PER_PAGE = 10;
 
-export default async function UserList({ query, currentPage }: UserListProps) {
+export default async function AchievementList({ query, currentPage }: UserListProps) {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
-  const users = await prisma.user.findMany({
+  const achievement = await prisma.achievementdata.findMany({
     where: {
-      name: {
+      title: {
         contains: query,
         mode: 'insensitive', // Case-insensitive search
       },
@@ -25,34 +23,32 @@ export default async function UserList({ query, currentPage }: UserListProps) {
     take: ITEMS_PER_PAGE,
   });
 
-  const totalUsers = await prisma.user.count();
+  const totalAchievement = await prisma.user.count();
 
-  const totalPages = Math.ceil(totalUsers / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(totalAchievement / ITEMS_PER_PAGE);
 
   return (
     <div className={styles.userListSection}>
       <table className={styles.userTable}>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Level</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
-            <tr key={user.id}>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.role}</td>
+          {achievement.map((achievement) => (
+            <tr key={achievement.id}>
+              <td>{achievement.title}</td>
+              <td>{achievement.category}</td>
+              <td>{achievement.level}</td>
               <td>
                 <div className={styles.actionButtons}>
                   <div className={styles.editButton}>
-                    <EditButton userId={user.id.toString()} initialData={user} />
                   </div>
-                  <div className={styles.deleteButton}>
-                    <DeactivateButton userId={user.id} />
+                  <div className={styles.deleteButton}><area shape="" coords="" href="" alt="" />
                   </div>
                 </div>
               </td>
