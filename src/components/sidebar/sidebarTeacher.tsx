@@ -32,9 +32,13 @@ const SidebarTeacher: React.FC<SidebarProps> = ({ userName }) => {
           <FaHome className={styles.icon} />
           {!isCollapsed && <span>Dashboard</span>}
         </Link>
-        <Link href="/teacher/achievementRecords" className={styles.navItem}>
+        <Link href="/teacher/achievement" className={styles.navItem}>
           <FaMedal className={styles.icon} />
           {!isCollapsed && <span>Achievement Records</span>}
+        </Link>
+        <Link href="/teacher/student" className={styles.navItem}>
+          <FaUserGraduate className={styles.icon} />
+          {!isCollapsed && <span>Students</span>}
         </Link>
       </nav>
       <div className={styles.logout}>
