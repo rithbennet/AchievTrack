@@ -1,7 +1,7 @@
 "use client"
 import { useState } from 'react';
 import UserForm from "../UserForm";
-import styles from '../styles/manageUser.module.scss';
+import styles from '../../styles/manageUser.module.scss';
 
 export default function AddButton() {
   const [isModalOpen, setIsModalOpen] = useState(false);
