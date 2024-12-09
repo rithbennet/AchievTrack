@@ -1,319 +1,402 @@
-.manageUserPage {
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: 'Arial', sans-serif;
-    border-radius: 10px;
+/* Page Container */
+.achievementPage {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: "Arial", sans-serif;
+  border-radius: 10px;
+  background-color: #f8f8ff;
+}
+
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  padding: 20px;
+}
+
+/* Top Section */
+.topSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 15px;
+}
+
+.searchAndActions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.searchInput {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s ease;
+  width: 100%;
+  max-width: 250px;
+}
+
+.importButton,
+.addButton {
+  padding: 6px 12px;
+  background-color: #623988;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.importButton:hover,
+.addButton:hover {
+  background-color: #42245e;
+}
+
+.sortButton {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: #FF8900;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #e6951d;
   }
-  
-  .pageContainer {
-    display: flex; /* Use flexbox to display sidebar and content side by side */
-    height: 100vh; /* Full height layout */
-  }
-  
-  .topSection {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 15px;
-  }
-  
-  .totalInfo {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #555;
-  }
-  
-  .searchAndAdd {
-    display: flex;
-    align-items: center;
-  }
-  
-  .searchInput {
-    padding: 6px 10px;
-    font-size: 0.9rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 10px;
-    outline: none;
-    transition: border-color 0.2s ease;
-  }
-  
-  .searchInput:focus {
-    border-color: #007bff;
-  }
-  
-  .addButton {
-    padding: 6px 12px;
-    background-color: #623988;
+}
+
+/* Achievement List Styles */
+.achievementListSection {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.achievementTable {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.achievementTable th,
+.achievementTable td {
+  padding: 10px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.achievementTable th {
+  background-color: #623988;
+  color: white;
+  font-size: 1rem;
+}
+
+.achievementTable td {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.achievementTable tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Action Buttons */
+.actionButtons {
+  display: flex;
+  gap: 5px;
+
+  .viewButton{
+    background-color: #4CBD00;
     color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: background-color 0.3s ease;
-  
+
     &:hover {
-      background-color: #45a049;
+      background-color: #3a9c00;
     }
   }
-  
-  .userListSection {
-    margin-top: 20px;
-  }
-  
-  .userTable {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    overflow: hidden;
-  
-    th,
-    td {
-      padding: 8px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-    }
-  
-    th {
-      background-color: #623988;
-      color: white;
-      font-size: 1.1rem;
-    }
-  
-    td {
-      font-size: 0.9rem;
-      color: #555;
-    }
-  }
-  
-  .editButton,
-  .deleteButton {
-    padding: 6px 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.85rem;
-    margin-right: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
+
   .editButton {
-    background-color: #0095FF;
+    background-color: #007bff;
     color: white;
-  
+
     &:hover {
       background-color: #0056b3;
     }
   }
-  
+
   .deleteButton {
     background-color: #dc3545;
     color: white;
-  
+
     &:hover {
       background-color: #bd1c2d;
     }
   }
-  
-  .pagination {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
+}
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+
+  select {
+    padding: 6px;
     font-size: 0.9rem;
-  
-    select {
-      padding: 6px;
-      font-size: 0.9rem;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      transition: border-color 0.3s ease;
-    }
-  
-    select:focus {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease;
+
+    &:focus {
       border-color: #007bff;
     }
-  
-    button {
-      background-color: #090C9B;
-      padding: 6px 12px;
-      border: none;
-      color: white;
-      border-radius: 5px;
-      font-size: 0.9rem;
-      transition: background-color 0.3s ease;
-  
-      &:hover {
-        background-color: #1976D2;
-      }
-    }
   }
-  
-  /* Flex layout for Sidebar and Content */
-  .contentContainer {
-    flex-grow: 1; /* Content takes remaining space */
-    padding: 20px;
-    overflow-y: auto;
-  }
-  
-  .sidebarContainer {
-    width: 250px; /* Adjust the width as per your preference */
-    background-color: #f0f0f0;
-    padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    height: 100vh; /* Full height */
-    position: sticky;
-    top: 0;
-    transition: all 0.3s ease;
-  }
-  
-  /* Modal Overlay */
-  .modalOverlay {
-    position: fixed; /* Ensure the modal is fixed and covers the entire screen */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000; /* Ensure the modal is on top of other elements */
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-  }
-  
-  .modalOverlay.open {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  
-  .modalContent {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
-    width: 100%;
-    animation: fadeIn 0.3s ease-in-out;
-  }
-  
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  /* Modal Header */
-  .modalHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .closeButton {
-    background: none;
+
+  button {
+    background-color: #623988;
+    padding: 6px 12px;
     border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #aaa;
-    transition: color 0.2s ease;
-  }
-  
-  .closeButton:hover {
-    color: #881a1a;
-  }
-  
-  .inputField {
-    display: block;
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-    outline: none;
-  }
-  
-  .inputField:focus {
-    border-color: #007bff;
-  }
-  
-  .submitButton {
-    background: #007bff;
     color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #42245e;
+    }
   }
-  
-  .submitButton:hover {
-    background-color: #45a049;
+}
+
+/* Form Styling */
+.form {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  margin: 20px auto;
+  font-family: "Arial", sans-serif;
+  max-height: 600px; /* Set a max-height for the form to make it scrollable */
+  overflow-y: auto; /* Enable vertical scrolling when content exceeds height */
+}
+
+.form h2 {
+  text-align: center;
+  color: #623988;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+/* Form Group */
+.form .formGroup {
+  margin-bottom: 15px;
+}
+
+.form label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.form input,
+.form textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.form input[type="file"] {
+  padding: 5px;
+  border: 1px solid #ccc;
+}
+
+.form input:focus,
+.form textarea:focus {
+  border-color: #623988;
+}
+
+/* Textarea Specific */
+.form textarea {
+  resize: vertical;
+  min-height: 100px;
+  font-family: "Arial", sans-serif;
+}
+
+/* Actions */
+.form .actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.form .submitButton,
+.form .cancelButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form .submitButton {
+  background-color: #623988;
+  color: white;
+}
+
+.form .submitButton:hover {
+  background-color: #42245e;
+}
+
+.form .cancelButton {
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+.form .cancelButton:hover {
+  background-color: #ddd;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .form {
+    padding: 15px;
+    width: 90%;
   }
-  
-  .successModal {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
-    width: 100%;
+  .form h2 {
+    font-size: 1.25rem;
   }
-  
-  .modalHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .form .submitButton,
+  .form .cancelButton {
+    padding: 8px 15px;
+    font-size: 0.9rem;
   }
-  
-  .closeButton {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-  }
-  
-  .searchAndAddContainer {
-    display: flex;
-    align-items: center; /* Align items vertically in the center */
-    justify-content: space-between; /* Adds space between the two elements */
-    margin-bottom: 1rem; /* Adjust spacing below the row */
-  }
-  
-  .searchInput {
-    flex: 1; /* Make the search input take up as much space as available */
-    max-width: 300px; /* Optional: Limit the maximum width */
-    margin-right: 1rem; /* Add spacing between the search bar and button */
-  }
-  
-  .addButton {
-    padding: 0.5rem 1rem; /* Add some padding for better button appearance */
-  }
-  .actionButtons {
-    display: flex; /* Align children horizontally */
-    gap: 10px; /* Add space between buttons */
-    justify-content: flex-start; /* Align buttons to the left (optional) */
-    align-items: center; /* Center buttons vertically (optional) */
-  }
-  
-  
-  
-  
-  
-  
-  
-  
+}
+
+/* In your SCSS file, add styles for the file preview */
+.filePreview {
+  margin-top: 10px;
+}
+
+.filePreview img {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 5px;
+}
+
+
+
+.fileDropArea {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.fileDropArea.dragging {
+  background-color: #f0f8ff;
+}
+
+.chooseFileLabel {
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.chooseFileButton {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.chooseFileButton:hover {
+  background-color: #45a049;
+}
+
+.fileInput {
+  display: none; /* Hide default file input */
+}
+
+.submitButton,
+.cancelButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submitButton {
+  background-color: #4caf50;
+  color: white;
+}
+
+.submitButton:hover {
+  background-color: #45a049;
+}
+
+.cancelButton {
+  background-color: #f44336;
+  color: white;
+}
+
+.cancelButton:hover {
+  background-color: #e53935;
+}
+
+.actions {
+  margin-top: 20px;
+}
+
+
