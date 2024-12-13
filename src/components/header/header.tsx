@@ -1,5 +1,4 @@
 // /app/components/header.tsx
-"use client";
 import React from 'react';
 import Image from 'next/image';
 import styles from './header.module.scss';
@@ -10,6 +9,8 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ userName, userRole }) => {
+
+
   return (
     <header className={styles.header}>
       <div className={styles.logoSection}>

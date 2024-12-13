@@ -5,30 +5,8 @@ import Link from 'next/link';
 const HomePage = () => {
   return (
     <div className={styles.container}>
-      {/* Side Menu */}
-      <aside className={styles.sidebar}>
-        <button className={styles.userName}>Saleha</button>
-        <div className={styles.menu}>
-          <Link href="/dashboardTeacher"><button className={styles.menuItem}>🏠Dashboard</button></Link>
-          <button className={styles.menuItem}>🚵Achievement Records</button>
-          <button className={styles.menuItem}>👤Profile</button>
-        </div>
-        <button className={styles.logoutButton}>ⓘLogout</button>
-      </aside>
-
       {/* Main Content */}
       <div className={styles.mainContent}>
-        {/* Top Bar */}
-        <div className={styles.topBar}>
-          <div className={styles.schoolInfo}>
-            <img src="/images/SKSU.jpg" alt="School Logo" className={styles.logo} />
-            <h1 className={styles.schoolName}>SEK. KEB. SAUJANA UTAMA</h1>
-          </div>
-          <div className={styles.userIcon}>
-            <img src="/images/user.webp" alt="User" />
-          </div>
-        </div>
-
         {/* Search Bar and Action Buttons */}
         <div className={styles.header}>
           <input type="text" placeholder="Search" className={styles.searchBar} />

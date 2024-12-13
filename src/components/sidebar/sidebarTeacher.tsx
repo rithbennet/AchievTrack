@@ -10,7 +10,7 @@ interface SidebarProps {
   userName: string;
 }
 
-const SidebarAdmin: React.FC<SidebarProps> = ({ userName }) => {
+const SidebarTeacher: React.FC<SidebarProps> = ({ userName }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const toggleSidebar = () => {
@@ -28,21 +28,17 @@ const SidebarAdmin: React.FC<SidebarProps> = ({ userName }) => {
         <span className={styles.userName}>{isCollapsed ? '' : userName}</span>
       </div>
       <nav className={styles.nav}>
-        <Link href="/admin" className={styles.navItem}>
+        <Link href="/teacher" className={styles.navItem}>
           <FaHome className={styles.icon} />
           {!isCollapsed && <span>Dashboard</span>}
         </Link>
-        <Link href="/admin/manageUser" className={styles.navItem}>
-          <FaUserCog className={styles.icon} />
-          {!isCollapsed && <span>Manage Users</span>}
-        </Link>
-        <Link href="/admin/manageStudent" className={styles.navItem}>
-          <FaUserGraduate className={styles.icon} />
-          {!isCollapsed && <span>Manage Students</span>}
-        </Link>
-        <Link href="/admin/achievementRecords" className={styles.navItem}>
+        <Link href="/teacher/achievement" className={styles.navItem}>
           <FaMedal className={styles.icon} />
           {!isCollapsed && <span>Achievement Records</span>}
+        </Link>
+        <Link href="/teacher/student" className={styles.navItem}>
+          <FaUserGraduate className={styles.icon} />
+          {!isCollapsed && <span>Students</span>}
         </Link>
       </nav>
       <div className={styles.logout}>
@@ -55,4 +51,4 @@ const SidebarAdmin: React.FC<SidebarProps> = ({ userName }) => {
   );
 };
 
-export default SidebarAdmin;
+export default SidebarTeacher;
