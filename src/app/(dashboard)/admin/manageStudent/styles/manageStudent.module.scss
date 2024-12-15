@@ -1,0 +1,203 @@
+/* General container style */
+.adminContainer {
+  margin-top: 20px;
+}
+
+/* Add Button */
+.addButton {
+  padding: 10px 20px;
+  background-color: #28a745; /* Green color */
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #218838; /* Darker green on hover */
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.5);
+  }
+}
+
+/* Modal Overlay */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Modal Content */
+.modalContent {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  transition: transform 0.3s ease;
+}
+
+/* When modal is open */
+.modalOverlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Student List */
+.studentList {
+  margin-top: 20px;
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #f9f9f9;
+}
+
+.studentList th, .studentList td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.studentList th {
+  background-color: #007bff; /* Blue header */
+  color: white;
+}
+
+.studentList tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Edit Button */
+.editButton {
+  padding: 5px 10px;
+  background-color: #ffc107; /* Yellow color */
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #e0a800; /* Darker yellow on hover */
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.5);
+  }
+}
+
+/* Student Form */
+.studentForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.studentForm input,
+.studentForm select,
+.studentForm textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.studentForm label {
+  font-size: 14px;
+  color: #333;
+}
+
+.studentForm button {
+  padding: 10px 20px;
+  background-color: #007bff; /* Blue submit button */
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+}
+
+/* Bulk Upload Handler */
+.bulkUploadContainer {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bulkUploadContainer input[type="file"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.bulkUploadContainer button {
+  padding: 10px 20px;
+  background-color: #6c757d; /* Gray button */
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #5a6268; /* Darker gray on hover */
+  }
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  border: 1px solid #007bff; /* Border color matches the primary theme */
+  background-color: white;
+  color: #007bff;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #007bff;
+    color: white;
+  }
+
+  &:disabled {
+    background-color: #f1f1f1;
+    color: #ccc;
+    cursor: not-allowed;
+  }
+}
+
+.pagination .active {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
