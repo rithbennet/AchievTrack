@@ -20,7 +20,10 @@ export default async function ManageStudentPage(props: {
 
 
       {/* Student list component */}
+      <div className="studentList">
       <StudentList query={query} currentPage={currentPage} />
+      </div>
+
     </div>
   );
 }
