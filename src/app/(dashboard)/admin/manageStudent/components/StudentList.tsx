@@ -36,6 +36,7 @@ export default async function StudentList({ query, currentPage }: StudentListPro
             <th>Name</th>
             <th>MyKad</th>
             <th>Class</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -55,7 +56,9 @@ export default async function StudentList({ query, currentPage }: StudentListPro
           ))}
         </tbody>
       </table>
+      <div className={styles.pagination}>
       <PaginationComponent pageCount={totalPages} />
+      </div>
     </div>
   );
 }
