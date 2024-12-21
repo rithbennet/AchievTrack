@@ -1,6 +1,5 @@
-"use client";
 import { useState } from "react";
-import styles from "../styles/achievement.module.scss";
+import styles from "../../styles/achievement.module.scss";
 
 interface AchievementData {
   title: string;

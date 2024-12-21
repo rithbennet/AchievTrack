@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react";
-import AchievementForm from '../achievementForm';
+import AchievementForm from '../form/achievementForm';
 import styles from '../../styles/achievement.module.scss';
 
 export default function AddButton() {
