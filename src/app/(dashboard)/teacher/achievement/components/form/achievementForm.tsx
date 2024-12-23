@@ -1,5 +1,7 @@
 import { useState } from "react";
 import styles from "../../styles/achievement.module.scss";
+import StudentMultiSearch from "./studentMultiSearch";
+import TeacherMultiSearch from "./teacherMultiSearch";
 
 interface AchievementData {
   title: string;
@@ -8,6 +10,8 @@ interface AchievementData {
   certificate: File | null;
   date: string;
   description: string;
+  students: number[];
+  teachers: number[];
 }
 
 interface AchievementFormProps {
@@ -23,6 +27,8 @@ export default function AchievementForm({ onSubmit, onClose }: AchievementFormPr
     certificate: null,
     date: "",
     description: "",
+    students: [],
+    teachers: [],
   });
 
   const [filePreview, setFilePreview] = useState<string | null>(null); // State for the file preview
@@ -31,6 +37,19 @@ export default function AchievementForm({ onSubmit, onClose }: AchievementFormPr
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  const handleStudentChange = (students: number[]) => {
+    setFormData({ ...formData, students });
+  };
+
+  const handleTeacherChange = (teachers: number[]) => {
+    setFormData({ ...formData, teachers });
+  };
+
+  const handleLogInput = () => {
+    console.log('Form Data:', formData);
+  };
+
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
@@ -51,9 +70,25 @@ export default function AchievementForm({ onSubmit, onClose }: AchievementFormPr
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(formData);
+    try {
+      const response = await fetch('/api/achievement', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        const achievement = await response.json();
+        onSubmit(achievement);
+      } else {
+        console.error('Failed to submit achievement');
+      }
+    } catch (error) {
+      console.error('Error submitting achievement:', error);
+    }
   };
 
   return (
@@ -100,7 +135,6 @@ export default function AchievementForm({ onSubmit, onClose }: AchievementFormPr
           name="certificate"
           onChange={handleFileChange}
         />
-        {/* File Preview Section */}
         {filePreview && (
           <div className={styles.filePreview}>
             {filePreview.includes("pdf") ? (
@@ -123,6 +157,12 @@ export default function AchievementForm({ onSubmit, onClose }: AchievementFormPr
         />
       </div>
       <div className={styles.formGroup}>
+        < StudentMultiSearch onChange={handleStudentChange}  />
+      </div>
+      <div className={styles.formGroup}>
+        < TeacherMultiSearch onChange={handleTeacherChange}/>
+      </div>
+      <div className={styles.formGroup}>
         <label htmlFor="description">Description</label>
         <textarea
           id="description"
@@ -139,6 +179,9 @@ export default function AchievementForm({ onSubmit, onClose }: AchievementFormPr
         </button>
         <button type="button" className={styles.cancelButton} onClick={onClose}>
           Cancel
+        </button>
+        <button type="button" className={styles.logButton} onClick={handleLogInput}>
+          Log Input
         </button>
       </div>
     </form>
