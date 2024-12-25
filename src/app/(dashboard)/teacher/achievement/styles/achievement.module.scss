@@ -185,8 +185,11 @@
   border-radius: 8px;
   width: 90%;
   max-width: 600px;
+  max-height: 80vh; /* Set max height */
+  overflow-y: auto; /* Enable vertical scrolling for overflowing content */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
+
 
 /* Pagination */
 .pagination {
@@ -225,16 +228,16 @@
 
 /* Form Styling */
 .form {
-  background-color: #ffffff;
+  // background-color: #ffffff;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 500px;
   margin: 20px auto;
   font-family: "Arial", sans-serif;
   max-height: 600px; /* Set a max-height for the form to make it scrollable */
-  overflow-y: auto; /* Enable vertical scrolling when content exceeds height */
+  // overflow-y: auto; /* Enable vertical scrolling when content exceeds height */
 }
 
 .form h2 {
