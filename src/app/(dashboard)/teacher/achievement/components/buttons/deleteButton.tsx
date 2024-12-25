@@ -1,24 +1,40 @@
 "use client";
 import { useState } from "react";
 import styles from "../../styles/achievement.module.scss";
+import { useRouter } from "next/navigation";
 
 interface DeleteButtonProps {
   achievementId: number;
-  onDelete: (id: number) => void; // A callback to handle the delete action
 }
 
-export default function DeleteButton({ achievementId, onDelete }: DeleteButtonProps) {
+export default function DeleteButton({ achievementId,}: DeleteButtonProps) {
   const [showModal, setShowModal] = useState(false);
+  const router = useRouter();
 
   // Toggle modal visibility
   const toggleModal = () => setShowModal(!showModal);
 
   // Handle confirmation action
-  const handleDelete = () => {
-    // Call the onDelete function passed from the parent component
-    onDelete(achievementId);
-    toggleModal(); // Close the modal after the action
-  };
+
+  const handleDelete = async () => {
+    try {
+      await fetch("/api/achievement", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: achievementId }),
+      });
+      console.log(`Achievement with ID ${achievementId} deleted successfully.`);
+      // Refetch achievements after deletion
+    } catch (error) {
+      console.error("Error deleting achievement:", error);
+    }
+
+    toggleModal();
+    router.refresh();
+  }
+
 
   return (
     <>

@@ -3,10 +3,6 @@ import Search from "./components/SearchBar";
 import AddButton from "./components/buttons/addButton";
 import AchievementList from "./components/achievementList";
 import ImportButton from "./components/buttons/importButton";
-import SortButton from "./components/buttons/sortButton";
-import ExportButton from "./components/buttons/exportButton";
-// import TestForm from "./components/form/testform";
-
 
 
 export default function AchievementRecordsPage(props: {
@@ -34,14 +30,12 @@ export default function AchievementRecordsPage(props: {
                 <AddButton />
             </div>
             <div className={'${styles.actionButton} ${styles.sortButton}'}>
-            <SortButton />
+            
             </div>
           </div>
         </div>
           <AchievementList query={query} currentPage={currentPage} />
         </div>
-        {/* <TestForm />  */}
-        {/* <ExportButton data={achievements} /> */}
       </div>
     </div>
   );
