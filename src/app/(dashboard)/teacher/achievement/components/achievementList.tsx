@@ -4,6 +4,7 @@ import PaginationComponent from "./Pagination";
 import ViewButton from "./buttons/viewButton";
 import EditButton from "./buttons/editButton";
 import DeleteButton from "./buttons/deleteButton";
+// import ExportButton from "./buttons/exportButton";
 
 interface AchievementListProps {
   query: string;
@@ -45,9 +46,6 @@ export default async function AchievementList({ query, currentPage }: Achievemen
     take: ITEMS_PER_PAGE,
   });
 
-
-
-
   // Getting the total count for pagination
   const totalAchievements = await prisma.achievementdata.count();
   const totalPages = Math.ceil(totalAchievements / ITEMS_PER_PAGE);
@@ -83,6 +81,7 @@ export default async function AchievementList({ query, currentPage }: Achievemen
         </tbody>
       </table>
       <PaginationComponent pageCount={totalPages} />
+      {/* <ExportButton query={query} currentPage={currentPage} /> */}
     </div>
   );
 }

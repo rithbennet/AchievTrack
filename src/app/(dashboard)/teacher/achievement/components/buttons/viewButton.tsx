@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import styles from "../../styles/achievement.module.scss";
+import { exportAchievementToPDF } from "./exportButton";
 
 interface TeacherUser {
   id: number;
@@ -149,8 +150,15 @@ export default function ViewButton({ achievement, students, teachers }: ViewButt
             </div>
 
             <div className={styles.actions}>
-              <button className={styles.cancelButton} onClick={toggleModal}>
-                Close
+
+              <button
+              className={styles.submitButton}
+              onClick={() => exportAchievementToPDF(achievement, students, teachers, "/logo.png")}
+              >
+              Export to PDF
+              </button>
+              <button className={styles.cancelButton} onClick={toggleModal} style={{ marginLeft: '10px' }}>
+              Close
               </button>
             </div>
           </div>
