@@ -66,11 +66,11 @@ export default function StudentForm({ closeModalAction, initialData }: StudentFo
           maxLength={100}
         />
 
-        <label htmlFor="myKadNumber">MyKad Number</label>
+        <label htmlFor="mykad">MyKad Number</label>
         <input
           type="text"
-          id="myKadNumber"
-          name="myKadNumber"
+          id="mykad"
+          name="mykad"
           value={student.mykad}
           onChange={handleChange}
           className={styles.inputField}

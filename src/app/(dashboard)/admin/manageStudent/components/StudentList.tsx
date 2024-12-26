@@ -13,7 +13,7 @@ const ITEMS_PER_PAGE = 8;
 export default async function StudentList({ query, currentPage }: StudentListProps) {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
-  const Students = await prisma.student.findMany({
+  const students = await prisma.student.findMany({
     where: {
       name: {
         contains: query,
@@ -40,16 +40,18 @@ export default async function StudentList({ query, currentPage }: StudentListPro
           </tr>
         </thead>
         <tbody>
-          {Students.map((Student) => (
-            <tr key={Student.id}>
-              <td>{Student.name}</td>
-              <td>{Student.mykad}</td>
-              <td>{Student.class}</td>
+          {students.map((student) => (
+            <tr key={student.id}>
+              <td>{student.name}</td>
+              <td>{student.mykad}</td>
+              <td>{student.class}</td>
               <td>
                 <div className={styles.actionButtons}>
                   <div className={styles.editButton}>
-                    <EditButton id={Student.id} initialData={Student} />
+                    <EditButton id={student.id} initialData={student} />
                   </div>
+                  <button className={styles.viewButton}>View</button>
+                  <button className={styles.deleteButton}>Delete</button>
                 </div>
               </td>
             </tr>
@@ -57,7 +59,7 @@ export default async function StudentList({ query, currentPage }: StudentListPro
         </tbody>
       </table>
       <div className={styles.pagination}>
-      <PaginationComponent pageCount={totalPages} />
+        <PaginationComponent pageCount={totalPages} />
       </div>
     </div>
   );

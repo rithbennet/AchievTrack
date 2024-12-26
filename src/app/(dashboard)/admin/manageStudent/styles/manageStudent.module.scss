@@ -1,3 +1,4 @@
+/* Manage Student Page */
 .manageStudentPage {
   max-width: 100%;
   margin: 0 auto;
@@ -62,8 +63,8 @@
 
 .StudentListSection {
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Optional: Center vertically */
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
   margin-top: 20px;
 }
 
@@ -95,8 +96,15 @@
   color: #555;
 }
 
-.editButton,
-.deleteButton {
+/* Action Buttons */
+.actionButtons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.editButton, .viewButton, .deleteButton {
   padding: 6px 10px;
   border: none;
   border-radius: 4px;
@@ -115,23 +123,34 @@
   background-color: #0056b3;
 }
 
+.viewButton {
+  background-color: #f0ad4e;
+  color: white;
+}
+
+.viewButton:hover {
+  background-color: #ec971f;
+}
+
+.deleteButton {
+  background-color: #d9534f;
+  color: white;
+}
+
+.deleteButton:hover {
+  background-color: #c9302c;
+}
+
+/* Pagination */
 .pagination {
   display: flex;
-  justify-content: center; /* Center align the pagination */
+  justify-content: center;
   align-items: center;
-  margin-top: 20px; /* Adds space between the table and pagination */
+  margin-top: 20px;
   font-size: 0.9rem;
 }
 
-.pagination select {
-  padding: 6px;
-  font-size: 0.9rem;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  transition: border-color 0.3s ease;
-}
-
-.pagination button {
+.paginationButton {
   background-color: #090C9B;
   padding: 6px 12px;
   border: none;
@@ -141,7 +160,7 @@
   transition: background-color 0.3s ease;
 }
 
-.pagination button:hover {
+.paginationButton:hover {
   background-color: #1976D2;
 }
 
