@@ -1,6 +1,29 @@
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
-import { Achievement, AchievementStudent, AchievementTeacher } from "../types"; // Adjust path as necessary
+
+interface Achievement {
+  title: string;
+  category: string;
+  level: string;
+  date: string;
+  description: string;
+}
+
+interface AchievementStudent {
+  Student: {
+    name: string;
+    class: string;
+  };
+}
+
+interface AchievementTeacher {
+  Teacher: {
+    User: {
+      name: string;
+      email: string;
+    };
+  };
+}
 
 export const exportAchievementToPDF = (
   achievement: Achievement,

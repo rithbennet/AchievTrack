@@ -27,9 +27,9 @@ export default function AddButton() {
       </button>
       {isModalOpen && (
         <div className={styles.modalOverlay}>
-        
+          <div className={styles.modalContent} >
             <AchievementForm onSubmit={handleFormSubmit} onClose={handleCloseModal} />
-   
+          </div>  
         </div>
       )}
     </div>
