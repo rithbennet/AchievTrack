@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import SidebarAdmin from '@/components/sidebar/sidebarAdmin';
 import SidebarTeacher from '@/components/sidebar/sidebarTeacher' // Ensure the correct path to your SidebarAdmin component
 import Header from '@/components/header/header'; 
-// import AdminGuard from "./components/AdminGuard";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
