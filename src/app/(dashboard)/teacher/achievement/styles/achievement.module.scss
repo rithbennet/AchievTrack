@@ -32,6 +32,17 @@
   width: 100%;
 }
 
+// .searchInput {
+//   padding: 8px 12px;
+//   font-size: 0.9rem;
+//   border: 1px solid #ccc;
+//   border-radius: 5px;
+//   outline: none;
+//   transition: border-color 0.3s ease;
+//   width: 100%;
+//   max-width: 250px;
+// }
+
 .searchInput {
   padding: 8px 12px;
   font-size: 0.9rem;
@@ -41,6 +52,8 @@
   transition: border-color 0.3s ease;
   width: 100%;
   max-width: 250px;
+  background-color: black; /* Set the background to black */
+  color: white; /* Ensure text is visible */
 }
 
 .importButton,
@@ -260,6 +273,17 @@
   margin-bottom: 5px;
 }
 
+// .form input,
+// .form textarea {
+//   width: 100%;
+//   padding: 10px;
+//   font-size: 1rem;
+//   border: 1px solid #ccc;
+//   border-radius: 5px;
+//   outline: none;
+//   transition: border-color 0.3s ease;
+// }
+
 .form input,
 .form textarea {
   width: 100%;
@@ -269,6 +293,8 @@
   border-radius: 5px;
   outline: none;
   transition: border-color 0.3s ease;
+  background-color: black; /* Set the background to black */
+  color: white; /* Ensure text is visible */
 }
 
 .form input[type="file"] {
@@ -276,9 +302,16 @@
   border: 1px solid #ccc;
 }
 
+// .form input:focus,
+// .form textarea:focus {
+//   border-color: #623988;
+// }
+
 .form input:focus,
 .form textarea:focus {
   border-color: #623988;
+  background-color: black; /* Maintain black background */
+  color: white; /* Maintain white text */
 }
 
 /* Textarea Specific */
@@ -433,6 +466,18 @@
   display: block;
 }
 
+// .cleanFormGroup input,
+// .cleanFormGroup select,
+// .cleanFormGroup textarea {
+//   width: 100%;
+//   padding: 10px;
+//   font-size: 1rem;
+//   border: 1px solid #ccc;
+//   border-radius: 5px;
+//   outline: none;
+//   transition: border-color 0.3s ease;
+// }
+
 .cleanFormGroup input,
 .cleanFormGroup select,
 .cleanFormGroup textarea {
@@ -443,6 +488,8 @@
   border-radius: 5px;
   outline: none;
   transition: border-color 0.3s ease;
+  background-color: black; /* Set the background to black */
+  color: white; /* Ensure text is visible */
 }
 
 .cleanFormGroup input[type="file"] {
@@ -450,10 +497,18 @@
   border: 1px solid #ccc;
 }
 
+// .cleanFormGroup input:focus,
+// .cleanFormGroup select:focus,
+// .cleanFormGroup textarea:focus {
+//   border-color: #623988;
+// }
+
 .cleanFormGroup input:focus,
 .cleanFormGroup select:focus,
 .cleanFormGroup textarea:focus {
   border-color: #623988;
+  background-color: black; /* Maintain black background */
+  color: white; /* Maintain white text */
 }
 
 /* Textarea Specific */

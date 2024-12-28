@@ -4,6 +4,7 @@ import PaginationComponent from "./Pagination";
 import ViewButton from "./buttons/viewButton";
 import EditButton from "./buttons/editButton";
 import DeleteButton from "./buttons/deleteButton";
+import PdfButton from "./buttons/pdfButton";
 // import ExportButton from "./buttons/exportButton";
 
 interface AchievementListProps {
@@ -15,9 +16,6 @@ const ITEMS_PER_PAGE = 5;
 
 export default async function AchievementList({ query, currentPage }: AchievementListProps) {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
-
-  // Fetching achievements based on search query
-// AchievementList.tsx
 
   const achievements = await prisma.achievementdata.findMany({
     where: {
@@ -81,7 +79,14 @@ export default async function AchievementList({ query, currentPage }: Achievemen
         </tbody>
       </table>
       <PaginationComponent pageCount={totalPages} />
-      {/* <ExportButton query={query} currentPage={currentPage} /> */}
+      <PdfButton achievements={achievements.map((achievement) => ({
+        title: achievement.title,
+        category: achievement.category,
+        level: achievement.level,
+        date: achievement.date.toDateString(), // Convert date to string
+      }))}
+        logoPath="/logo.png" // Replace with the actual path to your logo
+      />
     </div>
   );
 }
