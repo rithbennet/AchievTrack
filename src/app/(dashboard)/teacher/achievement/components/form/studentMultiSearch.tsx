@@ -1,7 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import Pills from './pills';
-import styles from './multiselect.module.scss';
+import MultipleSelector, { Option } from '@/components/ui/multiple-selector';
 
 interface Student {
   id: number;
@@ -11,70 +10,85 @@ interface Student {
 
 interface StudentMultiSearchProps {
   onChange: (students: number[]) => void;
+  studentids?: number[];
 }
 
-export default function studentMultiSearch({ onChange }: StudentMultiSearchProps) {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [suggestions, setSuggestions] = useState<Student[]>([]);
-  const [selectedStudents, setSelectedStudents] = useState<Student[]>([]);
-  const [selectedStudentSet, setSelectedStudentSet] = useState(new Set<number>());
+const studentSearch = async (value: string): Promise<Option[]> => {
+  return new Promise((resolve) => {
+    setTimeout(async () => {
+      const res = await fetch(`/api/student?name=${value}`)
+      .then(res => res.json())
+      .then(data => data.students.map((student: Student) => ({
+        label: student.name,
+        value: student.id,
+        group: student.class
+      })));
+      resolve(res);
+    }, 100);
+  });
+};
+
+export default function studentMultiSearch({ onChange, studentids }: StudentMultiSearchProps) {
+  const [, setSearchTerm] = useState('');
+  const [selectedStudents, setSelectedStudents] = useState<Option[]>([]);
+  const [,setIsTriggered] = React.useState(false);
 
   useEffect(() => {
-  
-    const fetchStudent = () => {
-      if (searchTerm.trim() === '') {
-        setSuggestions([]);
-        return;
+    const fetchInitialStudents = async () => {
+      try {
+        const studentPromises = (studentids || []).map(id =>
+          fetch(`/api/student?ids=${id}`)
+            .then(res => res.json())
+            .then(data => data.students.map((student: Student) => ({
+              label: student.name,
+              value: student.id,
+              group: student.class
+            })))
+        );
+        const fetchedStudentsArray = await Promise.all(studentPromises);
+        const fetchedStudents: Option[] = fetchedStudentsArray.flat();
+
+
+        setSelectedStudents(fetchedStudents);
+      } catch (err) {
+        console.error('Error fetching initial Students:', err);
       }
-      
-      fetch(`/api/student?name=${searchTerm}`)
-        .then((res) => res.json())
-        .then((data) => setSuggestions(data.students || []))
-        .catch((err) => {
-          console.error(err);
-        });
     };
+    fetchInitialStudents();
+  }, []);
 
-    fetchStudent();
-  }, [searchTerm]);
+  useEffect(() => {
+    const setStudentsIds = (selected: Option[]) => {
+      onChange(selected.map(option => parseInt(option.value)));
+    }
+    setStudentsIds(selectedStudents);
+  }, [selectedStudents]);
 
-  const handleSelectedStudent = (student: Student) => {
-    const newSelectedStudents = [...selectedStudents, student];
-    setSelectedStudents([...selectedStudents, student]);
-    setSelectedStudentSet(new Set([...selectedStudentSet, student.id]));
-    setSearchTerm('');
-    setSuggestions([]);
-    onChange(newSelectedStudents.map(s => s.id));
-  };
-
-  const handleRemoveStudent = (id: number) => {
-    const newSelectedStudents = selectedStudents.filter(student => student.id !== id);
-    setSelectedStudents(selectedStudents.filter(student => student.id !== id));
-    setSelectedStudentSet(new Set([...selectedStudentSet].filter(studentId => studentId !== id)));
-    onChange(newSelectedStudents.map(s => s.id));
-  };
+ 
 
   return (
-    <div className={styles.container}>
-      <div className={styles.searchBar}>
-        <Pills students={selectedStudents} onRemove={handleRemoveStudent} />
-        <input
-          type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search for students"
-          className={styles.searchInput}
-        />
-      </div>
-      <ul className={styles.suggestions}>
-        {suggestions.map((student) => (
-          !selectedStudentSet.has(student.id) && (
-            <li key={student.id} onClick={() => handleSelectedStudent(student)}>
-              {student.name}
-            </li>
-          )
-        ))}
-      </ul>
+    <div>
+      <MultipleSelector
+        value={selectedStudents}
+        onSearch={async (value) => {
+          setSearchTerm(value); // Update the searchTerm state
+          setIsTriggered(true);
+          const res = await studentSearch(value);
+          setIsTriggered(false);
+          return res;
+        }}
+        onChange={setSelectedStudents}
+        placeholder="search students"
+        groupBy='group'
+        loadingIndicator={
+          <p className="py-2 text-center text-lg leading-10 text-muted-foreground">searching student...</p>
+        }
+        emptyIndicator={
+          <p className="w-full text-center text-lg leading-10 text-muted-foreground">
+            student not found.
+          </p>
+        }
+      />
     </div>
   );
 }

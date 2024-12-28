@@ -11,14 +11,12 @@ interface TeacherUser {
 
 interface Teacher {
   id: number;
-  department: string;
   User: TeacherUser; // Teacher's user details
 }
 
 interface Student {
   id: number;
   name: string;
-  email: string;
   class: string;
 }
 

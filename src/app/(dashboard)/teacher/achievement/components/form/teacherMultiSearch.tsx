@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import Pills from './pills';
-import styles from './multiselect.module.scss';
+import MultipleSelector, { Option } from '@/components/ui/multiple-selector';
+import { set } from 'zod';
 
 interface Teacher {
   id: number;
@@ -10,68 +10,80 @@ interface Teacher {
 
 interface TeacherMultiSearchProps {
   onChange: (teachers: number[]) => void;
+  teacherids?: number[];
 }
 
-export default function teacherMultiSearch({ onChange }: TeacherMultiSearchProps) {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [suggestions, setSuggestions] = useState<Teacher[]>([]);
-  const [selectedTeachers, setSelectedTeachers] = useState<Teacher[]>([]);
-  const [selectedTeacherSet, setSelectedTeacherSet] = useState(new Set<number>());
+const teacherSearch = async (value: string): Promise<Option[]> => {
+  return new Promise((resolve) => {
+    setTimeout(async () => {
+      const res = await fetch(`/api/teacher?name=${value}`)
+      .then(res => res.json())
+      .then(data => data.teachers.map((teacher: Teacher) => ({
+        label: teacher.name,
+        value: teacher.id,
+      })));
+      resolve(res);
+    }, 100);
+  });
+};
+
+export default function teacherMultiSearch({ onChange, teacherids }: TeacherMultiSearchProps) {
+  const [, setSearchTerm] = useState('');
+  const [selectedTeachers, setSelectedTeachers] = useState<Option[]>([]);
+  const [,setIsTriggered] = React.useState(false);
 
   useEffect(() => {
-    const fetchUsers = () => {
-      if (searchTerm.trim() === '') {
-        setSuggestions([]);
-        return;
+    const fetchInitialTeachers = async () => {
+      try {
+        const teacherPromises = (teacherids || []).map(id =>
+          fetch(`/api/teacher?ids=${id}`)
+            .then(res => res.json())
+            .then(data => data.teachers.map((teacher: Teacher) => ({
+              label: teacher.name,
+              value: teacher.id,
+            })))
+        );
+        const fetchedTeachersArray = await Promise.all(teacherPromises);
+        const fetchedTeachers: Option[] = fetchedTeachersArray.flat();
+
+
+        setSelectedTeachers(fetchedTeachers);
+      } catch (err) {
+        console.error('Error fetching initial Teachers:', err);
       }
-      fetch(`/api/teacher?name=${searchTerm}`)
-        .then((res) => res.json())
-        .then((data) => setSuggestions(data.teachers || []))
-        .catch((err) => {
-          console.error(err);
-        });
     };
+    fetchInitialTeachers();
+  }, []);
 
-    fetchUsers();
-  }, [searchTerm]); 
-
-  const handleSelectedTeacher = (Teacher: Teacher) => {
-    const newSelecteedTeachers = [...selectedTeachers, Teacher];
-    setSelectedTeachers([...selectedTeachers, Teacher]);
-    setSelectedTeacherSet(new Set([...selectedTeacherSet, Teacher.id]));
-    setSearchTerm('');
-    setSuggestions([]);
-    onChange(newSelecteedTeachers.map(s => s.id));
-  };
-
-  const handleRemoveTeacher = (id: number) => {
-    const newSelectedTeachers = selectedTeachers.filter(Teacher => Teacher.id !== id);
-    setSelectedTeachers(selectedTeachers.filter(Teacher => Teacher.id !== id));
-    setSelectedTeacherSet(new Set([...selectedTeacherSet].filter(TeacherId => TeacherId !== id)));
-    onChange(newSelectedTeachers.map(s => s.id));
-  };
+  useEffect(() => {
+    const setTeachersIds = (selected: Option[]) => {
+      onChange(selected.map(option => parseInt(option.value)));
+    }
+    setTeachersIds(selectedTeachers);
+  }, [selectedTeachers]);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.searchBar}>
-        <Pills students={selectedTeachers} onRemove={handleRemoveTeacher} />
-        <input
-          type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search for Teachers"
-          className={styles.searchInput}
-        />
-      </div>
-      <ul className={styles.suggestions}>
-        {suggestions.map((teacher) => (
-          !selectedTeacherSet.has(teacher.id) && (
-            <li key={teacher.id} onClick={() => handleSelectedTeacher(teacher)}>
-              {teacher.name}
-            </li>
-          )
-        ))}
-      </ul>
+    <div>
+      <MultipleSelector
+        value={selectedTeachers}
+        onSearch={async (value) => {
+          setSearchTerm(value); // Update the searchTerm state
+          setIsTriggered(true);
+          const res = await teacherSearch(value);
+          setIsTriggered(false);
+          return res;
+        }}
+        onChange={setSelectedTeachers}
+        placeholder="search teachers"
+        loadingIndicator={
+          <p className="py-2 text-center text-lg leading-10 text-muted-foreground">searching teacher...</p>
+        }
+        emptyIndicator={
+          <p className="w-full text-center text-lg leading-10 text-muted-foreground">
+            teacher not found.
+          </p>
+        }
+      />
     </div>
   );
 }

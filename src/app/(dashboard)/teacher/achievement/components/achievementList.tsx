@@ -69,8 +69,8 @@ export default async function AchievementList({ query, currentPage }: Achievemen
               <td>{new Date(achievement.date).toDateString()}</td>
               <td>
                 <div className={styles.actionButtons}>
-                  <ViewButton achievement={achievement} students={achievement.achievementstudents} teachers={achievement.achievementteachers}/>
-                  <EditButton achievement={achievement} />
+                  <ViewButton achievement={achievement} students={achievement.achievementstudents} teachers={achievement.achievementteachers} />
+                  <EditButton achievement={achievement} students={achievement.achievementstudents} teachers={achievement.achievementteachers} />
                   <DeleteButton achievementId={achievement.id} />
                 </div>
               </td>

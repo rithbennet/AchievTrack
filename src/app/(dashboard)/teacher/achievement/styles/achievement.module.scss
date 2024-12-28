@@ -52,8 +52,7 @@
   transition: border-color 0.3s ease;
   width: 100%;
   max-width: 250px;
-  background-color: black; /* Set the background to black */
-  color: white; /* Ensure text is visible */
+  background-color: #fff;
 }
 
 .importButton,
@@ -293,8 +292,7 @@
   border-radius: 5px;
   outline: none;
   transition: border-color 0.3s ease;
-  background-color: black; /* Set the background to black */
-  color: white; /* Ensure text is visible */
+  background-color: #fff;
 }
 
 .form input[type="file"] {

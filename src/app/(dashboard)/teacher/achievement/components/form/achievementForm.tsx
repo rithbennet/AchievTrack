@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "../../styles/achievement.module.scss";
 import StudentMultiSearch from "./studentMultiSearch";
 import TeacherMultiSearch from "./teacherMultiSearch";
+import { useRouter } from "next/navigation";
 
 interface AchievementData {
   title: string;
@@ -30,6 +31,8 @@ export default function AchievementForm({ onSubmit, onClose }: AchievementFormPr
     students: [],
     teachers: [],
   });
+  
+  
 
   const [filePreview, setFilePreview] = useState<string | null>(null); // State for the file preview
 
@@ -49,6 +52,8 @@ export default function AchievementForm({ onSubmit, onClose }: AchievementFormPr
   const handleLogInput = () => {
     console.log('Form Data:', formData);
   };
+
+  const router = useRouter();
 
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,6 +94,8 @@ export default function AchievementForm({ onSubmit, onClose }: AchievementFormPr
     } catch (error) {
       console.error('Error submitting achievement:', error);
     }
+
+    router.refresh();
   };
 
   return (
