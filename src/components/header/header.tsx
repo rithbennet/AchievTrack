@@ -24,6 +24,7 @@ const Header: React.FC<HeaderProps> = ({ userName, userRole }) => {
         <div className={styles.userInfo}>
           <span className={styles.userName}>{userName}</span>
           <span className={styles.userRole}>{userRole}</span>
+          
         </div>
       </div>
     </header>
