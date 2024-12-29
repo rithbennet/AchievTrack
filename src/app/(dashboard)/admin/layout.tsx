@@ -28,7 +28,9 @@ export default async function AdminDashboardLayout({
     <>
       <Header userName={userName} userRole={userRole} />
       <SidebarAdmin userName={userName} />
-      {children}
+      <main className="flex flex-col h-full p-4">
+        {children}
+      </main>
     </>
   );
 }
