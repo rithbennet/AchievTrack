@@ -93,7 +93,7 @@
 
 .StudentTable td {
   font-size: 0.9rem;
-  color: #555;
+  color: #000; /* Set student details font color to black */
 }
 
 /* Action Buttons */
@@ -206,10 +206,10 @@
 
 .modalContent {
   background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  max-width: 500px;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
   width: 100%;
   animation: fadeIn 0.3s ease-in-out;
 }
@@ -232,6 +232,12 @@
   margin-bottom: 20px;
 }
 
+.modalHeader h2 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin: 0;
+}
+
 .closeButton {
   background: none;
   border: none;
@@ -241,14 +247,31 @@
 }
 
 .closeButton:hover {
-  color: #881a1a;
+  color: #e74c3c;
+}
+
+.studentDetails {
+  font-size: 1rem;
+  color: #34495e;
+  line-height: 1.6;
+  margin-top: 20px;
+}
+
+.studentDetails h3 {
+  font-size: 1.25rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.studentDetails p {
+  margin: 5px 0;
 }
 
 .inputField {
   display: block;
   width: 100%;
-  margin-bottom: 10px;
-  padding: 8px;
+  margin-bottom: 15px;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
@@ -262,11 +285,12 @@
 .submitButton {
   background: #007bff;
   color: white;
-  padding: 10px 20px;
+  padding: 12px 20px;
   border: none;
   border-radius: 4px;
   font-size: 1rem;
   cursor: pointer;
+  margin-top: 10px;
 }
 
 .submitButton:hover {
@@ -295,4 +319,18 @@
   gap: 10px;
   justify-content: flex-start;
   align-items: center;
+}
+
+/* Modal Content for Student Details */
+.modalContent p {
+  color: #000; /* Set the font color of the paragraphs to black */
+}
+
+.modalContent h2, .modalContent h3, .modalContent h4 {
+  color: #000; /* Set font color for headings to black */
+}
+
+.studentDetails {
+  border-top: 2px solid #e1e1e1;
+  padding-top: 20px;
 }

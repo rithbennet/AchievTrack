@@ -10,8 +10,8 @@ const createStudentSchema = z.object({
   mykad: z.string().length(12, "MYKAD must be 12 characters").nonempty("MYKAD is required"),
 });
 
-// Define a schema for updating an existing student
-const updateStudentSchema = z.object({
+// Define a schema for editing an existing student
+const editStudentSchema = z.object({
   name: z.string().min(1, "Name is required").max(100, "Name must be at most 100 characters"),
   class: z.string().min(1, "Class is required").max(50, "Class must be at most 50 characters"),
   mykad: z.string().length(12, "MYKAD must be 12 characters").nonempty("MYKAD is required"),
@@ -20,7 +20,6 @@ const updateStudentSchema = z.object({
 
 // Create a new student
 export async function createStudent(formData: FormData) {
-  // Extract and validate form data using Zod
   const studentData = {
     name: formData.get('name') as string,
     class: formData.get('class') as string,
@@ -42,9 +41,8 @@ export async function createStudent(formData: FormData) {
   return student;
 }
 
-// Update an existing student
-export async function updateStudent(studentId: number, formData: FormData) {
-  // Extract and validate form data using Zod
+// Edit an existing student
+export async function editStudent(studentId: number, formData: FormData) {
   const studentData = {
     name: formData.get('name') as string,
     class: formData.get('class') as string,
@@ -58,7 +56,7 @@ export async function updateStudent(studentId: number, formData: FormData) {
   }
 
   // Validate the student data
-  const validatedStudentData = updateStudentSchema.parse(studentData);
+  const validatedStudentData = editStudentSchema.parse(studentData);
 
   // Prepare the data to be updated
   const updateData: any = {
@@ -83,8 +81,28 @@ export async function updateStudent(studentId: number, formData: FormData) {
   return student;
 }
 
-// Deactivate a student
-export async function deactivateStudent(studentId: number) {
+// View a student by ID
+export async function viewStudent(studentId: number) {
+  const student = await prisma.student.findUnique({
+    where: { id: studentId },
+    select: {
+      id: true,
+      name: true,
+      class: true,
+      mykad: true,
+      is_active: true,
+    },
+  });
+
+  if (!student) {
+    throw new Error(`Student with ID ${studentId} does not exist.`);
+  }
+
+  return student;
+}
+
+// Delete a student by ID
+export async function deleteStudent(studentId: number) {
   const student = await prisma.student.findUnique({
     where: { id: studentId },
   });
@@ -93,10 +111,33 @@ export async function deactivateStudent(studentId: number) {
     throw new Error(`Student with ID ${studentId} does not exist.`);
   }
 
-  const response = await prisma.student.update({
+  const response = await prisma.student.delete({
     where: { id: studentId },
-    data: { is_active: false },
   });
 
   return response;
+}
+
+// List all students
+export async function relatedAchievements(id: number) {
+  const achievements = await prisma.achievementstudents.findMany({
+    where: {
+      studentid: id,
+    },
+  });
+
+  if (!achievements) {
+    throw new Error(`No achievement found`);
+  }
+
+  const achievementList = await prisma.achievementdata.findMany({
+    where: {
+      id: {
+        in: achievements.map(a => a.achievementid)
+      }
+    }
+  });
+
+  return achievementList;
+
 }

@@ -1,9 +1,9 @@
 "use client";
 import { useState } from 'react';
-import StudentDetails from "./StudentDetails";
-import styles from '../styles/manageStudent.module.scss';
+import StudentForm from "../StudentForm";
+import styles from '../../styles/manageStudent.module.scss';
 
-interface ViewButtonProps {
+interface EditButtonProps {
   id: number;
   initialData: {
     name: string;
@@ -12,16 +12,16 @@ interface ViewButtonProps {
   };
 }
 
-export default function ViewButtonStudents({ id, initialData }: ViewButtonProps) {
+export default function EditButtonStudents({ id, initialData }: EditButtonProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
-    console.log("Opening modal for student details:", id);
+    console.log("Opening modal for student:", id);
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
-    console.log("Closing modal for student details:", id);
+    console.log("Closing modal for student:", id);
     setIsModalOpen(false);
   };
 
@@ -29,15 +29,15 @@ export default function ViewButtonStudents({ id, initialData }: ViewButtonProps)
     <div>
       <button 
         onClick={openModal} 
-        className={styles.viewButton} 
-        aria-label={`View student ${id}`}
+        className={styles.editButton} 
+        aria-label={`Edit student ${id}`}
       >
-        View
+        Edit
       </button>
       {isModalOpen && (
         <div className={`${styles.modalOverlay} ${isModalOpen ? styles.open : ''}`}>
           <div className={styles.modalContent}>
-            <StudentDetails closeModalAction={closeModal} initialData={initialData} />
+            <StudentForm closeModalAction={closeModal} initialData={initialData} />
           </div>
         </div>
       )}

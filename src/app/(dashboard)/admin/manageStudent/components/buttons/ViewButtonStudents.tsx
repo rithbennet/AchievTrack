@@ -1,9 +1,10 @@
-"use client";
-import { useState } from 'react';
-import StudentForm from "./StudentForm";  // Replace with your student form component
-import styles from '../styles/manageStudent.module.scss';
+'use client'; // Mark this component as a client-side component
 
-interface EditButtonProps {
+import { useState } from 'react';
+import StudentDetails from "../StudentDetails";
+import styles from '../../styles/manageStudent.module.scss';
+
+interface ViewButtonProps {
   id: number;
   initialData: {
     name: string;
@@ -12,16 +13,16 @@ interface EditButtonProps {
   };
 }
 
-export default function EditButtonStudents({id, initialData }: EditButtonProps) {
+export default function ViewButtonStudents({ id, initialData }: ViewButtonProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
-    console.log("Opening modal for student:", id);
+    console.log("Opening modal for student details:", id);
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
-    console.log("Closing modal for student:", id);
+    console.log("Closing modal for student details:", id);
     setIsModalOpen(false);
   };
 
@@ -29,15 +30,15 @@ export default function EditButtonStudents({id, initialData }: EditButtonProps) 
     <div>
       <button 
         onClick={openModal} 
-        className={styles.editButton} 
-        aria-label={`Edit student ${id}`}
+        className={styles.viewButton} 
+        aria-label={`View student ${id}`}
       >
-        Edit
+        View
       </button>
       {isModalOpen && (
         <div className={`${styles.modalOverlay} ${isModalOpen ? styles.open : ''}`}>
           <div className={styles.modalContent}>
-            <StudentForm closeModalAction={closeModal} initialData={initialData} />
+            <StudentDetails closeModalAction={closeModal} initialData={{ ...initialData, id }} />
           </div>
         </div>
       )}

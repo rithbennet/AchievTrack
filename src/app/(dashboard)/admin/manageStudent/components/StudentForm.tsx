@@ -1,5 +1,6 @@
 "use client";
-import { createStudent, updateStudent } from '@/actions/manageStudentAction';
+// In StudentForm.tsx
+import { createStudent, editStudent } from '@/actions/manageStudentAction';
 import styles from '../styles/manageStudent.module.scss';
 import { FormEvent, useState, useEffect } from 'react';
 import { useRouter } from "next/navigation";
@@ -37,7 +38,7 @@ export default function StudentForm({ closeModalAction, initialData }: StudentFo
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (initialData && typeof initialData.id === 'number') {
-      await updateStudent(initialData.id, new FormData(event.target as HTMLFormElement));
+      await editStudent(initialData.id, new FormData(event.target as HTMLFormElement));
     } else {
       await createStudent(new FormData(event.target as HTMLFormElement));
     }
