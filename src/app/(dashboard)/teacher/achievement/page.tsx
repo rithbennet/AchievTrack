@@ -3,6 +3,7 @@ import Search from "./components/SearchBar";
 import AddButton from "./components/buttons/addButton";
 import AchievementList from "./components/achievementList";
 import ImportButton from "./components/buttons/importButton";
+import DownloadEmptySpreadsheet from "./components/form/downloadSpreadsheet";
 
 
 export default function AchievementRecordsPage(props: {
@@ -32,6 +33,9 @@ export default function AchievementRecordsPage(props: {
             <div className={'${styles.actionButton} ${styles.sortButton}'}>
             
             </div>
+            <div className={'${styles.actionButton} ${styles.downloadButton}'}>
+              <DownloadEmptySpreadsheet />
+              </div>
           </div>
         </div>
           <AchievementList query={query} currentPage={currentPage} />
