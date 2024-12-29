@@ -5,8 +5,8 @@ interface Achievement {
   title: string;
   category: string;
   level: string;
-  date: string;
-  description: string;
+  date: Date;
+  description: string | null;
 }
 
 interface AchievementStudent {

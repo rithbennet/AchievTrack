@@ -8,7 +8,7 @@ interface PdfButtonProps {
     title: string;
     category: string;
     level: string;
-    date: string;
+    date: Date;
   }[];
   logoPath: string; // Path to the logo image
 }

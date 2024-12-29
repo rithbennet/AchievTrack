@@ -79,12 +79,7 @@ export default async function AchievementList({ query, currentPage }: Achievemen
         </tbody>
       </table>
       <PaginationComponent pageCount={totalPages} />
-      <PdfButton achievements={achievements.map((achievement) => ({
-        title: achievement.title,
-        category: achievement.category,
-        level: achievement.level,
-        date: achievement.date.toDateString(), // Convert date to string
-      }))}
+      <PdfButton achievements={achievements}
         logoPath="/logo.png" // Replace with the actual path to your logo
       />
     </div>
