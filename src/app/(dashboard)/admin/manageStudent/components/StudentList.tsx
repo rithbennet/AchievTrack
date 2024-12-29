@@ -1,7 +1,18 @@
-import prisma from "@/lib/db";
+"use client";
+
+import { useState, useEffect } from 'react';
 import styles from "../styles/manageStudent.module.scss";
-import EditButton from './EditButtonStudents';
+import EditButtonStudents from './EditButtonStudents';
+import ViewButtonStudents from './ViewButtonStudents';
+import DeleteButtonStudents from './DeleteButtonStudents';
 import PaginationComponent from './PaginationStudent';
+
+interface Student {
+  id: number;
+  name: string;
+  mykad: string;
+  class: string;
+}
 
 interface StudentListProps {
   query: string;
@@ -10,23 +21,35 @@ interface StudentListProps {
 
 const ITEMS_PER_PAGE = 8;
 
-export default async function StudentList({ query, currentPage }: StudentListProps) {
-  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+export default function StudentList({ query, currentPage }: StudentListProps) {
+  const [students, setStudents] = useState<Student[]>([]);
+  const [totalPages, setTotalPages] = useState(0);
 
-  const students = await prisma.student.findMany({
-    where: {
-      name: {
-        contains: query,
-        mode: 'insensitive', // Case-insensitive search
-      },
-    },
-    skip: offset,
-    take: ITEMS_PER_PAGE,
-  });
+  useEffect(() => {
+    const fetchStudents = async () => {
+      const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+      const response = await fetch(`/api/student?query=${query}&offset=${offset}&limit=${ITEMS_PER_PAGE}`);
+      const data = await response.json();
 
-  const totalStudents = await prisma.student.count();
+      setStudents(data.students);
+      setTotalPages(Math.ceil(data.totalStudents / ITEMS_PER_PAGE));
+    };
 
-  const totalPages = Math.ceil(totalStudents / ITEMS_PER_PAGE);
+    fetchStudents();
+  }, [query, currentPage]);
+
+  const handleDelete = async (id: number) => {
+    await fetch(`/api/student/${id}`, {
+      method: 'DELETE',
+    });
+
+    const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+    const response = await fetch(`/api/student?query=${query}&offset=${offset}&limit=${ITEMS_PER_PAGE}`);
+    const data = await response.json();
+
+    setStudents(data.students);
+    setTotalPages(Math.ceil(data.totalStudents / ITEMS_PER_PAGE));
+  };
 
   return (
     <div className={styles.StudentListSection}>
@@ -48,10 +71,14 @@ export default async function StudentList({ query, currentPage }: StudentListPro
               <td>
                 <div className={styles.actionButtons}>
                   <div className={styles.editButton}>
-                    <EditButton id={student.id} initialData={student} />
+                    <EditButtonStudents id={student.id} initialData={student} />
                   </div>
-                  <button className={styles.viewButton}>View</button>
-                  <button className={styles.deleteButton}>Delete</button>
+                  <div className={styles.viewButton}>
+                    <ViewButtonStudents id={student.id} initialData={student} />
+                  </div>
+                  <div className={styles.deleteButton}>
+                    <DeleteButtonStudents id={student.id} onDelete={handleDelete} />
+                  </div>
                 </div>
               </td>
             </tr>
