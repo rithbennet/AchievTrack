@@ -3,8 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from './sidebarAdmin.module.scss';
-import { FaHome, FaUserCog, FaUserGraduate, FaMedal, FaSignOutAlt } from 'react-icons/fa';
+import { FaHome, FaUserGraduate, FaMedal, FaSignOutAlt } from 'react-icons/fa';
 import { signOut } from 'next-auth/react';
+import { SidebarTrigger } from '../ui/sidebar';
 
 interface SidebarProps {
   userName: string;
