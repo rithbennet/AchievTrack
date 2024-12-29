@@ -40,7 +40,7 @@ const SidebarAdmin: React.FC<SidebarProps> = ({ userName }) => {
           <FaUserGraduate className={styles.icon} />
           {!isCollapsed && <span>Manage Students</span>}
         </Link>
-        <Link href="/admin/achievementRecords" className={styles.navItem}>
+        <Link href="/admin/achievement" className={styles.navItem}>
           <FaMedal className={styles.icon} />
           {!isCollapsed && <span>Achievement Records</span>}
         </Link>

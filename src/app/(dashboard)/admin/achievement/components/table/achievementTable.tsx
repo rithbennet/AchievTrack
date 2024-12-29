@@ -5,6 +5,7 @@ import ViewButton from '../buttons/viewButton'
 import EditButton from '../buttons/editButton'
 import PdfButton from '../buttons/pdfButton'
 import ImportButton from '../buttons/importButton'
+import Verify from '../buttons/verify'
 import React, { useState } from 'react'
 import {
   Table,
@@ -162,9 +163,7 @@ export default function FilteredTable({ achievementData }: FilteredTableProps) {
         <Table className=''>
           <TableHeader className='bg-purple-800 ' >
             <TableRow >
-              <TableHead className="cursor-pointer text-white">
-                Verified
-              </TableHead>
+              
               <TableHead onClick={() => handleSort('title')} className="cursor-pointer text-white" >
                 Title {sortColumn === 'title' && (sortDirection === 'asc' ? '▲' : sortDirection === 'desc' ? '▼' : '')}
               </TableHead>
@@ -180,15 +179,15 @@ export default function FilteredTable({ achievementData }: FilteredTableProps) {
               <TableHead className="cursor-pointer text-white">
                 Actions
               </TableHead>
-
+              <TableHead className="cursor-pointer text-white">
+                Verified
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {paginatedData.map((achievementData) => (
               <TableRow key={achievementData.id}>
-                <TableCell className='w-1/12'>
-                  {achievementData.verified ? <CheckCircle2Icon color='green' /> : <XCircleIcon color='red' />}
-                </TableCell>
+                
                 <TableCell>{achievementData.title}</TableCell>
                 <TableCell>{achievementData.category}</TableCell>
                 <TableCell>{achievementData.level}</TableCell>
@@ -200,7 +199,9 @@ export default function FilteredTable({ achievementData }: FilteredTableProps) {
                     <ViewButton achievement={achievementData} students={achievementData.achievementstudents} teachers={achievementData.achievementteachers} />
                   </div>
                 </TableCell>
-
+                <TableCell className='w-1/12'>
+                  <Verify id={achievementData.id} initialVerified={achievementData.verified} />
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

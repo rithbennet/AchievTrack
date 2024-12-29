@@ -29,7 +29,8 @@ export default async function TeacherDashboardLayout({
       <Header userName={userName} userRole={userRole} />
       <SidebarTeacher userName={userName} />
       <main className="flex flex-col h-full p-4">
-        {children}</main>
+        {children}
+      </main>
     </>
   );
 }
