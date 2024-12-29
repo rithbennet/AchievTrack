@@ -1,6 +1,6 @@
 import styles from "./styles/manageUser.module.scss";
 import UserList from "./components/UserList";
-import AddButton from "./components/addButton";
+import AddButton from "./components/buttons/addButton";
 import Search from "./components/SearchBar";
 
 export default async function ManageUserPage(props: {

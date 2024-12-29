@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import SidebarAdmin from '@/components/sidebar/sidebarAdmin'; // Ensure the correct path to your SidebarAdmin component
+import SidebarTeacher from '@/components/sidebar/sidebarTeacher' // Ensure the correct path to your SidebarAdmin component
 import Header from '@/components/header/header'; 
-// import AdminGuard from "./components/AdminGuard";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
@@ -28,7 +27,7 @@ export default async function TeacherDashboardLayout({
   return (
     <>
       <Header userName={userName} userRole={userRole} />
-      <SidebarAdmin userName={userName} />
+      <SidebarTeacher userName={userName} />
       {children}
     </>
   );
