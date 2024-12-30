@@ -1,5 +1,5 @@
 // components/EditButton.tsx
-"use client";
+'use client';
 import { deactivateUser } from '@/actions/manageUserAction';
 import styles from '../styles/manageUser.module.scss';
 import { useRouter } from 'next/navigation';
@@ -22,7 +22,11 @@ export default function deactivateButton({ userId }: DeleteButtonProps) {
   };
 
   return (
-    <button onClick={handleDeactivate} className={styles.deleteButton} aria-label={`Delete user ${userId}`}>
+    <button
+      onClick={handleDeactivate}
+      className={styles.deleteButton}
+      aria-label={`Delete user ${userId}`}
+    >
       Deactivate
     </button>
   );

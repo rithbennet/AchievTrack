@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { createUser, updateUser } from '@/actions/manageUserAction';
 import styles from '../styles/manageUser.module.scss';
 import { FormEvent, useState, useEffect } from 'react';
@@ -75,7 +75,7 @@ export default function UserForm({ closeModal, initialData }: UserFormProps) {
           required
           maxLength={100}
         />
-        
+
         <label htmlFor="email">Email</label>
         <input
           type="email"
@@ -86,7 +86,7 @@ export default function UserForm({ closeModal, initialData }: UserFormProps) {
           className={styles.inputField}
           required
         />
-        
+
         <label htmlFor="role">Role</label>
         <select
           id="role"
