@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
-import TeacherMultiSearch from "../form/TeacherMultiSearch";
+import TeacherMultiSearch from "../form/teacherMultiSearch";
 import styles from "../../styles/achievement.module.scss";
-import StudentMultiSearch from "../form/StudentMultiSearch";
+import StudentMultiSearch from "../form/studentMultiSearch";
 import { useRouter } from "next/navigation";
 
 interface TeacherUser {
@@ -76,7 +76,7 @@ export default function EditButton({ achievement, students, teachers }: EditButt
 
   const handleTeacherChange = (teachers: number[]) => {
     setEditedAchievement({ ...editedAchievement, teachers });
-  }
+  };
 
   // Handle form submission (Saving the edited achievement)
   const handleSubmit = async (e: React.FormEvent) => {
