@@ -4,30 +4,55 @@ import prisma from "@/lib/db";
 import { z } from "zod";
 import { hash } from "bcrypt";
 
+interface userData {
+  name: string;
+  email: string;
+  password?: string;
+  role: string;
+}
+
 // Define a schema for creating a new user
 const createUserSchema = z.object({
-  name: z.string().min(1, "Name is required").max(100, "Name must be at most 100 characters"),
-  email: z.string().email("Invalid email address").nonempty("Email is required"),
+  name: z
+    .string()
+    .min(1, "Name is required")
+    .max(100, "Name must be at most 100 characters"),
+  email: z
+    .string()
+    .email("Invalid email address")
+    .nonempty("Email is required"),
   role: z.string().nonempty("Role is required"),
-  password: z.string().min(8, "Password must be at least 8 characters").nonempty("Password is required"),
+  password: z
+    .string()
+    .min(8, "Password must be at least 8 characters")
+    .nonempty("Password is required"),
 });
 
 // Define a schema for updating an existing user
 const updateUserSchema = z.object({
-  name: z.string().min(1, "Name is required").max(100, "Name must be at most 100 characters"),
-  email: z.string().email("Invalid email address").nonempty("Email is required"),
+  name: z
+    .string()
+    .min(1, "Name is required")
+    .max(100, "Name must be at most 100 characters"),
+  email: z
+    .string()
+    .email("Invalid email address")
+    .nonempty("Email is required"),
   role: z.string().nonempty("Role is required"),
-  password: z.string().min(8, "Password must be at least 8 characters").optional(),
+  password: z
+    .string()
+    .min(8, "Password must be at least 8 characters")
+    .optional(),
 });
 
 // Create a new user
 export async function createUser(formData: FormData) {
   // Extract and validate form data using Zod
   const userData = {
-    name: formData.get('name') as string,
-    email: formData.get('email') as string,
-    password: formData.get('password') as string,
-    role: formData.get('role') as string,
+    name: formData.get("name") as string,
+    email: formData.get("email") as string,
+    password: formData.get("password") as string,
+    role: formData.get("role") as string,
   };
 
   // Validate the user data
@@ -53,10 +78,10 @@ export async function createUser(formData: FormData) {
 export async function updateUser(userId: number, formData: FormData) {
   // Extract and validate form data using Zod
   const userData = {
-    name: formData.get('name') as string,
-    email: formData.get('email') as string,
-    password: formData.get('password') as string | undefined,
-    role: formData.get('role') as string,
+    name: formData.get("name") as string,
+    email: formData.get("email") as string,
+    password: formData.get("password") as string | undefined,
+    role: formData.get("role") as string,
   };
 
   // Handle null values in FormData
@@ -68,7 +93,7 @@ export async function updateUser(userId: number, formData: FormData) {
   const validatedUserData = updateUserSchema.parse(userData);
 
   // Prepare the data to be updated
-  const updateData: any = {
+  const updateData: userData = {
     name: validatedUserData.name,
     email: validatedUserData.email,
     role: validatedUserData.role,

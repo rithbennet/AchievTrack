@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
-import TeacherMultiSearch from "../form/teacherMultiSearch";
+import TeacherMultiSearch from "../form/TeacherMultiSearch";
 import styles from "../../styles/achievement.module.scss";
-import StudentMultiSearch from "../form/studentMultiSearch";
+import StudentMultiSearch from "../form/StudentMultiSearch";
 import { useRouter } from "next/navigation";
 
 interface TeacherUser {
@@ -53,7 +53,7 @@ interface EditButtonProps {
 }
 
 export default function EditButton({ achievement, students, teachers }: EditButtonProps) {
-  
+
   const router = useRouter();
   const toggleModal = () => setShowModal(!showModal);
   const [showModal, setShowModal] = useState(false);
@@ -180,9 +180,9 @@ export default function EditButton({ achievement, students, teachers }: EditButt
 
               <div className={styles.cleanFormGroup}>
                 <label htmlFor="teachers">Teachers</label>
-                <TeacherMultiSearch 
-                teacherids={teacherIds}
-                onChange={handleTeacherChange} 
+                <TeacherMultiSearch
+                  teacherids={teacherIds}
+                  onChange={handleTeacherChange}
                 />
               </div>
 

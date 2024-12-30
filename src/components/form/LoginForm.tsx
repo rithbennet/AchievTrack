@@ -1,6 +1,7 @@
 // src/app/LoginForm.tsx
 "use client";
 import { useForm } from "react-hook-form";
+import Image from "next/image";
 import styles from "@/app/styles/login.module.scss"; // Import the SCSS file
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -64,7 +65,7 @@ export default function LoginForm() {
     <div className={styles.container}>
       {/* Left Part (Logo and Title) */}
       <div className={styles.left}>
-        <img src="/logo.png" alt="School Logo" className={styles.logo} />
+        <Image src="/logo.png" alt="School Logo" className={styles.logo} width={200} height={100} />
         <h1 className={styles.title} style={{ color: "black" }}>SK SAUJANA UTAMA</h1>
       </div>
 
@@ -75,10 +76,10 @@ export default function LoginForm() {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-3">
               <label htmlFor="email" className="form-label">Email address</label>
-              <input 
-                type="email" 
-                className="form-control" 
-                id="email" 
+              <input
+                type="email"
+                className="form-control"
+                id="email"
                 placeholder="Enter your email"
                 {...register("email")}
               />
@@ -86,10 +87,10 @@ export default function LoginForm() {
             </div>
             <div className="mb-3">
               <label htmlFor="password" className="form-label">Password</label>
-              <input 
-                type="password" 
-                className="form-control" 
-                id="password" 
+              <input
+                type="password"
+                className="form-control"
+                id="password"
                 placeholder="Enter your password"
                 {...register("password")}
               />

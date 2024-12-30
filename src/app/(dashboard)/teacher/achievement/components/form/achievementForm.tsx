@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "../../styles/achievement.module.scss";
-import StudentMultiSearch from "./studentMultiSearch";
-import TeacherMultiSearch from "./teacherMultiSearch";
+import StudentMultiSearch from "./StudentMultiSearch";
+import TeacherMultiSearch from "./TeacherMultiSearch";
 import { useRouter } from "next/navigation";
 
 interface AchievementData {
@@ -16,11 +16,10 @@ interface AchievementData {
 }
 
 interface AchievementFormProps {
-  onSubmit: (data: AchievementData) => void;
   onClose: () => void;
 }
 
-export default function AchievementForm({ onSubmit, onClose }: AchievementFormProps) {
+export default function AchievementForm({ onClose }: AchievementFormProps) {
   const [formData, setFormData] = useState<AchievementData>({
     title: "",
     category: "",
@@ -31,8 +30,8 @@ export default function AchievementForm({ onSubmit, onClose }: AchievementFormPr
     students: [],
     teachers: [],
   });
-  
-  
+
+
 
   const [filePreview, setFilePreview] = useState<string | null>(null); // State for the file preview
 
@@ -86,8 +85,7 @@ export default function AchievementForm({ onSubmit, onClose }: AchievementFormPr
         body: JSON.stringify(formData),
       });
       if (response.ok) {
-        const achievement = await response.json();
-        onSubmit(achievement);
+        console.log('Achievement submitted successfully');
       } else {
         console.error('Failed to submit achievement');
       }
@@ -164,10 +162,10 @@ export default function AchievementForm({ onSubmit, onClose }: AchievementFormPr
         />
       </div>
       <div className={styles.formGroup}>
-        < StudentMultiSearch onChange={handleStudentChange}  />
+        < StudentMultiSearch onChange={handleStudentChange} />
       </div>
       <div className={styles.formGroup}>
-        < TeacherMultiSearch onChange={handleTeacherChange}/>
+        < TeacherMultiSearch onChange={handleTeacherChange} />
       </div>
       <div className={styles.formGroup}>
         <label htmlFor="description">Description</label>
