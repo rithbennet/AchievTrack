@@ -13,11 +13,7 @@ export default function AddButtonStudents() {
     setIsModalOpen(true);
   };
 
-  // Function to close the modal
-  const closeModal = () => {
-    console.log("Closing modal");
-    setIsModalOpen(false);
-  };
+
 
   return (
     <div>
@@ -30,7 +26,6 @@ export default function AddButtonStudents() {
       {isModalOpen && (
         <div className={`${styles.modalOverlay} ${isModalOpen ? styles.open : ''}`}>
           <div className={styles.modalContent}>
-            <StudentForm closeModal={closeModal} /> {/* StudentForm handles the form submission */}
           </div>
         </div>
       )}
