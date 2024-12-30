@@ -7,45 +7,22 @@
   border-radius: 10px;
 }
 
+/* Page Container */
 .pageContainer {
   display: flex; /* Use flexbox to display sidebar and content side by side */
   height: 100vh; /* Full height layout */
 }
 
-.topSection {
+/* Search and Add Container */
+.searchAndAddContainer {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 15px;
+  margin-bottom: 1rem;
+  gap: 20px;
 }
 
-.totalInfo {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #555;
-}
-
-.searchAndAdd {
-  display: flex;
-  align-items: center;
-}
-
-.searchInput {
-  padding: 6px 10px;
-  font-size: 0.9rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-right: 10px;
-  outline: none;
-  transition: border-color 0.2s ease;
-}
-
-.searchInput:focus {
-  border-color: #007bff;
-}
-
+/* Add Button */
 .addButton {
   padding: 6px 12px;
   background-color: #623988;
@@ -61,6 +38,7 @@
   background-color: #45a049;
 }
 
+/* Student List Section */
 .StudentListSection {
   display: flex;
   flex-direction: column;
@@ -68,6 +46,7 @@
   margin-top: 20px;
 }
 
+/* Student Table */
 .StudentTable {
   width: 80%; /* Adjust table width */
   max-width: 1200px; /* Limit the table's maximum width */
@@ -110,7 +89,6 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 0.85rem;
-  margin-right: 5px;
   transition: background-color 0.3s ease;
 }
 
@@ -297,40 +275,127 @@
   background-color: #45a049;
 }
 
-.searchAndAddContainer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-}
-
-.searchInput {
-  flex: 1;
-  max-width: 300px;
-  margin-right: 1rem;
-}
-
-.addButton {
-  padding: 0.5rem 1rem;
-}
-
+/* Additional Styles */
 .actionButtons {
   display: flex;
   gap: 10px;
   justify-content: flex-start;
   align-items: center;
 }
-
-/* Modal Content for Student Details */
-.modalContent p {
-  color: #000; /* Set the font color of the paragraphs to black */
+/* Import Student Button */
+.importButton {
+  padding: 6px 12px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
 }
 
-.modalContent h2, .modalContent h3, .modalContent h4 {
-  color: #000; /* Set font color for headings to black */
+.importButton:hover {
+  background-color: #218838;
 }
 
-.studentDetails {
-  border-top: 2px solid #e1e1e1;
-  padding-top: 20px;
+/* Import Student Modal Overlay */
+.importModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.importModalOverlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Modal Content */
+.importModalContent {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Modal Header */
+.importModalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.importModalHeader h2 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.importModalHeader .closeButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #aaa;
+}
+
+.importModalHeader .closeButton:hover {
+  color: #e74c3c;
+}
+
+/* File Upload Form */
+.importForm {
+  font-size: 1rem;
+  color: #34495e;
+  margin-top: 20px;
+}
+
+.importForm input[type="file"] {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.importForm button {
+  background-color: #28a745;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.importForm button:hover {
+  background-color: #218838;
 }

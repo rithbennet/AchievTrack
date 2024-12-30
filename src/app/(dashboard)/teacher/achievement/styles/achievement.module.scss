@@ -548,6 +548,51 @@
 .cleanFormGroup .actions .cancelButton:hover {
   background-color: #e53935;
 }
+/* Button Styles */
+.importButton {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: white;
+  background-color: #623988;
+
+  &:hover {
+    background-color: #42245e;
+  }
+}
+
+.exportButton {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: white;
+  background-color: #4caf50;
+
+  &:hover {
+    background-color: #45a049;
+  }
+}
+
+.pdfButton {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: white;
+  background-color: #ff5722;
+
+  &:hover {
+    background-color: #e64a19;
+  }
+}
 
 
 

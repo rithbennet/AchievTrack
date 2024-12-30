@@ -3,18 +3,15 @@ import styles from "../styles/manageStudent.module.scss";
 import EditButtonStudents from './buttons/EditButtonStudents';
 import ViewButtonStudents from './buttons/ViewButtonStudents';
 import DeleteButtonStudents from './buttons/DeleteButtonStudents';
-import PaginationComponent from './PaginationStudent';
-
-interface StudentListProps {
-  query: string;
-  currentPage: number;
-}
+import ImportStudentButton from "./ImportStudentButton";
+import PaginationStudent from './PaginationStudent';
 
 const ITEMS_PER_PAGE = 8;
 
-export default async function StudentList({ query, currentPage }: StudentListProps) {
+const StudentList = async ({ query, currentPage }: { query: string, currentPage: number }) => {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
+  // Fetch the list of students based on search query and pagination
   const students = await prisma.student.findMany({
     where: {
       name: {
@@ -26,6 +23,7 @@ export default async function StudentList({ query, currentPage }: StudentListPro
     take: ITEMS_PER_PAGE,
   });
 
+  // Get the total number of students matching the query
   const totalStudents = await prisma.student.count({
     where: {
       name: {
@@ -35,43 +33,53 @@ export default async function StudentList({ query, currentPage }: StudentListPro
     },
   });
 
+  // Calculate total pages for pagination
   const totalPages = Math.ceil(totalStudents / ITEMS_PER_PAGE);
 
   return (
-    <div className={styles.StudentListSection}>
-      <table className={styles.StudentTable}>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>MyKad</th>
-            <th>Class</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {students.map((student) => (
-            <tr key={student.id}>
-              <td>{student.name}</td>
-              <td>{student.mykad}</td>
-              <td>{student.class}</td>
-              <td>
-                <div className={styles.actionButtons}>
-                  <div className={styles.editButton}>
+    <div className={styles.pageContainer}>
+      <div className={styles.topSection}>
+        <div className={styles.searchAndAddContainer}>
+        <ImportStudentButton />  {/* Import Button Component */}
+        </div>
+      </div>
+
+      {/* Student List Section */}
+      <div className={styles.StudentListSection}>
+        <table className={styles.StudentTable}>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>MyKad</th>
+              <th>Class</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {/* Displaying the list of students */}
+            {students.map((student) => (
+              <tr key={student.id}>
+                <td>{student.name}</td>
+                <td>{student.mykad}</td>
+                <td>{student.class}</td>
+                <td>
+                  <div className={styles.actionButtons}>
+                    {/* Action buttons for each student */}
                     <EditButtonStudents id={student.id} initialData={student} />
-                  </div>
-                  <div className={styles.viewButton}>
                     <ViewButtonStudents id={student.id} initialData={student} />
-                  </div>
-                  <div className={styles.deleteButton}>
                     <DeleteButtonStudents id={student.id} />
                   </div>
-                </div>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <PaginationComponent pageCount={totalPages} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        {/* Pagination */}
+        <PaginationStudent pageCount={totalPages} />
+      </div>
     </div>
   );
-}
+};
+
+export default StudentList;
