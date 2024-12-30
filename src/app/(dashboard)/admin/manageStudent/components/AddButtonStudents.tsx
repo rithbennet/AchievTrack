@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from 'react';
-import StudentForm from './StudentForm'; // Assuming you have a StudentForm component to handle student data
 import styles from '../styles/manageStudent.module.scss'; // Make sure styles are updated to match the student context
 
 export default function AddButtonStudents() {
