@@ -51,14 +51,14 @@ export default function TeacherMultiSearch({ onChange, teacherids }: TeacherMult
       }
     };
     fetchInitialTeachers();
-  }, []);
+  },);
 
   useEffect(() => {
     const setTeachersIds = (selected: Option[]) => {
       onChange(selected.map(option => parseInt(option.value)));
     };
     setTeachersIds(selectedTeachers);
-  }, [selectedTeachers]);
+  }, [selectedTeachers, onChange]);
 
   return (
     <div>

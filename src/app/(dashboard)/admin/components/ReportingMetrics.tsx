@@ -4,7 +4,7 @@ export default function ReportingMetrics() {
         <div className="card-body">
             <p>Summary and key metrics go here.</p>
         </div>
-    </div>
+    </div>;
 };
 
 

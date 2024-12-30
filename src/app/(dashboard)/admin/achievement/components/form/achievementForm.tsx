@@ -3,6 +3,7 @@ import styles from "../../styles/achievement.module.scss";
 import StudentMultiSearch from "./studentMultiSearch";
 import TeacherMultiSearch from "./teacherMultiSearch";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface AchievementData {
   title: string;
@@ -16,11 +17,10 @@ interface AchievementData {
 }
 
 interface AchievementFormProps {
-  onSubmit: (data: AchievementData) => void;
   onClose: () => void;
 }
 
-export default function AchievementForm({ onSubmit, onClose }: AchievementFormProps) {
+export default function AchievementForm({ onClose }: AchievementFormProps) {
   const [formData, setFormData] = useState<AchievementData>({
     title: "",
     category: "",
@@ -86,8 +86,7 @@ export default function AchievementForm({ onSubmit, onClose }: AchievementFormPr
         body: JSON.stringify(formData),
       });
       if (response.ok) {
-        const achievement = await response.json();
-        onSubmit(achievement);
+        console.log('Achievement submitted successfully');
       } else {
         console.error('Failed to submit achievement');
       }
@@ -145,9 +144,9 @@ export default function AchievementForm({ onSubmit, onClose }: AchievementFormPr
         {filePreview && (
           <div className={styles.filePreview}>
             {filePreview.includes("pdf") ? (
-              <img src="/path-to-pdf-icon.png" alt="PDF Preview" width={50} height={50} /> // Placeholder PDF icon
+              <Image src="/path-to-pdf-icon.png" alt="PDF Preview" width={50} height={50} /> // Placeholder PDF icon
             ) : (
-              <img src={filePreview} alt="File Preview" style={{ maxWidth: "200px", maxHeight: "200px" }} />
+              <Image src={filePreview} alt="File Preview" width={200} height={200} style={{ maxWidth: "200px", maxHeight: "200px" }} />
             )}
           </div>
         )}

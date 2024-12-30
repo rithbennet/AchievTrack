@@ -4,5 +4,5 @@ export default function SystemActivity() {
         <div className="card-body">
             <p>Overview of recent system activity will be displayed here.</p>
         </div>
-    </div>
+    </div>;
 }

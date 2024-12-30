@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import prisma from '@/lib/db';
 
 
@@ -37,6 +37,6 @@ export default async function RecentActivities() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
 

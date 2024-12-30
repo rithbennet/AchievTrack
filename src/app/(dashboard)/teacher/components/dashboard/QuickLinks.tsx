@@ -1,6 +1,6 @@
-import { Button } from '@/components/ui/button'
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { PlusCircle, Trophy } from 'lucide-react'
+import { Button } from '@/components/ui/button';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { PlusCircle, Trophy } from 'lucide-react';
 
 export default function QuickLinks() {
   return (
@@ -17,6 +17,6 @@ export default function QuickLinks() {
         </Button>
       </CardContent>
     </Card>
-  )
+  );
 }
 

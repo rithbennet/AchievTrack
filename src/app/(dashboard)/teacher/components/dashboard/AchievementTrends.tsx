@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 const data = [
   { name: 'Jan', achievements: 65 },
@@ -9,7 +9,7 @@ const data = [
   { name: 'Mar', achievements: 80 },
   { name: 'Apr', achievements: 81 },
   { name: 'May', achievements: 56 },
-]
+];
 
 export default function AchievementTrends() {
   return (
@@ -28,6 +28,6 @@ export default function AchievementTrends() {
         </ResponsiveContainer>
       </CardContent>
     </Card>
-  )
+  );
 }
 

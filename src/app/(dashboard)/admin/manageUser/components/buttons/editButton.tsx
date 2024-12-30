@@ -1,5 +1,5 @@
 // components/EditButton.tsx
-"use client"
+"use client";
 import { useState } from 'react';
 import UserForm from "../UserForm";
 import styles from '../../styles/manageUser.module.scss';

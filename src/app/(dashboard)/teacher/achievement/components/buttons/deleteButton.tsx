@@ -33,7 +33,7 @@ export default function DeleteButton({ achievementId,}: DeleteButtonProps) {
 
     toggleModal();
     router.refresh();
-  }
+  };
 
 
   return (

@@ -55,14 +55,14 @@ export default function StudentMultiSearch({ onChange, studentids }: StudentMult
       }
     };
     fetchInitialStudents();
-  }, []);
+  },);
 
   useEffect(() => {
     const setStudentsIds = (selected: Option[]) => {
       onChange(selected.map(option => parseInt(option.value)));
     };
     setStudentsIds(selectedStudents);
-  }, [selectedStudents]);
+  }, [selectedStudents, onChange]);
 
 
 
