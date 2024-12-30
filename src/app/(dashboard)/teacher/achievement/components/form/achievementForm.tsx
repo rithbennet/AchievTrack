@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "../../styles/achievement.module.scss";
-import StudentMultiSearch from "./StudentMultiSearch";
-import TeacherMultiSearch from "./TeacherMultiSearch";
+import StudentMultiSearch from "./studentMultiSearch";
+import TeacherMultiSearch from "./teacherMultiSearch";
 import { useRouter } from "next/navigation";
 
 interface AchievementData {
