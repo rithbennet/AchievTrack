@@ -1,20 +1,38 @@
-"use server"
+"use server";
 
 import prisma from "@/lib/db";
 import { z } from "zod";
 
 // Define a schema for creating a new student
 const createStudentSchema = z.object({
-  name: z.string().min(1, "Name is required").max(100, "Name must be at most 100 characters"),
-  class: z.string().min(1, "Class is required").max(50, "Class must be at most 50 characters"),
-  mykad: z.string().length(12, "MYKAD must be 12 characters").nonempty("MYKAD is required"),
+  name: z
+    .string()
+    .min(1, "Name is required")
+    .max(100, "Name must be at most 100 characters"),
+  class: z
+    .string()
+    .min(1, "Class is required")
+    .max(50, "Class must be at most 50 characters"),
+  mykad: z
+    .string()
+    .length(12, "MYKAD must be 12 characters")
+    .nonempty("MYKAD is required"),
 });
 
 // Define a schema for updating an existing student
 const updateStudentSchema = z.object({
-  name: z.string().min(1, "Name is required").max(100, "Name must be at most 100 characters"),
-  class: z.string().min(1, "Class is required").max(50, "Class must be at most 50 characters"),
-  mykad: z.string().length(12, "MYKAD must be 12 characters").nonempty("MYKAD is required"),
+  name: z
+    .string()
+    .min(1, "Name is required")
+    .max(100, "Name must be at most 100 characters"),
+  class: z
+    .string()
+    .min(1, "Class is required")
+    .max(50, "Class must be at most 50 characters"),
+  mykad: z
+    .string()
+    .length(12, "MYKAD must be 12 characters")
+    .nonempty("MYKAD is required"),
   is_active: z.boolean().optional(),
 });
 
@@ -22,9 +40,9 @@ const updateStudentSchema = z.object({
 export async function createStudent(formData: FormData) {
   // Extract and validate form data using Zod
   const studentData = {
-    name: formData.get('name') as string,
-    class: formData.get('class') as string,
-    mykad: formData.get('mykad') as string,
+    name: formData.get("name") as string,
+    class: formData.get("class") as string,
+    mykad: formData.get("mykad") as string,
   };
 
   // Validate the student data
@@ -46,10 +64,10 @@ export async function createStudent(formData: FormData) {
 export async function updateStudent(studentId: number, formData: FormData) {
   // Extract and validate form data using Zod
   const studentData = {
-    name: formData.get('name') as string,
-    class: formData.get('class') as string,
-    mykad: formData.get('mykad') as string,
-    is_active: formData.get('is_active') as string | undefined,
+    name: formData.get("name") as string,
+    class: formData.get("class") as string,
+    mykad: formData.get("mykad") as string,
+    is_active: formData.get("is_active") as string | undefined,
   };
 
   // Handle null values in FormData

@@ -1,13 +1,13 @@
-import { Metadata } from 'next'
-import QuickLinks from './components/dashboard/QuickLinks'
-import Insights from './components/dashboard/Insights'
-import RecentActivities from './components/dashboard/RecentActivities'
-import AchievementTrends from './components/dashboard/AchievementTrends'
+import { Metadata } from "next";
+import QuickLinks from './components/dashboard/QuickLinks';
+import Insights from './components/dashboard/Insights';
+import RecentActivities from './components/dashboard/RecentActivities';
+import AchievementTrends from './components/dashboard/AchievementTrends';
 
 export const metadata: Metadata = {
   title: 'Teacher Dashboard',
   description: 'Dashboard for managing student achievements and school activities',
-}
+};
 
 export default async function DashboardPage() {
   return (
@@ -21,5 +21,5 @@ export default async function DashboardPage() {
         <AchievementTrends />
       </div>
     </div>
-  )
+  );
 }
