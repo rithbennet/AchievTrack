@@ -3,6 +3,14 @@
 import prisma from "@/lib/db";
 import { z } from "zod";
 
+interface studentData {
+  id?: number;
+  name?: string;
+  class?: string;
+  mykad?: string;
+  is_active?: boolean;
+}
+
 // Define a schema for creating a new student
 const createStudentSchema = z.object({
   name: z
@@ -79,7 +87,7 @@ export async function updateStudent(studentId: number, formData: FormData) {
   const validatedStudentData = updateStudentSchema.parse(studentData);
 
   // Prepare the data to be updated
-  const updateData: any = {
+  const updateData: studentData = {
     name: validatedStudentData.name,
     class: validatedStudentData.class,
     mykad: validatedStudentData.mykad,

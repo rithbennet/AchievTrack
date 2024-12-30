@@ -1,6 +1,5 @@
 import prisma from '@/lib/db';
 import MetricsCard from './components/MetricsCard';
-import QuickActionCard from './components/QuickActionCard';
 import VisitorInsights from './components/VisitorInsights'; // Correct import path
 
 export default async function DashboardAdmin() {

@@ -1,11 +1,11 @@
-'use client'
-import AddButton from '../buttons/addButton'
-import DeleteButton from '../buttons/deleteButton'
-import ViewButton from '../buttons/viewButton'
-import EditButton from '../buttons/editButton'
-import PdfButton from '../buttons/pdfButton'
-import ImportButton from '../buttons/importButton'
-import React, { useState } from 'react'
+'use client';
+import AddButton from '../buttons/addButton';
+import DeleteButton from '../buttons/deleteButton';
+import ViewButton from '../buttons/viewButton';
+import EditButton from '../buttons/editButton';
+import PdfButton from '../buttons/pdfButton';
+import ImportButton from '../buttons/importButton';
+import React, { useState } from 'react';
 import {
   Table,
   TableBody,
@@ -13,17 +13,17 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/table";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, CheckCircle2Icon, XCircleIcon } from 'lucide-react'
+} from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, CheckCircle2Icon, XCircleIcon } from 'lucide-react';
 
 export interface Student {
   id: number;
@@ -65,17 +65,17 @@ interface FilteredTableProps {
 }
 
 export default function FilteredTable({ achievementData }: FilteredTableProps) {
-  const [filterValue, setFilterValue] = useState("")
-  const [sortColumn, setSortColumn] = useState<string | null>(null)
-  const [sortDirection, setSortDirection] = useState<SortDirection>(null)
-  const [rowsPerPage, setRowsPerPage] = useState(5)
-  const [currentPage, setCurrentPage] = useState(1)
+  const [filterValue, setFilterValue] = useState("");
+  const [sortColumn, setSortColumn] = useState<string | null>(null);
+  const [sortDirection, setSortDirection] = useState<SortDirection>(null);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
   // Filter function
   const filteredData = achievementData.filter((item) =>
     Object.values(item).some((value) =>
       value !== null && value !== undefined && value.toString().toLowerCase().includes(filterValue.toLowerCase())
     )
-  )
+  );
 
   // Sort function
   const sortedData = [...filteredData].sort((a, b) => {
@@ -105,26 +105,17 @@ export default function FilteredTable({ achievementData }: FilteredTableProps) {
   });
 
   // Pagination
-  const totalPages = Math.ceil(sortedData.length / rowsPerPage)
+  const totalPages = Math.ceil(sortedData.length / rowsPerPage);
   const paginatedData = sortedData.slice(
     (currentPage - 1) * rowsPerPage,
     currentPage * rowsPerPage
-  )
+  );
 
   const handleSort = (column: string) => {
     if (sortColumn === column) {
-      setSortDirection(sortDirection === 'asc' ? 'desc' : sortDirection === 'desc' ? null : 'asc')
-    } else {
-      setSortColumn(column)
-      setSortDirection('asc')
-    }
-  }
-
-  const handleSortDate = () => {
-    if (sortColumn === 'date') {
       setSortDirection(sortDirection === 'asc' ? 'desc' : sortDirection === 'desc' ? null : 'asc');
     } else {
-      setSortColumn('date');
+      setSortColumn(column);
       setSortDirection('asc');
     }
   };
@@ -143,8 +134,8 @@ export default function FilteredTable({ achievementData }: FilteredTableProps) {
         <Select
           value={rowsPerPage.toString()}
           onValueChange={(value) => {
-            setRowsPerPage(Number(value))
-            setCurrentPage(1)
+            setRowsPerPage(Number(value));
+            setCurrentPage(1);
           }}
         >
           <SelectTrigger className="w-[180px]">
@@ -250,6 +241,6 @@ export default function FilteredTable({ achievementData }: FilteredTableProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 

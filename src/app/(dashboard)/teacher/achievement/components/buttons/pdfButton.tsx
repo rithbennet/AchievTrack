@@ -44,6 +44,7 @@ const PdfButton = ({ achievements, logoPath }: PdfButtonProps) => {
       ]);
 
       // Use jsPDF autoTable for generating the table
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (doc as any).autoTable({
         head: headers,
         body: data,

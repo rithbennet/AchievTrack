@@ -1,6 +1,5 @@
 import prisma from "@/lib/db";
-import { NextRequest, NextResponse } from "next/server";
-import { getToken } from "next-auth/jwt";
+import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
   const { title, category, level, date, description, students, teachers } =
@@ -15,12 +14,12 @@ export async function POST(req: NextRequest) {
         date: new Date(date),
         description,
         achievementstudents: {
-          create: students.map((studentId: any) => ({
+          create: students.map((studentId: number) => ({
             studentid: studentId,
           })),
         },
         achievementteachers: {
-          create: teachers.map((teacherId: any) => ({
+          create: teachers.map((teacherId: number) => ({
             teacherid: teacherId,
           })),
         },
@@ -33,7 +32,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export async function DELETE(req: NextRequest, res: NextResponse) {
+export async function DELETE(req: NextRequest) {
   const { id } = await req.json();
 
   try {
@@ -49,7 +48,7 @@ export async function DELETE(req: NextRequest, res: NextResponse) {
   }
 }
 
-export async function PUT(req: NextRequest, res: NextResponse) {
+export async function PUT(req: NextRequest) {
   const { id, title, category, level, date, description, students, teachers } =
     await req.json();
 
@@ -66,13 +65,13 @@ export async function PUT(req: NextRequest, res: NextResponse) {
         description,
         achievementstudents: {
           deleteMany: {},
-          create: students.map((studentId: any) => ({
+          create: students.map((studentId: number) => ({
             studentid: studentId,
           })),
         },
         achievementteachers: {
           deleteMany: {},
-          create: teachers.map((teacherId: any) => ({
+          create: teachers.map((teacherId: number) => ({
             teacherid: teacherId,
           })),
         },

@@ -1,8 +1,6 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from 'react';
 import MultipleSelector, { Option } from '@/components/ui/multiple-selector';
-import { set } from 'zod';
-
 interface Teacher {
   id: number;
   name: string;
@@ -17,20 +15,20 @@ const teacherSearch = async (value: string): Promise<Option[]> => {
   return new Promise((resolve) => {
     setTimeout(async () => {
       const res = await fetch(`/api/teacher?name=${value}`)
-      .then(res => res.json())
-      .then(data => data.teachers.map((teacher: Teacher) => ({
-        label: teacher.name,
-        value: teacher.id,
-      })));
+        .then(res => res.json())
+        .then(data => data.teachers.map((teacher: Teacher) => ({
+          label: teacher.name,
+          value: teacher.id,
+        })));
       resolve(res);
     }, 100);
   });
 };
 
-export default function teacherMultiSearch({ onChange, teacherids }: TeacherMultiSearchProps) {
+export default function TeacherMultiSearch({ onChange, teacherids }: TeacherMultiSearchProps) {
   const [, setSearchTerm] = useState('');
   const [selectedTeachers, setSelectedTeachers] = useState<Option[]>([]);
-  const [,setIsTriggered] = React.useState(false);
+  const [, setIsTriggered] = React.useState(false);
 
   useEffect(() => {
     const fetchInitialTeachers = async () => {
@@ -58,7 +56,7 @@ export default function teacherMultiSearch({ onChange, teacherids }: TeacherMult
   useEffect(() => {
     const setTeachersIds = (selected: Option[]) => {
       onChange(selected.map(option => parseInt(option.value)));
-    }
+    };
     setTeachersIds(selectedTeachers);
   }, [selectedTeachers]);
 

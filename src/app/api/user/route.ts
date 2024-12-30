@@ -1,14 +1,23 @@
 import { NextResponse } from "next/server";
 import db from "@/lib/db"; // Ensure the correct path to your db file
-import { hash } from 'bcrypt';
+import { hash } from "bcrypt";
 import { z } from "zod";
 
 // Define a schema for user validation using zod
 const userSchema = z.object({
-  name: z.string().min(1, "Name is required").max(100, "Name must be at most 100 characters"),
-  email: z.string().email("Invalid email address").nonempty("Email is required"),
+  name: z
+    .string()
+    .min(1, "Name is required")
+    .max(100, "Name must be at most 100 characters"),
+  email: z
+    .string()
+    .email("Invalid email address")
+    .nonempty("Email is required"),
   role: z.string().nonempty("Role is required"),
-  password: z.string().nonempty("Password is required").min(8, "Password must be at least 8 characters"),
+  password: z
+    .string()
+    .nonempty("Password is required")
+    .min(8, "Password must be at least 8 characters"),
   id: z.number().optional(),
 });
 
@@ -23,10 +32,13 @@ export async function POST(req: Request) {
     });
 
     if (existingUserByEmail) {
-      return NextResponse.json({
-        status: "error",
-        message: "User with this email already exists",
-      }, { status: 409 });
+      return NextResponse.json(
+        {
+          status: "error",
+          message: "User with this email already exists",
+        },
+        { status: 409 }
+      );
     }
 
     const hashedPassword = await hash(password, 10);
@@ -40,27 +52,29 @@ export async function POST(req: Request) {
         password: hashedPassword,
       },
     });
-    const { password: newUserPassword, ...rest } = newUser;
 
-    return NextResponse.json({
-      user: rest,
-      message: "User created successfully",
-    }, { status: 201 });
+    return NextResponse.json(
+      {
+        user: newUser.name,
+        message: "User created successfully",
+      },
+      { status: 201 }
+    );
   } catch (error) {
     console.error("Error creating user:", error);
-    return NextResponse.json({
-      status: "error",
-      message: "Failed to create user",
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        status: "error",
+        message: "Failed to create user",
+      },
+      { status: 500 }
+    );
   }
 }
 
 export async function GET() {
-
-  
   try {
     const users = await db.user.findMany();
- 
 
     return NextResponse.json({
       status: "ok",
@@ -68,10 +82,12 @@ export async function GET() {
     });
   } catch (error) {
     console.error("Error fetching users:", error);
-    return NextResponse.json({
-      status: "error",
-      message: "Failed to fetch users",
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        status: "error",
+        message: "Failed to fetch users",
+      },
+      { status: 500 }
+    );
   }
 }
-

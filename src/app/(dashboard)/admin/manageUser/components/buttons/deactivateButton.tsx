@@ -8,7 +8,7 @@ interface DeleteButtonProps {
   userId: number; // Ensure userId is a number
 }
 
-export default function deactivateButton({ userId }: DeleteButtonProps) {
+export default function DeactivateButton({ userId }: DeleteButtonProps) {
   const router = useRouter();
   const handleDeactivate = async () => {
     try {

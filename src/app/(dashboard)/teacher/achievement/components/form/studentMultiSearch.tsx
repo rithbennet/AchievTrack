@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from 'react';
 import MultipleSelector, { Option } from '@/components/ui/multiple-selector';
 
@@ -17,21 +17,21 @@ const studentSearch = async (value: string): Promise<Option[]> => {
   return new Promise((resolve) => {
     setTimeout(async () => {
       const res = await fetch(`/api/student?name=${value}`)
-      .then(res => res.json())
-      .then(data => data.students.map((student: Student) => ({
-        label: student.name,
-        value: student.id,
-        group: student.class
-      })));
+        .then(res => res.json())
+        .then(data => data.students.map((student: Student) => ({
+          label: student.name,
+          value: student.id,
+          group: student.class
+        })));
       resolve(res);
     }, 100);
   });
 };
 
-export default function studentMultiSearch({ onChange, studentids }: StudentMultiSearchProps) {
+export default function StudentMultiSearch({ onChange, studentids }: StudentMultiSearchProps) {
   const [, setSearchTerm] = useState('');
   const [selectedStudents, setSelectedStudents] = useState<Option[]>([]);
-  const [,setIsTriggered] = React.useState(false);
+  const [, setIsTriggered] = React.useState(false);
 
   useEffect(() => {
     const fetchInitialStudents = async () => {
@@ -60,11 +60,11 @@ export default function studentMultiSearch({ onChange, studentids }: StudentMult
   useEffect(() => {
     const setStudentsIds = (selected: Option[]) => {
       onChange(selected.map(option => parseInt(option.value)));
-    }
+    };
     setStudentsIds(selectedStudents);
   }, [selectedStudents]);
 
- 
+
 
   return (
     <div>

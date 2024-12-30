@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "../../styles/achievement.module.scss";
-import StudentMultiSearch from "./studentMultiSearch";
-import TeacherMultiSearch from "./teacherMultiSearch";
+import StudentMultiSearch from "./StudentMultiSearch";
+import TeacherMultiSearch from "./TeacherMultiSearch";
 import { useRouter } from "next/navigation";
 
 interface AchievementData {
@@ -31,8 +31,8 @@ export default function AchievementForm({ onSubmit, onClose }: AchievementFormPr
     students: [],
     teachers: [],
   });
-  
-  
+
+
 
   const [filePreview, setFilePreview] = useState<string | null>(null); // State for the file preview
 
@@ -164,10 +164,10 @@ export default function AchievementForm({ onSubmit, onClose }: AchievementFormPr
         />
       </div>
       <div className={styles.formGroup}>
-        < StudentMultiSearch onChange={handleStudentChange}  />
+        < StudentMultiSearch onChange={handleStudentChange} />
       </div>
       <div className={styles.formGroup}>
-        < TeacherMultiSearch onChange={handleTeacherChange}/>
+        < TeacherMultiSearch onChange={handleTeacherChange} />
       </div>
       <div className={styles.formGroup}>
         <label htmlFor="description">Description</label>
