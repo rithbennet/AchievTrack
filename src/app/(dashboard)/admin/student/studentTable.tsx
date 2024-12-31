@@ -1,10 +1,4 @@
 'use client';
-import AddButton from '@/components/achievementPage/buttons/addButton';
-import DeleteButton from '@/components/achievementPage/buttons/deleteButton';
-import ViewButton from '@/components/achievementPage/buttons/viewButton';
-import EditButton from '@/components/achievementPage/buttons/editButton';
-import PdfButton from '@/components/achievementPage/buttons/pdfButton';
-import ImportButton from '@/components/achievementPage/buttons/importButton';
 import React, { useState } from 'react';
 import {
   Table,
@@ -23,26 +17,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, CheckCircle2Icon, XCircleIcon } from 'lucide-react';
+import AddButtonStudents from "@/components/studentPage/buttons/AddButtonStudents";
+import { ViewStudentDetails } from '@/components/studentPage/buttons/viewStudentDetails';
+import { StudentDeactiveButton } from '@/components/studentPage/buttons/DeactivateStudent';
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, CircleAlert, CircleUser } from 'lucide-react';
 
-export interface Student {
-  id: number;
-  name: string;
-  class: string;
-}
-
-export interface TeacherUser {
-  id: number;
-  name: string;
-  email: string;
-}
-
-export interface Teacher {
-  id: number;
-  User: TeacherUser;
-}
-
-export interface AchievementData {
+interface achievement {
   id: number;
   title: string;
   date: Date;
@@ -51,27 +31,36 @@ export interface AchievementData {
   certificate: string[];
   description: string | null;
   createdby: number | null;
-  verified: boolean | null;
-  created_at: Date | null;
-  updated_at: Date | null;
-  achievementstudents: { Student: Student }[];
-  achievementteachers: { Teacher: Teacher }[];
 }
+
+
+export interface Student {
+  id: number;
+  name: string;
+  class: string;
+  mykad: string;
+  created_at: Date | null;
+  is_active: boolean | null;
+  achievementstudents: { achievementdata: achievement }[];
+}
+
+
 
 type SortDirection = 'asc' | 'desc' | null;
 
 interface FilteredTableProps {
-  achievementData: AchievementData[];
+  studentData: Student[];
 }
 
-export default function FilteredTable({ achievementData }: FilteredTableProps) {
+
+export default function FilteredTable({ studentData }: FilteredTableProps) {
   const [filterValue, setFilterValue] = useState("");
   const [sortColumn, setSortColumn] = useState<string | null>(null);
   const [sortDirection, setSortDirection] = useState<SortDirection>(null);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   // Filter function
-  const filteredData = achievementData.filter((item) =>
+  const filteredData = studentData.filter((item) =>
     Object.values(item).some((value) =>
       value !== null && value !== undefined && value.toString().toLowerCase().includes(filterValue.toLowerCase())
     )
@@ -79,6 +68,9 @@ export default function FilteredTable({ achievementData }: FilteredTableProps) {
 
   // Sort function
   const sortedData = [...filteredData].sort((a, b) => {
+    if (a.is_active && !b.is_active) return -1;
+    if (!a.is_active && b.is_active) return 1;
+
     if (sortColumn) {
       const aValue = a[sortColumn as keyof typeof a];
       const bValue = b[sortColumn as keyof typeof b];
@@ -124,13 +116,12 @@ export default function FilteredTable({ achievementData }: FilteredTableProps) {
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <Input
-          placeholder="Search an achievement..."
+          placeholder="Seach an student..."
           value={filterValue}
           onChange={(e) => setFilterValue(e.target.value)}
           className="max-w-sm"
         />
-        <ImportButton />
-        <AddButton />
+        <AddButtonStudents />
         <Select
           value={rowsPerPage.toString()}
           onValueChange={(value) => {
@@ -150,45 +141,38 @@ export default function FilteredTable({ achievementData }: FilteredTableProps) {
         </Select>
       </div>
       <div className='rounded-lg overflow-clip border to-black'>
-        <Table className=''>
+        <Table>
           <TableHeader className='bg-purple-800 ' >
             <TableRow >
               <TableHead className="cursor-pointer text-white">
 
               </TableHead>
-              <TableHead onClick={() => handleSort('title')} className="cursor-pointer text-white" >
-                Title {sortColumn === 'title' && (sortDirection === 'asc' ? '▲' : sortDirection === 'desc' ? '▼' : '')}
+              <TableHead onClick={() => handleSort('name')} className="cursor-pointer text-white" >
+                Name {sortColumn === 'name' && (sortDirection === 'asc' ? '▲' : sortDirection === 'desc' ? '▼' : '')}
               </TableHead>
-              <TableHead onClick={() => handleSort('category')} className="cursor-pointer text-white" >
-                Catergory {sortColumn === 'categort' && (sortDirection === 'asc' ? '▲' : sortDirection === 'desc' ? '▼' : '')}
+              <TableHead onClick={() => handleSort('mykad')} className="cursor-pointer text-white" >
+                MyKad {sortColumn === 'mykad' && (sortDirection === 'asc' ? '▲' : sortDirection === 'desc' ? '▼' : '')}
               </TableHead>
-              <TableHead onClick={() => handleSort('level')} className="cursor-pointer text-white">
-                Level {sortColumn === 'level' && (sortDirection === 'asc' ? '▲' : sortDirection === 'desc' ? '▼' : '')}
-              </TableHead>
-              <TableHead onClick={() => handleSort('date')} className="cursor-pointer text-white">
-                Date {sortColumn === 'date' && (sortDirection === 'asc' ? '▲' : sortDirection === 'desc' ? '▼' : '')}
+              <TableHead onClick={() => handleSort('class')} className="cursor-pointer text-white">
+                Class {sortColumn === 'class' && (sortDirection === 'asc' ? '▲' : sortDirection === 'desc' ? '▼' : '')}
               </TableHead>
               <TableHead className="cursor-pointer text-white">
                 Actions
               </TableHead>
-
             </TableRow>
           </TableHeader>
           <TableBody>
-            {paginatedData.map((achievementData) => (
-              <TableRow key={achievementData.id}>
-                <TableCell className='w-12 p-2 text-center'>
-                  {achievementData.verified ? <CheckCircle2Icon color='green' /> : <XCircleIcon color='red' />}
-                </TableCell>
-                <TableCell>{achievementData.title}</TableCell>
-                <TableCell>{achievementData.category}</TableCell>
-                <TableCell>{achievementData.level}</TableCell>
-                <TableCell>{achievementData.date.toLocaleDateString('en-GB')}</TableCell>
-                <TableCell>
+            {paginatedData.map((studentData) => (
+              <TableRow key={studentData.id}>
+                <TableCell className='w-12 p-2 text-center'>{studentData.is_active ? <CircleUser color='green' /> : <CircleAlert color='red' />}</TableCell>
+                <TableCell>{studentData.name}</TableCell>
+                <TableCell>{studentData.mykad}</TableCell>
+                <TableCell>{studentData.class}</TableCell>
+                <TableCell className='flex justify-end space-x-2'>
                   <div className="flex space-x-2">
-                    <EditButton achievement={achievementData} students={achievementData.achievementstudents} teachers={achievementData.achievementteachers} />
-                    <DeleteButton achievementId={achievementData.id} />
-                    <ViewButton achievement={achievementData} students={achievementData.achievementstudents} teachers={achievementData.achievementteachers} />
+                    <AddButtonStudents initialData={studentData} />
+                    <ViewStudentDetails studentData={studentData} />
+                    <StudentDeactiveButton studentid={studentData.id} />
                   </div>
                 </TableCell>
 
@@ -202,9 +186,6 @@ export default function FilteredTable({ achievementData }: FilteredTableProps) {
         <div>
           Showing {((currentPage - 1) * rowsPerPage) + 1} to {Math.min(currentPage * rowsPerPage, sortedData.length)} of {sortedData.length} entries
         </div>
-        <PdfButton achievements={sortedData}
-          logoPath="/logo.png" // Replace with the actual path to your logo
-        />
         <div className="flex space-x-2">
           <Button
             variant="outline"

@@ -36,7 +36,7 @@ const SidebarAdmin: React.FC<SidebarProps> = ({ userName }) => {
           <FaUserCog className={styles.icon} />
           {!isCollapsed && <span>Manage Users</span>}
         </Link>
-        <Link href="/admin/manageStudent" className={styles.navItem}>
+        <Link href="/admin/student" className={styles.navItem}>
           <FaUserGraduate className={styles.icon} />
           {!isCollapsed && <span>Manage Students</span>}
         </Link>
