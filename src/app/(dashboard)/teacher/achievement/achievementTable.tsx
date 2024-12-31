@@ -1,10 +1,10 @@
 'use client';
-import AddButton from '../buttons/addButton';
-import DeleteButton from '../buttons/deleteButton';
-import ViewButton from '../buttons/viewButton';
-import EditButton from '../buttons/editButton';
-import PdfButton from '../buttons/pdfButton';
-import ImportButton from '../buttons/importButton';
+import AddButton from '@/components/achievementPage/buttons/addButton';
+import DeleteButton from '@/components/achievementPage/buttons/deleteButton';
+import ViewButton from '@/components/achievementPage/buttons/viewButton';
+import EditButton from '@/components/achievementPage/buttons/editButton';
+import PdfButton from '@/components/achievementPage/buttons/pdfButton';
+import ImportButton from '@/components/achievementPage/buttons/importButton';
 import React, { useState } from 'react';
 import {
   Table,

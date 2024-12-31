@@ -1,6 +1,6 @@
 import React from 'react';
 import prisma from '@/lib/db';
-import Achievementtable from './components/table/achievementTable';
+import Achievementtable from './achievementTable';
 
 export default async function table() {
 
@@ -33,8 +33,8 @@ export default async function table() {
 
   return (
     <div>
-    <h1>Achievement Records</h1>
-    <Achievementtable achievementData={achievements}/>    
+      <h1>Achievement Records</h1>
+      <Achievementtable achievementData={achievements} />
     </div>
   );
 }

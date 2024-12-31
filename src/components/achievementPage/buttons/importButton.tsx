@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import * as XLSX from "xlsx";
-import styles from "../../styles/achievement.module.scss";
+import styles from "../styles/achievement.module.scss";
 
 interface AchievementData {
   Title: string;

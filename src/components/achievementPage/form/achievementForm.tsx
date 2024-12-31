@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
-import styles from "../../styles/achievement.module.scss";
-import StudentMultiSearch from "./studentMultiSearch";
-import TeacherMultiSearch from "./teacherMultiSearch";
+import styles from "../styles/achievement.module.scss";
+import StudentMultiSearch from "../search/studentMultiSearch";
+import TeacherMultiSearch from "../search/teacherMultiSearch";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 

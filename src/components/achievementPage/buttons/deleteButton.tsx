@@ -1,13 +1,13 @@
 "use client";
 import { useState } from "react";
-import styles from "../../styles/achievement.module.scss";
+import styles from "../styles/achievement.module.scss";
 import { useRouter } from "next/navigation";
 
 interface DeleteButtonProps {
   achievementId: number;
 }
 
-export default function DeleteButton({ achievementId,}: DeleteButtonProps) {
+export default function DeleteButton({ achievementId, }: DeleteButtonProps) {
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
 
@@ -49,9 +49,9 @@ export default function DeleteButton({ achievementId,}: DeleteButtonProps) {
 
             <div className={styles.actions}>
               <div className={styles.cleanFormGroup + " " + styles.actions}>
-                  <button className={styles.submitButton} onClick={handleDelete}>Yes, Delete!</button>
-                  <button className={styles.cancelButton} onClick={toggleModal}>Cancel</button>
-                </div>
+                <button className={styles.submitButton} onClick={handleDelete}>Yes, Delete!</button>
+                <button className={styles.cancelButton} onClick={toggleModal}>Cancel</button>
+              </div>
             </div>
           </div>
         </div>

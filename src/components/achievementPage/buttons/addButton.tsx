@@ -1,8 +1,7 @@
 "use client";
 import { useState } from "react";
 import AchievementForm from '../form/achievementForm';
-import styles from '../../styles/achievement.module.scss';
-
+import styles from '../styles/achievement.module.scss';
 
 export default function AddButton() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,6 +13,7 @@ export default function AddButton() {
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+
 
   return (
     <div>
