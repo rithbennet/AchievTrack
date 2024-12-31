@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import MultipleSelector, { Option } from '@/components/ui/multiple-selector';
 
 interface Student {
@@ -32,30 +32,33 @@ export default function StudentMultiSearch({ onChange, studentids }: StudentMult
   const [, setSearchTerm] = useState('');
   const [selectedStudents, setSelectedStudents] = useState<Option[]>([]);
   const [, setIsTriggered] = React.useState(false);
+  const hasFetchedStudents = useRef(false);
 
   useEffect(() => {
-    const fetchInitialStudents = async () => {
-      try {
-        const studentPromises = (studentids || []).map(id =>
-          fetch(`/api/student?ids=${id}`)
-            .then(res => res.json())
-            .then(data => data.students.map((student: Student) => ({
-              label: student.name,
-              value: student.id,
-              group: student.class
-            })))
-        );
-        const fetchedStudentsArray = await Promise.all(studentPromises);
-        const fetchedStudents: Option[] = fetchedStudentsArray.flat();
+    if (!hasFetchedStudents.current && studentids !== undefined) {
+      const fetchInitialStudents = async () => {
+        try {
+          const studentPromises = (studentids || []).map(id =>
+            fetch(`/api/student?ids=${id}`)
+              .then(res => res.json())
+              .then(data => data.students.map((student: Student) => ({
+                label: student.name,
+                value: student.id,
+                group: student.class
+              })))
+          );
+          const fetchedStudentsArray = await Promise.all(studentPromises);
+          const fetchedStudents: Option[] = fetchedStudentsArray.flat();
 
-
-        setSelectedStudents(fetchedStudents);
-      } catch (err) {
-        console.error('Error fetching initial Students:', err);
-      }
+          setSelectedStudents(fetchedStudents);
+          hasFetchedStudents.current = true; // Mark as fetched
+        } catch (err) {
+          console.error('Error fetching initial Students:', err);
+        }
+      };
+      fetchInitialStudents();
     };
-    fetchInitialStudents();
-  },);
+  }, [studentids]);
 
   useEffect(() => {
     const setStudentsIds = (selected: Option[]) => {

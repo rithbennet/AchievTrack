@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import MultipleSelector, { Option } from '@/components/ui/multiple-selector';
 
 interface Teacher {
@@ -30,29 +30,32 @@ export default function TeacherMultiSearch({ onChange, teacherids }: TeacherMult
   const [, setSearchTerm] = useState('');
   const [selectedTeachers, setSelectedTeachers] = useState<Option[]>([]);
   const [, setIsTriggered] = React.useState(false);
+  const hasFetchedTeachers = useRef(false);
 
   useEffect(() => {
-    const fetchInitialTeachers = async () => {
-      try {
-        const teacherPromises = (teacherids || []).map(id =>
-          fetch(`/api/teacher?ids=${id}`)
-            .then(res => res.json())
-            .then(data => data.teachers.map((teacher: Teacher) => ({
-              label: teacher.name,
-              value: teacher.id,
-            })))
-        );
-        const fetchedTeachersArray = await Promise.all(teacherPromises);
-        const fetchedTeachers: Option[] = fetchedTeachersArray.flat();
+    if (!hasFetchedTeachers.current && teacherids !== undefined) {
+      const fetchInitialTeachers = async () => {
+        try {
+          const teacherPromises = (teacherids || []).map(id =>
+            fetch(`/api/teacher?ids=${id}`)
+              .then(res => res.json())
+              .then(data => data.teachers.map((teacher: Teacher) => ({
+                label: teacher.name,
+                value: teacher.id,
+              })))
+          );
+          const fetchedTeachersArray = await Promise.all(teacherPromises);
+          const fetchedTeachers: Option[] = fetchedTeachersArray.flat();
 
-
-        setSelectedTeachers(fetchedTeachers);
-      } catch (err) {
-        console.error('Error fetching initial Teachers:', err);
-      }
+          setSelectedTeachers(fetchedTeachers);
+          hasFetchedTeachers.current = true; // Mark as fetched
+        } catch (err) {
+          console.error('Error fetching initial Teachers:', err);
+        }
+      };
+      fetchInitialTeachers();
     };
-    fetchInitialTeachers();
-  },);
+  }, [teacherids]);
 
   useEffect(() => {
     const setTeachersIds = (selected: Option[]) => {

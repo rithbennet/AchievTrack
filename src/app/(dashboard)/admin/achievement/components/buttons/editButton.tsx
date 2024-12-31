@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import TeacherMultiSearch from "../form/teacherMultiSearch";
 import styles from "../../styles/achievement.module.scss";
 import StudentMultiSearch from "../form/studentMultiSearch";
@@ -61,6 +61,7 @@ export default function EditButton({ achievement, students, teachers }: EditButt
   const studentIds = students.map(s => s.Student.id);
   const teacherIds = teachers.map(t => t.Teacher.id);
 
+
   // Handle input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -70,13 +71,13 @@ export default function EditButton({ achievement, students, teachers }: EditButt
     });
   };
 
-  const handleStudentChange = (students: number[]) => {
-    setEditedAchievement({ ...editedAchievement, students });
-  };
+  const handleStudentChange = useCallback((students: number[]) => {
+    setEditedAchievement((prevAchievement) => ({ ...prevAchievement, students }));
+  }, []);
 
-  const handleTeacherChange = (teachers: number[]) => {
-    setEditedAchievement({ ...editedAchievement, teachers });
-  };
+  const handleTeacherChange = useCallback((teachers: number[]) => {
+    setEditedAchievement((prevAchievement) => ({ ...prevAchievement, teachers }));
+  }, []);
 
   // Handle form submission (Saving the edited achievement)
   const handleSubmit = async (e: React.FormEvent) => {

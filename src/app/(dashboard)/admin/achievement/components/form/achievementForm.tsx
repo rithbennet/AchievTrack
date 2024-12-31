@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import styles from "../../styles/achievement.module.scss";
 import StudentMultiSearch from "./studentMultiSearch";
 import TeacherMultiSearch from "./teacherMultiSearch";
@@ -41,13 +41,13 @@ export default function AchievementForm({ onClose }: AchievementFormProps) {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleStudentChange = (students: number[]) => {
-    setFormData({ ...formData, students });
-  };
+  const handleStudentChange = useCallback((students: number[]) => {
+    setFormData((prev) => ({ ...prev, students }));
+  }, []);
 
-  const handleTeacherChange = (teachers: number[]) => {
-    setFormData({ ...formData, teachers });
-  };
+  const handleTeacherChange = useCallback((teachers: number[]) => {
+    setFormData((prev) => ({ ...prev, teachers }));
+  }, []);
 
   const handleLogInput = () => {
     console.log('Form Data:', formData);
@@ -87,6 +87,8 @@ export default function AchievementForm({ onClose }: AchievementFormProps) {
       });
       if (response.ok) {
         console.log('Achievement submitted successfully');
+        router.refresh();
+        onClose();
       } else {
         console.error('Failed to submit achievement');
       }
@@ -94,7 +96,6 @@ export default function AchievementForm({ onClose }: AchievementFormProps) {
       console.error('Error submitting achievement:', error);
     }
 
-    router.refresh();
   };
 
   return (
