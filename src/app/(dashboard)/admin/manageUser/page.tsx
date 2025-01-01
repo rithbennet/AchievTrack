@@ -1,28 +1,28 @@
-import styles from "./styles/manageUser.module.scss";
-import UserList from "./components/UserList";
-import AddButton from "./components/buttons/addButton";
-import Search from "./components/SearchBar";
+import React from 'react';
+import UserTable from './components/userTable';
+import prisma from '@/lib/db';
 
-export default async function ManageUserPage(props: {
- searchParams?: Promise< { query?: string; page?: string }>;
-}) {
-  const searchParams = await props.searchParams; // Await searchParams
-  const query = searchParams?.query || '';
-  const currentPage = Number(searchParams?.page) || 1;
-
-
+export default async function page() {
+  const users = await prisma.user.findMany(
+    {
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+        password: true,
+        is_active: true,
+        created_at: true,
+      },
+      orderBy: {
+        created_at: 'desc',
+      },
+    },
+  );
   return (
-      <div className={styles.pageContainer}>
-        <div className={styles.contentContainer}>
-          <div className={styles.manageUserPage}>
-            <h1 style={{ fontWeight: "bold" }}>User Management</h1>
-            <div className={styles.searchAndAddContainer}>
-              <Search placeholder="Search..." />
-              <AddButton />
-            </div>
-            <UserList query={query} currentPage={currentPage} />
-          </div>
-        </div>
-      </div>
+    <div>
+      <h1>Manage Users</h1>
+      <UserTable UserData={users} />
+    </div>
   );
 }

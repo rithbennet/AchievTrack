@@ -5,7 +5,7 @@ import UserForm from "../UserForm";
 import styles from '../../styles/manageUser.module.scss';
 
 interface EditButtonProps {
-  userId: string;
+  userId: number;
   initialData: {
     name: string;
     email: string;

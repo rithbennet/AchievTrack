@@ -127,7 +127,7 @@ export async function deactivateUser(userId: number) {
 
   const response = await prisma.user.update({
     where: { id: userId },
-    data: { is_active: false },
+    data: { is_active: !user.is_active },
   });
 
   return response;

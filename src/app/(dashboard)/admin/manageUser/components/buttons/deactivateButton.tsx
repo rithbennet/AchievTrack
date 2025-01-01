@@ -6,9 +6,10 @@ import { useRouter } from 'next/navigation';
 
 interface DeleteButtonProps {
   userId: number; // Ensure userId is a number
+  is_active: boolean | null;
 }
 
-export default function DeactivateButton({ userId }: DeleteButtonProps) {
+export default function DeactivateButton({ userId, is_active }: DeleteButtonProps) {
   const router = useRouter();
   const handleDeactivate = async () => {
     try {
@@ -22,8 +23,16 @@ export default function DeactivateButton({ userId }: DeleteButtonProps) {
   };
 
   return (
-    <button onClick={handleDeactivate} className={styles.deleteButton} aria-label={`Delete user ${userId}`}>
-      Deactivate
-    </button>
+    <div>
+      {is_active ? (
+        <button onClick={handleDeactivate} className={styles.deleteButton} aria-label={`Delete user ${userId}`}>
+          Deactivate
+        </button>
+      ) : (
+        <button onClick={handleDeactivate} className={styles.activateButton} aria-label={`Delete user ${userId}`}>
+          Activate
+        </button>
+      )}
+    </div>
   );
 }

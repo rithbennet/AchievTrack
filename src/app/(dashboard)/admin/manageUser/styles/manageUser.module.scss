@@ -2,7 +2,7 @@
   max-width: 100%;
   margin: 0 auto;
   padding: 20px;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   border-radius: 10px;
 }
 
@@ -102,7 +102,7 @@
 }
 
 .editButton {
-  background-color: #0095FF;
+  background-color: #0095ff;
   color: white;
 
   &:hover {
@@ -116,6 +116,22 @@
 
   &:hover {
     background-color: #bd1c2d;
+  }
+}
+
+.activateButton {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-right: 5px;
+  transition: background-color 0.3s ease;
+  background-color: #38b5c0;
+  color: white;
+
+  &:hover {
+    background-color: #0f6c70;
   }
 }
 
@@ -139,7 +155,7 @@
   }
 
   button {
-    background-color: #090C9B;
+    background-color: #090c9b;
     padding: 6px 12px;
     border: none;
     color: white;
@@ -148,7 +164,7 @@
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: #1976D2;
+      background-color: #1976d2;
     }
   }
 }
@@ -309,10 +325,3 @@
   justify-content: flex-start; /* Align buttons to the left (optional) */
   align-items: center; /* Center buttons vertically (optional) */
 }
-
-
-
-
-
-
-
