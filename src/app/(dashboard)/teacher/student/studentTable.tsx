@@ -19,6 +19,7 @@ import {
 import { Button } from "@/components/ui/button";
 import AddButtonStudents from "@/components/studentPage/buttons/AddButtonStudents";
 import { ViewStudentDetails } from '@/components/studentPage/buttons/viewStudentDetails';
+import PdfButtonStudents from '@/components/studentPage/buttons/pdfButtonStudents';
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, CircleAlert, CircleUser } from 'lucide-react';
 
 interface achievement {
@@ -121,6 +122,8 @@ export default function FilteredTable({ studentData }: FilteredTableProps) {
           className="max-w-sm"
         />
         <AddButtonStudents />
+        <PdfButtonStudents students={sortedData} logoPath="/logo.png" />
+
         <Select
           value={rowsPerPage.toString()}
           onValueChange={(value) => {
