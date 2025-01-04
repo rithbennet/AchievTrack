@@ -11,7 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { jsPDF } from "jspdf";
-import "jspdf-autotable";
+import autoTable from "jspdf-autotable";
 
 interface PdfButtonStudentsProps {
   students: {
@@ -56,7 +56,7 @@ export default function PdfButtonStudents({ students, logoPath }: PdfButtonStude
       ]);
 
       // Use jsPDF autoTable for generating the table
-      (doc as any).autoTable({
+      autoTable(doc, {
         head: headers,
         body: data,
         startY: 60, // Adjust starting position based on the logo and school name
