@@ -10,6 +10,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { Eye } from "lucide-react";
+import { exportStudentToPDF } from "./exportButton";
 
 interface Achievement {
     id: number;
@@ -35,10 +36,16 @@ interface ViewStudentDetailsProps {
 }
 
 export function ViewStudentDetails({ studentData }: ViewStudentDetailsProps) {
+    const handleExport = () => {
+        exportStudentToPDF(studentData, "/logo.png"); // Adjust the logo path if necessary
+    };
+
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button className='bg-purple-400' ><Eye color='white' /></Button>
+                <Button className="bg-purple-400">
+                    <Eye color="white" />
+                </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-md">
                 <DialogHeader>
@@ -52,17 +59,28 @@ export function ViewStudentDetails({ studentData }: ViewStudentDetailsProps) {
                     <ul>
                         {studentData.achievementstudents.map(({ achievementdata }, index) => (
                             <li key={index} className="mb-2">
-                                <h3 className="text-lg font-semibold text-gray-800">{achievementdata.title}</h3>
-                                <p className="text-sm text-gray-600"><strong>Level:</strong> {achievementdata.level}</p>
-                                <p className="text-sm text-gray-600"><strong>Category:</strong> {achievementdata.category}</p>
-                                <p className="text-sm text-gray-600">{achievementdata.description}</p>
+                                <h3 className="text-lg font-semibold text-gray-800">
+                                    {achievementdata.title}
+                                </h3>
+                                <p className="text-sm text-gray-600">
+                                    <strong>Level:</strong> {achievementdata.level}
+                                </p>
+                                <p className="text-sm text-gray-600">
+                                    <strong>Category:</strong> {achievementdata.category}
+                                </p>
+                                <p className="text-sm text-gray-600">
+                                    {achievementdata.description || "No description available."}
+                                </p>
                             </li>
                         ))}
                     </ul>
                 </div>
                 <DialogFooter className="sm:justify-start">
+                    <Button type="button" variant="secondary" onClick={handleExport}>
+                        Export to PDF
+                    </Button>
                     <DialogClose asChild>
-                        <Button type="button" variant="secondary">
+                        <Button type="button" variant="secondary" style={{ marginLeft: "10px" }}>
                             Close
                         </Button>
                     </DialogClose>
