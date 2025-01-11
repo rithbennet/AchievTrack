@@ -155,22 +155,22 @@ export default function FilteredTable({ achievementData }: FilteredTableProps) {
           <TableHeader className='bg-purple-800 ' >
             <TableRow >
 
-              <TableHead onClick={() => handleSort('title')} className="cursor-pointer text-white" >
+              <TableHead onClick={() => handleSort('title')} className="cursor-pointer text-white w-5/12 " >
                 Title {sortColumn === 'title' && (sortDirection === 'asc' ? '▲' : sortDirection === 'desc' ? '▼' : '')}
               </TableHead>
-              <TableHead onClick={() => handleSort('category')} className="cursor-pointer text-white" >
+              <TableHead onClick={() => handleSort('category')} className="cursor-pointer text-white w-2/12" >
                 Catergory {sortColumn === 'categort' && (sortDirection === 'asc' ? '▲' : sortDirection === 'desc' ? '▼' : '')}
               </TableHead>
-              <TableHead onClick={() => handleSort('level')} className="cursor-pointer text-white">
+              <TableHead onClick={() => handleSort('level')} className="cursor-pointer text-white w-2/12">
                 Level {sortColumn === 'level' && (sortDirection === 'asc' ? '▲' : sortDirection === 'desc' ? '▼' : '')}
               </TableHead>
-              <TableHead onClick={() => handleSort('date')} className="cursor-pointer text-white">
+              <TableHead onClick={() => handleSort('date')} className="cursor-pointer text-white w-2/12">
                 Date {sortColumn === 'date' && (sortDirection === 'asc' ? '▲' : sortDirection === 'desc' ? '▼' : '')}
               </TableHead>
-              <TableHead className="cursor-pointer text-white">
+              <TableHead className="cursor-pointer text-white w-1/12">
                 Actions
               </TableHead>
-              <TableHead className="cursor-pointer text-white">
+              <TableHead className="cursor-pointer text-white w-20">
                 Verified
               </TableHead>
             </TableRow>
@@ -190,7 +190,7 @@ export default function FilteredTable({ achievementData }: FilteredTableProps) {
                     <ViewButton achievement={achievementData} students={achievementData.achievementstudents} teachers={achievementData.achievementteachers} />
                   </div>
                 </TableCell>
-                <TableCell className='w-1/12'>
+                <TableCell className="flex justify-center">
                   <Verify id={achievementData.id} initialVerified={achievementData.verified} />
                 </TableCell>
               </TableRow>
