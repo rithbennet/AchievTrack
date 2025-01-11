@@ -3,6 +3,7 @@ import { createUser, updateUser } from '@/actions/manageUserAction';
 import styles from '../styles/manageUser.module.scss';
 import { FormEvent, useState, useEffect } from 'react';
 import { useRouter } from "next/navigation";
+import { Button } from '@/components/ui/button';
 
 interface UserFormProps {
   closeModal: () => void;
@@ -130,13 +131,15 @@ export default function UserForm({ closeModal, initialData }: UserFormProps) {
                 />
               </div>
             ) : (
-              <button type="button" onClick={handleEditPassword} className={"btn btn-primary"}>
+              <Button type="button" className="mt-1" onClick={handleEditPassword}>
                 Edit Password
-              </button>
+              </Button>
             )}
           </>
         )}
-        <button type="submit" className={styles.submitButton}>{initialData ? 'Save Changes' : 'Add User'}</button>
+        <div>
+          <Button type="submit" className="mt-3">{initialData ? 'Save Changes' : 'Add User'}</Button>
+        </div>
       </form>
     </div>
   );

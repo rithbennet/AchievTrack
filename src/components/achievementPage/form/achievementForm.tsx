@@ -204,7 +204,7 @@ export default function AchievementForm({ onClose }: AchievementFormProps) {
           required
         ></textarea>
       </div>
-      <div className={styles.actions}>
+      <div className="grid grid-cols-3 gap-10 justify-center p-3">
         <button type="submit" className={styles.submitButton}>
           Submit
         </button>
