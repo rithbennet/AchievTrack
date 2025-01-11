@@ -1,11 +1,13 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import styles from "../styles/achievement.module.scss";
 import StudentMultiSearch from "../search/studentMultiSearch";
 import TeacherMultiSearch from "../search/teacherMultiSearch";
 import { useRouter } from "next/navigation";
+import { getSession } from "next-auth/react";
 import Image from "next/image";
 
 interface AchievementData {
+  createdby: number;
   title: string;
   category: string;
   level: string;
@@ -21,6 +23,8 @@ interface AchievementFormProps {
 }
 
 export default function AchievementForm({ onClose }: AchievementFormProps) {
+  const [userId, setUserId] = useState<number | null>(null);
+
   const [formData, setFormData] = useState<AchievementData>({
     title: "",
     category: "",
@@ -28,11 +32,22 @@ export default function AchievementForm({ onClose }: AchievementFormProps) {
     certificate: null,
     date: "",
     description: "",
+    createdby: 0,
     students: [],
     teachers: [],
   });
 
-
+  useEffect(() => {
+    async function fetchUserId() {
+      const session = await getSession();
+      if (session && session.user) {
+        const id = Number(session.user.id); // Assuming the user ID is stored in session.user.id and converting it to a number
+        setUserId(id);
+        setFormData((prev) => ({ ...prev, createdby: id }));
+      }
+    }
+    fetchUserId();
+  }, []);
 
   const [filePreview, setFilePreview] = useState<string | null>(null); // State for the file preview
 
@@ -51,6 +66,8 @@ export default function AchievementForm({ onClose }: AchievementFormProps) {
 
   const handleLogInput = () => {
     console.log('Form Data:', formData);
+    console.log(userId);
+    console.log(userId);
   };
 
   const router = useRouter();
@@ -102,6 +119,13 @@ export default function AchievementForm({ onClose }: AchievementFormProps) {
     <form onSubmit={handleSubmit} className={styles.form}>
       <h2 style={{ fontWeight: "bold" }}>Add New Achievement</h2>
       <div className={styles.formGroup}>
+        <input
+          type="hidden"
+          id="createdBy"
+          name="createdBy"
+          value={userId || ''}
+          readOnly
+        />
         <label htmlFor="title">Title</label>
         <input
           type="text"

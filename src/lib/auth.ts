@@ -5,7 +5,6 @@ import prisma from "./db";
 import { compare } from "bcrypt";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  
   pages: {
     signIn: "/sigIn", // Ensure this path is correct
   },
@@ -16,7 +15,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
     Credentials({
       credentials: {
-        email: { label: "Email", type: "email", placeholder: "abu@example.com" },
+        email: {
+          label: "Email",
+          type: "email",
+          placeholder: "abu@example.com",
+        },
         password: { label: "Password", type: "password" },
       },
       authorize: async (credentials) => {
@@ -34,7 +37,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           return null;
         }
 
-        const passwordMatch = await compare(credentials.password as string, existingUser.password);
+        const passwordMatch = await compare(
+          credentials.password as string,
+          existingUser.password
+        );
 
         if (!passwordMatch) {
           return null;
