@@ -19,9 +19,7 @@ model User {
   Admin           Admin?
   Notification    Notification[]
   Teacher         Teacher?
-  accounts        Account[]
   achievementdata achievementdata[]
-  sessions        Session[]
 
   @@map("users")
 }
@@ -97,42 +95,4 @@ model achievementteachers {
   Teacher         Teacher         @relation(fields: [teacherid], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
   @@id([achievementid, teacherid])
-}
-
-model Account {
-  id                Int     @id @default(autoincrement())
-  userId            Int     @map("user_id")
-  type              String
-  provider          String
-  providerAccountId String  @map("provider_account_id")
-  refresh_token     String?
-  access_token      String?
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?
-  session_state     String?
-  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-  @@map("accounts")
-}
-
-model Session {
-  id           Int      @id @default(autoincrement())
-  sessionToken String   @unique @map("session_token")
-  userId       Int      @map("user_id")
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("sessions")
-}
-
-model VerificationToken {
-  identifier String
-  token      String
-  expires    DateTime
-
-  @@unique([identifier, token])
-  @@map("verification_tokens")
 }
