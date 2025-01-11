@@ -117,7 +117,7 @@ export default function AddButtonStudents({ initialData }: StudentFormProps) {
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit">Save changes</Button>
+            <Button type="submit">{initialData ? 'Save Changes' : 'Add Student'}</Button>
           </DialogFooter>
         </form>
       </DialogContent>
