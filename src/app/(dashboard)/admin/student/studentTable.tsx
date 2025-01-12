@@ -50,10 +50,11 @@ type SortDirection = 'asc' | 'desc' | null;
 
 interface FilteredTableProps {
   studentData: Student[];
+  existingMykads: string[];
 }
 
 
-export default function FilteredTable({ studentData }: FilteredTableProps) {
+export default function FilteredTable({ studentData, existingMykads }: FilteredTableProps) {
   const [filterValue, setFilterValue] = useState("");
   const [sortColumn, setSortColumn] = useState<string | null>(null);
   const [sortDirection, setSortDirection] = useState<SortDirection>(null);
@@ -129,7 +130,7 @@ export default function FilteredTable({ studentData }: FilteredTableProps) {
           onChange={(e) => setFilterValue(e.target.value)}
           className="max-w-sm"
         />
-        <AddButtonStudents />
+        <AddButtonStudents existingMyKads={existingMykads} />
         <Select
           value={rowsPerPage.toString()}
           onValueChange={(value) => {
@@ -178,7 +179,7 @@ export default function FilteredTable({ studentData }: FilteredTableProps) {
                 <TableCell>{studentData.class}</TableCell>
                 <TableCell>
                   <div className="flex space-x-2">
-                    <AddButtonStudents initialData={studentData} />
+                    <AddButtonStudents initialData={studentData} existingMyKads={existingMykads} />
                     <ViewStudentDetails studentData={studentData} />
                     <StudentDeactiveButton studentid={studentData.id} />
                   </div>
