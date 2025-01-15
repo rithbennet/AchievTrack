@@ -8,6 +8,7 @@ import Image from "next/image";
 
 interface AchievementData {
   createdby: number;
+  organizer: string;
   title: string;
   category: string;
   level: string;
@@ -27,6 +28,7 @@ export default function AchievementForm({ onClose }: AchievementFormProps) {
 
   const [formData, setFormData] = useState<AchievementData>({
     title: "",
+    organizer: "",
     category: "",
     level: "",
     certificate: null,
@@ -132,6 +134,17 @@ export default function AchievementForm({ onClose }: AchievementFormProps) {
           id="title"
           name="title"
           value={formData.title}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div className={styles.formGroup}>
+        <label htmlFor="organizer">Organizer</label>
+        <input
+          type="text"
+          id="organizer"
+          name="organizer"
+          value={formData.organizer}
           onChange={handleChange}
           required
         />

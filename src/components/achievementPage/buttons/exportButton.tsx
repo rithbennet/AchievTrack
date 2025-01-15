@@ -4,6 +4,7 @@ import "jspdf-autotable";
 
 interface Achievement {
   title: string;
+  organizer: string;
   category: string;
   level: string;
   date: Date;
@@ -58,6 +59,7 @@ export const exportAchievementToPDF = (
       head: [["Field", "Details"]],
       body: [
         ["Title", achievement.title],
+        ["Organizer", achievement.organizer],
         ["Category", achievement.category],
         ["Level", achievement.level],
         ["Date", new Date(achievement.date).toDateString()],

@@ -64,6 +64,7 @@ model Teacher {
 model achievementdata {
   id                  Int                   @id @default(autoincrement())
   title               String
+  organizer           String
   category            String
   level               String
   certificate         String[]
