@@ -5,6 +5,7 @@ import ViewButton from '@/components/achievementPage/buttons/viewButton';
 import EditButton from '@/components/achievementPage/buttons/editButton';
 import PdfButton from '@/components/achievementPage/buttons/pdfButton';
 import ImportButton from '@/components/achievementPage/buttons/importButton';
+import DownloadEmptySpreadsheet from '@/components/achievementPage/form/downloadSpreadsheet';
 import React, { useState } from 'react';
 import {
   Table,
@@ -129,6 +130,7 @@ export default function FilteredTable({ achievementData }: FilteredTableProps) {
           onChange={(e) => setFilterValue(e.target.value)}
           className="max-w-sm"
         />
+        <DownloadEmptySpreadsheet />
         <ImportButton />
         <AddButton />
         <Select

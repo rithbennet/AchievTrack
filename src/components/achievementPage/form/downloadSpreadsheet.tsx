@@ -1,24 +1,28 @@
-"use client"; // Ensures this is a Client Component
-
 import { useState } from "react";
 import * as XLSX from "xlsx";
 import styles from "../styles/achievement.module.scss";
+
+// Define the type for the template data
+interface AchievementTemplate {
+  Title: string;
+  Category: string;
+  Level: string;
+  Date: string;
+  Description: string;
+}
 
 const DownloadEmptySpreadsheet = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleDownload = () => {
-    // Define the updated column headers and sample data
-    const headers = [
+    // Define the column headers for the empty template
+    const headers: AchievementTemplate[] = [
       {
-        Title: "Achievement Title",
+        Title: "Achievement Title (e.g., Math Olympiad)",
         Category: "e.g., Academic, Sports",
         Level: "e.g., School, State, National",
-        // Certificate: "Provide file name or URL if applicable",
-        Date: "YYYY-MM-DD",
-        Description: "Brief description of the achievement",
-        // AssociatedStudents: "Comma-separated student IDs (e.g., 1,2,3)",
-        // AssociatedTeachers: "Comma-separated teacher IDs (e.g., 4,5)",
+        Date: "YYYY-MM-DD (e.g., 2023-12-31)",
+        Description: "Brief description (e.g., Won first place in competition)",
       },
     ];
 
@@ -39,26 +43,32 @@ const DownloadEmptySpreadsheet = () => {
   };
 
   const autoFitColumns = (worksheet: XLSX.WorkSheet) => {
-    const columns = Object.keys(worksheet).filter((key) => key[0] !== "!");
-    const columnWidths = columns.map((key) => {
-      const column = worksheet[key];
-      return column ? column.v.toString().length : 10;
+    const range = XLSX.utils.decode_range(worksheet["!ref"] || "");
+    const colWidths = Array.from({ length: range.e.c + 1 }).map((_, colIdx) => {
+      const columnKey = XLSX.utils.encode_col(colIdx);
+      let maxWidth = 10;
+
+      for (let rowIdx = range.s.r; rowIdx <= range.e.r; rowIdx++) {
+        const cellAddress = `${columnKey}${rowIdx + 1}`;
+        const cell = worksheet[cellAddress];
+        if (cell && cell.v) {
+          const valueLength = cell.v.toString().length;
+          maxWidth = Math.max(maxWidth, valueLength);
+        }
+      }
+
+      return maxWidth + 2; // Add padding
     });
 
-    const maxColumnWidths = columns.reduce((acc, key, index) => {
-      const col = key.replace(/[0-9]/g, "");
-      acc[col] = Math.max(acc[col] || 0, columnWidths[index]);
-      return acc;
-    }, {} as { [key: string]: number });
-
-    worksheet["!cols"] = Object.keys(maxColumnWidths).map((key) => ({
-      wch: maxColumnWidths[key] + 2,
-    }));
+    worksheet["!cols"] = colWidths.map((wch) => ({ wch }));
   };
 
   return (
     <div>
-      <button className={styles.importButton} onClick={() => setIsModalOpen(true)}>
+      <button
+        className={styles.importButton}
+        onClick={() => setIsModalOpen(true)}
+      >
         Download Template
       </button>
 
@@ -67,13 +77,20 @@ const DownloadEmptySpreadsheet = () => {
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
             <h3>Download Empty Template</h3>
             <p>
-              This template helps you add new achievements.
+              Use this template to prepare achievement data for importing. You can later edit or
+              add additional details after submission.
             </p>
             <div className={styles.actions}>
-              <button className={styles.submitButton} onClick={handleDownload}>
+              <button
+                className={styles.submitButton}
+                onClick={handleDownload}
+              >
                 Download
               </button>
-              <button className={styles.cancelButton} onClick={() => setIsModalOpen(false)}>
+              <button
+                className={styles.cancelButton}
+                onClick={() => setIsModalOpen(false)}
+              >
                 Cancel
               </button>
             </div>
