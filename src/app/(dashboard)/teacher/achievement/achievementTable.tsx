@@ -45,6 +45,7 @@ export interface Teacher {
 export interface AchievementData {
   id: number;
   title: string;
+  organizer: string;
   date: Date;
   category: string;
   level: string;
