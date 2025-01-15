@@ -32,10 +32,12 @@ export default async function student() {
     },
   });
 
+  const existingMyKads = student.map((student) => student.mykad);
+
   return (
     <div>
       <h1>Students</h1>
-      <StudentTable studentData={student} />
+      <StudentTable studentData={student} existingMykads={existingMyKads} />
     </div>
   );
 }

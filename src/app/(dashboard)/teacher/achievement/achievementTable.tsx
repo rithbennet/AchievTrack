@@ -161,16 +161,16 @@ export default function FilteredTable({ achievementData }: FilteredTableProps) {
               <TableHead onClick={() => handleSort('title')} className="cursor-pointer text-white" >
                 Title {sortColumn === 'title' && (sortDirection === 'asc' ? '▲' : sortDirection === 'desc' ? '▼' : '')}
               </TableHead>
-              <TableHead onClick={() => handleSort('category')} className="cursor-pointer text-white" >
+              <TableHead onClick={() => handleSort('category')} className="cursor-pointer text-white w-2/12" >
                 Catergory {sortColumn === 'categort' && (sortDirection === 'asc' ? '▲' : sortDirection === 'desc' ? '▼' : '')}
               </TableHead>
-              <TableHead onClick={() => handleSort('level')} className="cursor-pointer text-white">
+              <TableHead onClick={() => handleSort('level')} className="cursor-pointer text-white w-2/12">
                 Level {sortColumn === 'level' && (sortDirection === 'asc' ? '▲' : sortDirection === 'desc' ? '▼' : '')}
               </TableHead>
-              <TableHead onClick={() => handleSort('date')} className="cursor-pointer text-white">
+              <TableHead onClick={() => handleSort('date')} className="cursor-pointer text-white w-2/12">
                 Date {sortColumn === 'date' && (sortDirection === 'asc' ? '▲' : sortDirection === 'desc' ? '▼' : '')}
               </TableHead>
-              <TableHead className="cursor-pointer text-white">
+              <TableHead className="cursor-pointer text-white w-2/12">
                 Actions
               </TableHead>
 

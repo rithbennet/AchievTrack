@@ -518,6 +518,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
                   'ml-1': selected.length !== 0,
                 },
                 inputProps?.className,
+                'text-black' // Add this line to set the text color to black
               )}
             />
             <button

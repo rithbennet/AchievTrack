@@ -76,7 +76,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  background-color: #FF8900;
+  background-color: #ff8900;
   color: white;
   border: none;
   border-radius: 5px;
@@ -148,7 +148,7 @@
 
 /* View Button */
 .viewButton {
-  background-color: #4CBD00;
+  background-color: #4cbd00;
   color: white;
 }
 
@@ -176,7 +176,6 @@
   background-color: #bd1c2d;
 }
 
-
 /* Modal Styles */
 .modalOverlay {
   position: fixed;
@@ -201,7 +200,6 @@
   overflow-y: auto; /* Enable vertical scrolling for overflowing content */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
-
 
 /* Pagination */
 .pagination {
@@ -307,9 +305,7 @@
 
 .form input:focus,
 .form textarea:focus {
-  border-color: #623988;
-  background-color: black; /* Maintain black background */
-  color: white; /* Maintain white text */
+  border-color: #623988; /* Maintain white text */
 }
 
 /* Textarea Specific */
@@ -381,8 +377,6 @@
   max-height: 200px;
   border-radius: 5px;
 }
-
-
 
 .fileDropArea {
   border: 2px dashed #ccc;
@@ -486,8 +480,8 @@
   border-radius: 5px;
   outline: none;
   transition: border-color 0.3s ease;
-  background-color: black; /* Set the background to black */
-  color: white; /* Ensure text is visible */
+  background-color: white; /* Set the background to black */
+  color: black; /* Ensure text is visible */
 }
 
 .cleanFormGroup input[type="file"] {
@@ -505,8 +499,8 @@
 .cleanFormGroup select:focus,
 .cleanFormGroup textarea:focus {
   border-color: #623988;
-  background-color: black; /* Maintain black background */
-  color: white; /* Maintain white text */
+  background-color: white; /* Maintain black background */
+  color: black; /* Maintain white text */
 }
 
 /* Textarea Specific */
@@ -548,7 +542,3 @@
 .cleanFormGroup .actions .cancelButton:hover {
   background-color: #e53935;
 }
-
-
-
-

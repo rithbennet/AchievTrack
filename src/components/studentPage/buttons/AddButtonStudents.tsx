@@ -6,7 +6,6 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -24,9 +23,11 @@ interface StudentFormProps {
     mykad: string;
     class: string;
   };
+
+  existingMyKads: string[]
 }
 
-export default function AddButtonStudents({ initialData }: StudentFormProps) {
+export default function AddButtonStudents({ initialData, existingMyKads }: StudentFormProps) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [student, setStudent] = useState({
@@ -35,6 +36,7 @@ export default function AddButtonStudents({ initialData }: StudentFormProps) {
     class: '',
   });
 
+  const [error, setError] = useState<string | null>(null); // State for error message
 
   useEffect(() => {
     if (initialData) {
@@ -48,17 +50,25 @@ export default function AddButtonStudents({ initialData }: StudentFormProps) {
   };
 
   async function handleSubmit(event: React.FormEvent) {
+
     event.preventDefault();
-    if (initialData && typeof initialData.id === 'number') {
-      await updateStudent(initialData.id, new FormData(event.target as HTMLFormElement));
-    } else {
-      await createStudent(new FormData(event.target as HTMLFormElement));
+    if (existingMyKads.includes(student.mykad)) {
+      setError('MyKad is the same, invalid cannot be same');
+      return;
     }
+    setError(null);
+    const formData = new FormData(event.target as HTMLFormElement);
+    if (initialData && typeof initialData.id === 'number') {
+      await updateStudent(initialData.id, formData);
+    } else {
+      await createStudent(formData);
+    } // Create or update student
     console.log('Submitted:', { student });
     // Reset form and close dialog
     setOpen(false);
     router.refresh();
   }
+
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -116,9 +126,10 @@ export default function AddButtonStudents({ initialData }: StudentFormProps) {
               />
             </div>
           </div>
-          <DialogFooter>
-            <Button type="submit">Save changes</Button>
-          </DialogFooter>
+          {error && <p className="text-red-500 text-sm">{error}</p>} {/* Display error message */}
+          <div className="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
+            <Button type="submit">{initialData ? 'Save Changes' : 'Add Student'}</Button>
+          </div>
         </form>
       </DialogContent>
     </Dialog>

@@ -105,7 +105,7 @@ export default function FilteredTable({ UserData }: FilteredTableProps) {
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <Input
-          placeholder="Seach an student..."
+          placeholder="Seach a user..."
           value={filterValue}
           onChange={(e) => setFilterValue(e.target.value)}
           className="max-w-sm"
@@ -145,7 +145,7 @@ export default function FilteredTable({ UserData }: FilteredTableProps) {
               <TableHead onClick={() => handleSort('role')} className="cursor-pointer text-white w-2/12">
                 Role {sortColumn === 'role' && (sortDirection === 'asc' ? '▲' : sortDirection === 'desc' ? '▼' : '')}
               </TableHead>
-              <TableHead className="cursor-pointer text-white w-2/12">
+              <TableHead className="cursor-pointer text-white w-2/12 ">
                 Actions
               </TableHead>
             </TableRow>
@@ -158,7 +158,7 @@ export default function FilteredTable({ UserData }: FilteredTableProps) {
                 <TableCell>{UserData.email}</TableCell>
                 <TableCell>{UserData.role}</TableCell>
                 <TableCell>
-                  <div className="flex space-x-2">
+                  <div className="flex">
                     <EditButton initialData={UserData} userId={UserData.id} />
                     <DeactivateButton userId={UserData.id} is_active={UserData.is_active} />
                   </div>

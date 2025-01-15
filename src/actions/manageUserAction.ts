@@ -71,6 +71,21 @@ export async function createUser(formData: FormData) {
     },
   });
 
+  // Populate the admin or teacher table based on the role
+  if (validatedUserData.role === "Teacher") {
+    await prisma.teacher.create({
+      data: {
+        id: user.id,
+      },
+    });
+  } else if (validatedUserData.role === "Admin") {
+    await prisma.admin.create({
+      data: {
+        id: user.id,
+      },
+    });
+  }
+
   return user;
 }
 

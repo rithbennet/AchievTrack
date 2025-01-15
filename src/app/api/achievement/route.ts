@@ -2,8 +2,16 @@ import prisma from "@/lib/db";
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
-  const { title, category, level, date, description, students, teachers } =
-    await req.json();
+  const {
+    title,
+    category,
+    level,
+    date,
+    description,
+    createdby,
+    students,
+    teachers,
+  } = await req.json();
 
   try {
     const achievement = await prisma.achievementdata.create({
@@ -13,6 +21,7 @@ export async function POST(req: NextRequest) {
         level,
         date: new Date(date),
         description,
+        createdby,
         achievementstudents: {
           create: students.map((studentId: number) => ({
             studentid: studentId,

@@ -31,20 +31,6 @@
   align-items: center;
 }
 
-.searchInput {
-  padding: 6px 10px;
-  font-size: 0.9rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-right: 10px;
-  outline: none;
-  transition: border-color 0.2s ease;
-}
-
-.searchInput:focus {
-  border-color: #007bff;
-}
-
 .addButton {
   padding: 6px 12px;
   background-color: #623988;
@@ -62,32 +48,6 @@
 
 .userListSection {
   margin-top: 20px;
-}
-
-.userTable {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  overflow: hidden;
-
-  th,
-  td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-
-  th {
-    background-color: #623988;
-    color: white;
-    font-size: 1.1rem;
-  }
-
-  td {
-    font-size: 0.9rem;
-    color: #555;
-  }
 }
 
 .editButton,
@@ -260,6 +220,7 @@
   border-radius: 4px;
   font-size: 1rem;
   outline: none;
+  background-color: white;
 }
 
 .inputField:focus {

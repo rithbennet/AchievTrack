@@ -50,10 +50,11 @@ type SortDirection = 'asc' | 'desc' | null;
 
 interface FilteredTableProps {
   studentData: Student[];
+  existingMykads: string[];
 }
 
 
-export default function FilteredTable({ studentData }: FilteredTableProps) {
+export default function FilteredTable({ studentData, existingMykads }: FilteredTableProps) {
   const [filterValue, setFilterValue] = useState("");
   const [sortColumn, setSortColumn] = useState<string | null>(null);
   const [sortDirection, setSortDirection] = useState<SortDirection>(null);
@@ -68,8 +69,16 @@ export default function FilteredTable({ studentData }: FilteredTableProps) {
 
   // Sort function
   const sortedData = [...filteredData].sort((a, b) => {
-    if (a.is_active && !b.is_active) return -1;
-    if (!a.is_active && b.is_active) return 1;
+    if (sortColumn === 'is_active') {
+      if (sortDirection === 'asc') {
+        return Number(a.is_active) - Number(b.is_active);
+      } else if (sortDirection === 'desc') {
+        return Number(b.is_active) - Number(a.is_active);
+      }
+    }
+
+    if (a.is_active === true && b.is_active !== true) return -1;
+    if (a.is_active !== true && b.is_active === true) return 1;
 
     if (sortColumn) {
       const aValue = a[sortColumn as keyof typeof a];
@@ -121,7 +130,7 @@ export default function FilteredTable({ studentData }: FilteredTableProps) {
           onChange={(e) => setFilterValue(e.target.value)}
           className="max-w-sm"
         />
-        <AddButtonStudents />
+        <AddButtonStudents existingMyKads={existingMykads} />
         <Select
           value={rowsPerPage.toString()}
           onValueChange={(value) => {
@@ -144,19 +153,19 @@ export default function FilteredTable({ studentData }: FilteredTableProps) {
         <Table>
           <TableHeader className='bg-purple-800 ' >
             <TableRow >
-              <TableHead className="cursor-pointer text-white">
-
+              <TableHead onClick={() => handleSort('is_active')} className="cursor-pointer text-white">
+                {sortColumn === 'is_active' && (sortDirection === 'asc' ? '▲' : sortDirection === 'desc' ? '▼' : '')}
               </TableHead>
               <TableHead onClick={() => handleSort('name')} className="cursor-pointer text-white" >
                 Name {sortColumn === 'name' && (sortDirection === 'asc' ? '▲' : sortDirection === 'desc' ? '▼' : '')}
               </TableHead>
-              <TableHead onClick={() => handleSort('mykad')} className="cursor-pointer text-white" >
+              <TableHead onClick={() => handleSort('mykad')} className="cursor-pointer text-white w-2/12" >
                 MyKad {sortColumn === 'mykad' && (sortDirection === 'asc' ? '▲' : sortDirection === 'desc' ? '▼' : '')}
               </TableHead>
-              <TableHead onClick={() => handleSort('class')} className="cursor-pointer text-white">
+              <TableHead onClick={() => handleSort('class')} className="cursor-pointer text-white w-2/12">
                 Class {sortColumn === 'class' && (sortDirection === 'asc' ? '▲' : sortDirection === 'desc' ? '▼' : '')}
               </TableHead>
-              <TableHead className="cursor-pointer text-white">
+              <TableHead className="cursor-pointer text-white w-2/12">
                 Actions
               </TableHead>
             </TableRow>
@@ -168,9 +177,9 @@ export default function FilteredTable({ studentData }: FilteredTableProps) {
                 <TableCell>{studentData.name}</TableCell>
                 <TableCell>{studentData.mykad}</TableCell>
                 <TableCell>{studentData.class}</TableCell>
-                <TableCell className='flex justify-end space-x-2'>
+                <TableCell>
                   <div className="flex space-x-2">
-                    <AddButtonStudents initialData={studentData} />
+                    <AddButtonStudents initialData={studentData} existingMyKads={existingMykads} />
                     <ViewStudentDetails studentData={studentData} />
                     <StudentDeactiveButton studentid={studentData.id} />
                   </div>
