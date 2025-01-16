@@ -4,6 +4,7 @@ import { NextRequest } from "next/server";
 export async function POST(req: NextRequest) {
   const {
     title,
+    organizer,
     category,
     level,
     date,
@@ -17,6 +18,7 @@ export async function POST(req: NextRequest) {
     const achievement = await prisma.achievementdata.create({
       data: {
         title,
+        organizer,
         category,
         level,
         date: new Date(date),
@@ -58,8 +60,17 @@ export async function DELETE(req: NextRequest) {
 }
 
 export async function PUT(req: NextRequest) {
-  const { id, title, category, level, date, description, students, teachers } =
-    await req.json();
+  const {
+    id,
+    title,
+    organizer,
+    category,
+    level,
+    date,
+    description,
+    students,
+    teachers,
+  } = await req.json();
 
   try {
     const achievement = await prisma.achievementdata.update({
@@ -69,6 +80,7 @@ export async function PUT(req: NextRequest) {
       data: {
         title,
         category,
+        organizer,
         level,
         date: new Date(date),
         description,
