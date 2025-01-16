@@ -10,6 +10,8 @@ interface AchievementData {
   Level: string;
   Date: string; // Ensure dates are in YYYY-MM-DD format
   Description: string;
+  students?: number[];  // Optional array of student IDs
+  teachers?: number[];  // Optional array of teacher IDs
 }
 
 const ImportButton: React.FC = () => {
@@ -54,8 +56,19 @@ const ImportButton: React.FC = () => {
       const sheet = workbook.Sheets[sheetName];
       const jsonData: AchievementData[] = XLSX.utils.sheet_to_json(sheet);
 
-      setImportedData(jsonData);
-      console.log("Imported data:", jsonData);
+      // Map the data to include students and teachers if available
+      const formattedData = jsonData.map((row) => ({
+        Title: row.Title,
+        Category: row.Category,
+        Level: row.Level,
+        Date: new Date(row.Date).toISOString().split("T")[0], // Convert date to YYYY-MM-DD format
+        Description: row.Description,
+        students: row.students || [],  // Default to empty array if no students
+        teachers: row.teachers || [],  // Default to empty array if no teachers
+      }));
+
+      setImportedData(formattedData);
+      console.log("Imported data:", formattedData);
     };
 
     reader.readAsBinaryString(file);
@@ -80,14 +93,32 @@ const ImportButton: React.FC = () => {
     setImportedData(null);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (importedData) {
-      // Process the imported data
-      console.log("Submitting imported data:", importedData);
-      // Submit to the server or use as needed
+      try {
+        console.log("Submitting data:", importedData); // Log the data being submitted
+  
+        const response = await fetch('/api/uploadExcel', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(importedData),
+        });
+  
+        if (response.ok) {
+          console.log("Data submitted successfully");
+        } else {
+          const errorText = await response.text();
+          console.error("Failed to submit data:", errorText); // Log the error message
+        }
+      } catch (error) {
+        console.error("Error submitting data:", error); // Log the error object
+      }
     }
     handleCloseModal();
   };
+  
 
   // Trigger click on file input when the button is clicked
   const handleChooseFileClick = () => {

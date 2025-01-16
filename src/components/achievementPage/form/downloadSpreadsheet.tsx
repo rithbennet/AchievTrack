@@ -1,3 +1,5 @@
+"use client"; // Ensures this is client-side only
+
 import { useState } from "react";
 import * as XLSX from "xlsx";
 import styles from "../styles/achievement.module.scss";
@@ -9,6 +11,8 @@ interface AchievementTemplate {
   Level: string;
   Date: string;
   Description: string;
+  Students: string;  // List of student IDs or names, separated by commas
+  Teachers: string;  // List of teacher IDs or names, separated by commas
 }
 
 const DownloadEmptySpreadsheet = () => {
@@ -23,6 +27,8 @@ const DownloadEmptySpreadsheet = () => {
         Level: "e.g., School, State, National",
         Date: "YYYY-MM-DD (e.g., 2023-12-31)",
         Description: "Brief description (e.g., Won first place in competition)",
+        Students: "Comma-separated list of student IDs or names (e.g., 101, 102)",
+        Teachers: "Comma-separated list of teacher IDs or names (e.g., T1, T2)",
       },
     ];
 
@@ -60,7 +66,7 @@ const DownloadEmptySpreadsheet = () => {
       return maxWidth + 2; // Add padding
     });
 
-    worksheet["!cols"] = colWidths.map((wch) => ({ wch }));
+    worksheet["!cols"] = colWidths.map((wch) => ({ wch })); // Adjust column widths
   };
 
   return (
