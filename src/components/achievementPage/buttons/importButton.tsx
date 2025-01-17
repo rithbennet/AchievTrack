@@ -5,13 +5,11 @@ import * as XLSX from "xlsx";
 import styles from "../styles/achievement.module.scss";
 
 interface AchievementData {
-  Title: string;
-  Category: string;
-  Level: string;
-  Date: string; // Ensure dates are in YYYY-MM-DD format
-  Description: string;
-  students?: number[];  // Optional array of student IDs
-  teachers?: number[];  // Optional array of teacher IDs
+  title: string;
+  category: string;
+  level: string;
+  date: string; // Ensure dates are in YYYY-MM-DD format
+  description: string;
 }
 
 const ImportButton: React.FC = () => {
@@ -56,16 +54,20 @@ const ImportButton: React.FC = () => {
       const sheet = workbook.Sheets[sheetName];
       const jsonData: AchievementData[] = XLSX.utils.sheet_to_json(sheet);
 
-      // Map the data to include students and teachers if available
-      const formattedData = jsonData.map((row) => ({
-        Title: row.Title,
-        Category: row.Category,
-        Level: row.Level,
-        Date: new Date(row.Date).toISOString().split("T")[0], // Convert date to YYYY-MM-DD format
-        Description: row.Description,
-        students: row.students || [],  // Default to empty array if no students
-        teachers: row.teachers || [],  // Default to empty array if no teachers
-      }));
+      // Map the data and validate the date
+      const formattedData = jsonData.map((row) => {
+        // Validate the date and ensure it's in a valid format
+        const date = new Date(row.date);
+        const isValidDate = !isNaN(date.getTime());
+
+        return {
+          title: row.title,
+          category: row.category,
+          level: row.level,
+          date: isValidDate ? date.toISOString().split("T")[0] : "Invalid Date", // Handle invalid date
+          description: row.description,
+        };
+      });
 
       setImportedData(formattedData);
       console.log("Imported data:", formattedData);
@@ -118,7 +120,6 @@ const ImportButton: React.FC = () => {
     }
     handleCloseModal();
   };
-  
 
   // Trigger click on file input when the button is clicked
   const handleChooseFileClick = () => {

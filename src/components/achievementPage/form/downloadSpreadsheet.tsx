@@ -1,6 +1,6 @@
 "use client"; // Ensures this is client-side only
 
-import { useState } from "react";
+import React, { useState } from "react";
 import * as XLSX from "xlsx";
 import styles from "../styles/achievement.module.scss";
 
@@ -11,11 +11,9 @@ interface AchievementTemplate {
   Level: string;
   Date: string;
   Description: string;
-  Students: string;  // List of student IDs or names, separated by commas
-  Teachers: string;  // List of teacher IDs or names, separated by commas
 }
 
-const DownloadEmptySpreadsheet = () => {
+const DownloadEmptySpreadsheet: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleDownload = () => {
@@ -27,8 +25,6 @@ const DownloadEmptySpreadsheet = () => {
         Level: "e.g., School, State, National",
         Date: "YYYY-MM-DD (e.g., 2023-12-31)",
         Description: "Brief description (e.g., Won first place in competition)",
-        Students: "Comma-separated list of student IDs or names (e.g., 101, 102)",
-        Teachers: "Comma-separated list of teacher IDs or names (e.g., T1, T2)",
       },
     ];
 
@@ -69,22 +65,27 @@ const DownloadEmptySpreadsheet = () => {
     worksheet["!cols"] = colWidths.map((wch) => ({ wch })); // Adjust column widths
   };
 
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div>
-      <button
-        className={styles.importButton}
-        onClick={() => setIsModalOpen(true)}
-      >
+      <button className={styles.importButton} onClick={handleOpenModal}>
         Download Template
       </button>
 
       {isModalOpen && (
         <div className={styles.modalOverlay}>
-          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-            <h3>Download Empty Template</h3>
+          <div className={styles.modalContent}>
+            <h3>Download Achievement Template</h3>
             <p>
-              Use this template to prepare achievement data for importing. You can later edit or
-              add additional details after submission.
+              Use this template to prepare achievement data for importing. Fill in the required
+              fields and ensure all dates are in the correct format.
             </p>
             <div className={styles.actions}>
               <button
@@ -95,7 +96,7 @@ const DownloadEmptySpreadsheet = () => {
               </button>
               <button
                 className={styles.cancelButton}
-                onClick={() => setIsModalOpen(false)}
+                onClick={handleCloseModal}
               >
                 Cancel
               </button>
