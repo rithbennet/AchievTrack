@@ -33,6 +33,7 @@ interface AchievementTeacher {
 interface Achievement {
   id: number;
   title: string;
+  organizer: string;
   category: string;
   level: string;
   certificate: string[];
@@ -125,6 +126,17 @@ export default function EditButton({ achievement, students, teachers }: EditButt
                   name="title"
                   value={editedAchievement.title}
                   onChange={handleInputChange}
+                />
+              </div>
+              <div className={styles.cleanFormGroup}>
+                <label htmlFor="organizer">Organizer</label>
+                <input
+                  type="text"
+                  id="organizer"
+                  name="organizer"
+                  value={editedAchievement.organizer}
+                  onChange={handleInputChange}
+                  required
                 />
               </div>
 

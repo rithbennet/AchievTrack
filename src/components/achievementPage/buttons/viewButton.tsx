@@ -31,6 +31,7 @@ interface AchievementTeacher {
 interface Achievement {
   id: number;
   title: string;
+  organizer: string;
   category: string;
   level: string;
   certificate: string[];
@@ -65,6 +66,9 @@ export default function ViewButton({ achievement, students, teachers }: ViewButt
             <h2>Achievement Details</h2>
             <p>
               <strong>Title:</strong> {achievement.title}
+            </p>
+            <p>
+              <strong>Organizer:</strong> {achievement.organizer}
             </p>
             <p>
               <strong>Category:</strong> {achievement.category}
