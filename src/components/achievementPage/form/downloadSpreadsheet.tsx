@@ -1,3 +1,6 @@
+// 
+
+
 "use client"; // Ensures this is client-side only
 
 import React, { useState } from "react";
@@ -7,6 +10,7 @@ import styles from "../styles/achievement.module.scss";
 // Define the type for the template data
 interface AchievementTemplate {
   Title: string;
+  Organizer: string;
   Category: string;
   Level: string;
   Date: string;
@@ -21,6 +25,7 @@ const DownloadEmptySpreadsheet: React.FC = () => {
     const headers: AchievementTemplate[] = [
       {
         Title: "Achievement Title (e.g., Math Olympiad)",
+        Organizer: "e.g., School Name, Organization Name",
         Category: "e.g., Academic, Sports",
         Level: "e.g., School, State, National",
         Date: "YYYY-MM-DD (e.g., 2023-12-31)",
