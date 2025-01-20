@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ userName, userRole }) => {
       </div>
       <div className={styles.userSection}>
         <div className={styles.notificationButton}>
-          {userRole === "admin" ? <NotificationBell /> : <TeacherNotificationBell />}
+          {userRole === "Admin" ? <NotificationBell /> : <TeacherNotificationBell />}
         </div>
         <div className={styles.userInfo}>
           <span className={styles.userName}>{userName}</span>
