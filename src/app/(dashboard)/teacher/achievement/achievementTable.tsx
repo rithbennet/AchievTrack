@@ -5,6 +5,8 @@ import ViewButton from '@/components/achievementPage/buttons/viewButton';
 import EditButton from '@/components/achievementPage/buttons/editButton';
 import PdfButton from '@/components/achievementPage/buttons/pdfButton';
 import ImportButton from '@/components/achievementPage/buttons/importButton';
+import DownloadEmptySpreadsheet from '@/components/achievementPage/form/downloadSpreadsheet';
+import ExcelButton from '@/components/achievementPage/buttons/excelButton';
 import React, { useState } from 'react';
 import {
   Table,
@@ -130,6 +132,7 @@ export default function FilteredTable({ achievementData }: FilteredTableProps) {
           onChange={(e) => setFilterValue(e.target.value)}
           className="max-w-sm"
         />
+        <DownloadEmptySpreadsheet />
         <ImportButton />
         <AddButton />
         <Select
@@ -206,6 +209,7 @@ export default function FilteredTable({ achievementData }: FilteredTableProps) {
         <PdfButton achievements={sortedData}
           logoPath="/logo.png" // Replace with the actual path to your logo
         />
+        <ExcelButton achievements={sortedData} />
         <div className="flex space-x-2">
           <Button
             variant="outline"
