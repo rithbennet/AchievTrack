@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2Icon, XCircleIcon } from 'lucide-react';
+import { getSession } from 'next-auth/react';
 
 interface VerifyProps {
   id: number;
@@ -19,10 +20,19 @@ interface VerifyProps {
 
 const Verify: React.FC<VerifyProps> = ({ id, initialVerified }) => {
   const [verified, setVerified] = useState(initialVerified);
+  const [verifier, setVerifier] = useState<number | undefined>(undefined);
   const [open, setOpen] = useState(false);
   const handleDialogOpen = () => {
     setOpen(true);
   };
+
+  useEffect(() => {
+    const fetchSession = async () => {
+      const session = await getSession();
+      setVerifier(Number(session?.user?.id));
+    };
+    fetchSession();
+  }, []);
 
   const handleVerify = async () => {
     try {
@@ -31,7 +41,7 @@ const Verify: React.FC<VerifyProps> = ({ id, initialVerified }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id: id, verify: !verified }),
+        body: JSON.stringify({ id: id, verify: !verified, verifier: verifier }),
       });
       setOpen(false);
       if (response.ok) {
