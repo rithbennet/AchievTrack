@@ -36,6 +36,15 @@ export async function POST(req: NextRequest) {
         },
       },
     });
+
+    await prisma.notification.create({
+      data: {
+        type: "VerifyRequest",
+        from: createdby,
+        created_at: new Date(),
+      },
+    });
+
     return new Response(JSON.stringify(achievement), { status: 201 });
   } catch (error) {
     console.error("Error creating achievement:", error);
@@ -96,8 +105,37 @@ export async function PUT(req: NextRequest) {
             teacherid: teacherId,
           })),
         },
+        verified: false,
       },
     });
+
+    const editcreatedby = await prisma.achievementdata.findUnique({
+      where: {
+        id: Number(id),
+      },
+      select: {
+        createdby: true,
+      },
+    });
+
+    if (!editcreatedby) {
+      throw new Error("Achievement data not found");
+    }
+
+    const createdBy = editcreatedby.createdby;
+
+    if (createdBy === null) {
+      throw new Error("CreatedBy is null");
+    }
+
+    await prisma.notification.create({
+      data: {
+        type: "EditedVerifyRequest",
+        from: createdBy, // Use the extracted createdBy variable
+        created_at: new Date(),
+      },
+    });
+
     return new Response(JSON.stringify(achievement), { status: 200 });
   } catch (error) {
     console.error("Error updating achievement:", error);

@@ -30,16 +30,14 @@ model Admin {
 }
 
 model Notification {
-  id              BigInt          @id(map: "notification_pkey") @default(autoincrement())
-  message         String
-  date            DateTime        @default(now()) @db.Timestamp(6)
-  recipientid     Int
-  achievementid   Int
-  acknowledged    Boolean?        @default(false)
-  achievementdata achievementdata @relation(fields: [achievementid], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "notification_achievementid_fkey")
-  User            User            @relation(fields: [recipientid], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "notification_recipientid_fkey")
+  id           Int      @id(map: "notification_pkey") @default(autoincrement())
+  created_at   DateTime @db.Timestamptz(6)
+  recipientid  Int?
+  acknowledged Boolean? @default(false)
+  type         String
+  from         Int
+  users        User     @relation(fields: [from], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
-  @@index([achievementid])
   @@index([recipientid])
 }
 
@@ -64,7 +62,6 @@ model Teacher {
 model achievementdata {
   id                  Int                   @id @default(autoincrement())
   title               String
-  organizer           String
   category            String
   level               String
   certificate         String[]
@@ -74,7 +71,7 @@ model achievementdata {
   verified            Boolean?              @default(false)
   created_at          DateTime?             @default(now()) @db.Timestamptz(6)
   updated_at          DateTime?             @default(now()) @db.Timestamptz(6)
-  Notification        Notification[]
+  organizer           String
   User                User?                 @relation(fields: [createdby], references: [id], onUpdate: NoAction)
   achievementstudents achievementstudents[]
   achievementteachers achievementteachers[]

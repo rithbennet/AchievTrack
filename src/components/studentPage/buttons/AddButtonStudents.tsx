@@ -77,7 +77,7 @@ export default function AddButtonStudents({ initialData, existingMyKads }: Stude
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>{initialData ? 'Edit Student' : 'Add New Student'}t</DialogTitle>
+          <DialogTitle>{initialData ? 'Edit Student' : 'Add New Student'}</DialogTitle>
           <DialogDescription>
             {initialData ? 'Edit the student\'s details below.' : 'Enter the student\'s details below.'}
           </DialogDescription>

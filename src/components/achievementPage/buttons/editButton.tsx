@@ -168,7 +168,7 @@ export default function EditButton({ achievement, students, teachers }: EditButt
                   type="date"
                   id="date"
                   name="date"
-                  value={editedAchievement.date.toISOString().split("T")[0]}
+                  value={new Date(editedAchievement.date).toISOString().split("T")[0]}
                   onChange={handleInputChange}
                 />
               </div>

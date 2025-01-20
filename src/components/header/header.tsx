@@ -2,6 +2,8 @@
 import React from 'react';
 import Image from 'next/image';
 import styles from './header.module.scss';
+import { NotificationBell } from '../notifications/NotificationBell';
+import { TeacherNotificationBell } from '../notificationsTeacher/TeacherNotificationBell';
 
 interface HeaderProps {
   userName: string;
@@ -18,13 +20,13 @@ const Header: React.FC<HeaderProps> = ({ userName, userRole }) => {
         <h1>Sek. Keb Saujana Utama</h1>
       </div>
       <div className={styles.userSection}>
-        <button className={styles.notificationButton}>
-          <Image src="/notification.png" alt="Notifications" width={24} height={24} />
-        </button>
+        <div className={styles.notificationButton}>
+          {userRole === "admin" ? <NotificationBell /> : <TeacherNotificationBell />}
+        </div>
         <div className={styles.userInfo}>
           <span className={styles.userName}>{userName}</span>
           <span className={styles.userRole}>{userRole}</span>
-          
+
         </div>
       </div>
     </header>

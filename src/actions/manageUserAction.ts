@@ -76,6 +76,7 @@ export async function createUser(formData: FormData) {
     await prisma.teacher.create({
       data: {
         id: user.id,
+        specialization: "teacher",
       },
     });
   } else if (validatedUserData.role === "Admin") {
