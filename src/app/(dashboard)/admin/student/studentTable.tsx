@@ -126,7 +126,7 @@ export default function FilteredTable({ studentData, existingMykads }: FilteredT
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <Input
-          placeholder="Seach a student..."
+          placeholder="Search a student..."
           value={filterValue}
           onChange={(e) => setFilterValue(e.target.value)}
           className="max-w-sm"
