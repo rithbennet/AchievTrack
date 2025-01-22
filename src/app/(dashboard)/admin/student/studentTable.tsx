@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import AddButtonStudents from "@/components/studentPage/buttons/AddButtonStudents";
 import { ViewStudentDetails } from '@/components/studentPage/buttons/viewStudentDetails';
 import { StudentDeactiveButton } from '@/components/studentPage/buttons/DeactivateStudent';
+import PdfButtonStudents from '@/components/studentPage/buttons/pdfButtonStudents';
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, CircleAlert, CircleUser } from 'lucide-react';
 
 interface achievement {
@@ -125,11 +126,12 @@ export default function FilteredTable({ studentData, existingMykads }: FilteredT
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <Input
-          placeholder="Seach an student..."
+          placeholder="Search a student..."
           value={filterValue}
           onChange={(e) => setFilterValue(e.target.value)}
           className="max-w-sm"
         />
+        <PdfButtonStudents students={sortedData} logoPath="/logo.png" />
         <AddButtonStudents existingMyKads={existingMykads} />
         <Select
           value={rowsPerPage.toString()}
