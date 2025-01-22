@@ -105,7 +105,7 @@ export default function FilteredTable({ UserData }: FilteredTableProps) {
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <Input
-          placeholder="Seach a user..."
+          placeholder="Search a user..."
           value={filterValue}
           onChange={(e) => setFilterValue(e.target.value)}
           className="max-w-sm"

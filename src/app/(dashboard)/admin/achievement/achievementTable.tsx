@@ -7,6 +7,7 @@ import PdfButton from '@/components/achievementPage/buttons/pdfButton';
 import ImportButton from '@/components/achievementPage/buttons/importButton';
 import Verify from '@/components/achievementPage/buttons/verify';
 import ExcelButton from '@/components/achievementPage/buttons/excelButton';
+import DownloadEmptySpreadsheet from '@/components/achievementPage/form/downloadSpreadsheet';
 import React, { useState } from 'react';
 import {
   Table,
@@ -127,11 +128,12 @@ export default function FilteredTable({ achievementData }: FilteredTableProps) {
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <Input
-          placeholder="Seach an achievement..."
+          placeholder="Search an achievement..."
           value={filterValue}
           onChange={(e) => setFilterValue(e.target.value)}
           className="max-w-sm"
         />
+        <DownloadEmptySpreadsheet />
         <ImportButton />
         <AddButton />
         <Select

@@ -49,7 +49,7 @@ const ExcelButton = ({ achievements }: ExcelButtonProps) => {
       onClick={handleExport}
       style={{
         padding: "10px",
-        backgroundColor: "#3b8b2e",
+        backgroundColor: "#623988",
         color: "white",
         border: "none",
         borderRadius: "5px",
