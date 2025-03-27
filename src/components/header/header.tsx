@@ -11,12 +11,10 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ userName, userRole }) => {
-
-
   return (
     <header className={styles.header}>
       <div className={styles.logoSection}>
-        <Image src="/logo.png" alt="School Logo" width={50} height={50} />
+        <Image src="/logo.png" alt="School Logo" width={45} height={45} className={styles.logo} />
         <h1>Sek. Keb Saujana Utama</h1>
       </div>
       <div className={styles.userSection}>
@@ -26,7 +24,6 @@ const Header: React.FC<HeaderProps> = ({ userName, userRole }) => {
         <div className={styles.userInfo}>
           <span className={styles.userName}>{userName}</span>
           <span className={styles.userRole}>{userRole}</span>
-
         </div>
       </div>
     </header>

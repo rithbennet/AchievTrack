@@ -1,0 +1,39 @@
+.dashboardContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  padding-top: 4rem; /* space for fixed header */
+  overflow-x: hidden;
+  background-color: #f9f9f9;
+}
+
+.mainContent {
+  margin-left: 250px; /* Match the sidebar width */
+  padding: 2rem;
+  flex-grow: 1;
+  min-height: calc(100vh - 4rem); /* adjust for header height */
+  transition: all 0.3s ease;
+  width: calc(100% - 250px);
+  composes: custom-scrollbar from global;
+  overflow-y: auto;
+}
+
+/* For when sidebar is collapsed */
+:global(.sidebar-collapsed) .mainContent {
+  margin-left: 80px; /* Match the collapsed sidebar width */
+  width: calc(100% - 80px);
+}
+
+@media (max-width: 768px) {
+  .mainContent {
+    margin-left: 80px;
+    width: calc(100% - 80px);
+    padding: 1.5rem;
+  }
+
+  :global(.sidebar-collapsed) .mainContent {
+    margin-left: 80px;
+    width: calc(100% - 80px);
+  }
+}

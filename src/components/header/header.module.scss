@@ -1,55 +1,110 @@
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    background-color: #cfc0e2;
-    // border-bottom: 1px solid #ddd;
-  }
-  
-  .logoSection {
-    display: flex;
-    align-items: center;
-  
-    h1 {
-      margin-left: 10px;
-      font-size: 24px;
-      font-weight: bold;
-      color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background-color: #cfc0e2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  height: 4rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.logoSection {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 21;
+  min-width: 250px;
+  height: 100%;
+  padding-right: 15px;
+
+  h1 {
+    margin-left: 15px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    letter-spacing: 0.02em;
+
+    @media (max-width: 768px) {
+      font-size: 16px;
     }
   }
-  
-  .userSection {
-    display: flex;
-    align-items: center;
-  }
-  
-  .notificationButton {
-    margin-right: 20px;
-    background: none;
-    border: none;
-    font-size: 1rem;
-    color: #0070f3;
-    cursor: pointer;
-  
-    &:hover {
-      text-decoration: underline;
+
+  @media (max-width: 768px) {
+    min-width: auto;
+    padding-right: 10px;
+
+    img {
+      width: 40px;
+      height: 40px;
     }
   }
-  
-  .userInfo {
-    display: flex;
-    flex-direction: column;
-    text-align: right;
-  
+}
+
+.logo {
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.userSection {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  height: 100%;
+  position: relative;
+  padding-left: 20px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 25%;
+    height: 50%;
+    width: 1px;
+    background-color: rgba(0, 0, 0, 0.08);
+  }
+}
+
+.notificationButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  padding: 0.2rem 0;
+  transition: color 0.2s ease;
+
+  .userName {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+  }
+
+  .userRole {
+    font-size: 0.8rem;
+    color: #555;
+    opacity: 0.9;
+  }
+
+  @media (max-width: 768px) {
     .userName {
-      font-weight: bold;
-      color: #333;
-    }
-  
-    .userRole {
       font-size: 0.9rem;
-      color: #666;
+    }
+
+    .userRole {
+      font-size: 0.75rem;
     }
   }
-  
+}
